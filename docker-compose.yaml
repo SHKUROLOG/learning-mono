@@ -1,0 +1,107 @@
+version: '3.8'
+services:
+  node-learning-site-serve:
+    image: node-learning-site-serve
+    build: ../moon-signal/apps/node-learning-site
+    restart: unless-stopped
+    volumes:
+      - '.:/app'
+    ports:
+      - '3000:3000'
+      - '9229:9229'
+  telegram:
+    image: telegram
+    build: ../moon-signal/apps/telegram
+    restart: unless-stopped
+    ports:
+      - '${TELEGRAM_PORT}:${TELEGRAM_PORT}'
+    links:
+      - 'transaction-history-loader'
+  price-watcher:
+    image: price-watcher
+    build: ../moon-signal/apps/price-watcher
+    restart: unless-stopped
+    ports:
+      - '${PRICE_WATCHER_PORT}:${PRICE_WATCHER_PORT}'
+  transaction-watcher:
+    image: transaction-watcher
+    build: ../moon-signal/apps/transaction-watcher
+    restart: unless-stopped
+    ports:
+      - '${TRANSACTION_WATCHER_PORT}:${TRANSACTION_WATCHER_PORT}'
+    links:
+      - 'price-watcher'
+  transaction-history-loader:
+    image: transaction-history-loader
+    build: ../moon-signal/apps/transaction-history-loader
+    restart: unless-stopped
+    ports:
+      - '${TRANSACTION_HISTORY_LOADER_PORT}:${TRANSACTION_HISTORY_LOADER_PORT}'
+    links:
+      - 'transaction-storage'
+      - 'price-storage'
+  price-storage:
+    image: price-storage
+    build: ../moon-signal/apps/price-storage
+    restart: unless-stopped
+    ports:
+      - '${PRICE_STORAGE_PORT}:${PRICE_STORAGE_PORT}'
+    links:
+      - '.db'
+  transaction-storage:
+    image: transaction-storage
+    build: ../moon-signal/apps/transaction-storage
+    restart: unless-stopped
+    ports:
+      - '${TRANSACTION_STORAGE_PORT}:${TRANSACTION_STORAGE_PORT}'
+    links:
+      - '.db'
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U user -d moon" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - '${DB_PORT}:5432'
+    volumes:
+      - './.db:/var/lib/postgresql/data'
+  db-admin:
+    image: dpage/pgadmin4:latest
+    restart: unless-stopped
+    ports:
+      - '5050:80'
+    volumes:
+      - './..db-admin:/var/lib/pgadmin'
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=user@mail.ru
+      - PGADMIN_DEFAULT_PASSWORD=pass
+    links:
+      - '.db'
+  bitcoind:
+    image: lncm/bitcoind:v22.0
+    restart: unless-stopped
+    volumes:
+      - './.bitcoin:/data/.bitcoin'
+    ports:
+      - '8332:8332'
+      - '8333:8333'
+      - '28332:28332'
+      - '28333:28333'
+  electrumx:
+    image: lukechilds/electrumx:v1.16.0
+    restart: unless-stopped
+    environment:
+      #- DAEMON_URL=https://bitcoinrpc:wmPj9UzQmxlc4LUgwcuvAe9agRWbbf4Eve3DIPERcJhy@rpc.morlz.keenetic.pro:433
+      - DAEMON_URL=http://bitcoinrpc:wmPj9UzQmxlc4LUgwcuvAe9agRWbbf4Eve3DIPERcJhy@bitcoind:8332
+      - COIN=BitcoinSegwit
+    ports:
+      - '50002:50002'
+    volumes:
+      - './.electrumx:/data'
