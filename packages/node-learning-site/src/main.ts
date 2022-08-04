@@ -7,33 +7,9 @@ const prisma = new PrismaClient()
 async function main() {
   await prisma.$connect()
 
-  await prisma.category.create({
-    data: {
-      title: 'who you',
-      themes: {
-        create: {
-          title: 'asd',
-          questions: {
-            create: {
-              title: 'syka',
-              answers: {
-                createMany: {
-                  data: [
-                    { title: 'blat' },
-                    { title: 'blat?' },
-                    { title: 'blat??', isCorrect: true },
-                    { title: 'blat???' },
-                  ],
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  })
-
-  const questions = await prisma.question.findMany({
+  const questions = await prisma
+    .question
+    .findMany({
     include: {
       answers: true,
     },
@@ -46,25 +22,35 @@ async function main() {
     res.json(questions)
   })
 
-  app.get('/question/:id?', async (req, res) => {
-    if (req.params.id) {
-      const question = await prisma.question.findUnique({
-        where: {
-          id: parseInt(req.params.id),
-        },
-      })
-      res.json(question)
-    } else {
-      const questions = await prisma.question.findMany()
-      res.json(questions)
-    }
-  })
+  // app.get('/question/:id?', async (req, res) => {
+  //   if (req.params.id) {
+  //     const question = await prisma.question.findUnique({
+  //       where: {
+  //         id: parseInt(req.params.id),
+  //       },
+  //       include: {
+  //         answers: true,
+  //       },
+  //     })
+  //     res.json(question)
+  //   } else {
+  //     const questions = await prisma.question.findMany()
+  //     res.json(questions)
+  //   }
+  // })
 
   app.get('/themes/:id?', async (req, res) => {
     if (req.params.id) {
       const theme = await prisma.theme.findUnique({
         where: {
           id: parseInt(req.params.id),
+        },
+        include: {
+          questions: {
+            include: {
+              answers: true,
+            },
+          },
         },
       })
       res.json(theme)
@@ -79,6 +65,9 @@ async function main() {
       const category = await prisma.category.findUnique({
         where: {
           id: parseInt(req.params.id),
+        },
+        include: {
+          themes: true,
         },
       })
       res.json(category)
