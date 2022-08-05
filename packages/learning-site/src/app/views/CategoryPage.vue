@@ -1,17 +1,15 @@
 <template>
-  <div v-if="category" :class="$style.category">
-    {{ category.title }}
+  <div v-if="category"
+       :class="$style.category">
+    <div v-text="category.title"
+         :class="$style.title"/>
+
     <div v-for="theme in category.themes"
          :key="theme.id"
-         :class="$style.themes">
-      <router-link :to="{ name: 'theme', params: { themeId: theme.id } }">
-        {{ theme.title }}
-      </router-link>
+         :class="$style.theme">
+      <router-link v-text="`> ${theme.title}`"
+                   :to="{ name: 'theme', params: { themeId: theme.id } }"/>
     </div>
-
-    <router-link :to="{ name: 'categories' }">
-      Back
-    </router-link>
   </div>
 </template>
 
@@ -34,25 +32,23 @@ watchEffect(async () => {
 </script>
 
 <style module>
+.title {
+  padding: 16px 0;
+}
 .category {
   display: grid;
-  grid-gap: 10px;
-  grid-auto-rows: minmax(20px, auto);
-  background: rgba( 240, 240, 240, 0.25 );
-  box-shadow: 0 8px 32px 0 rgba(218, 219, 231, 0.37);
-  backdrop-filter: blur( 7px );
-  -webkit-backdrop-filter: blur( 7px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.25 );
-  width: 1000px;
+  text-align: left;
+  padding: 16px;
+  align-items: start;
+  justify-items: start;
 }
-.themes {
-  border-radius: 20px;
-  /*width: 500px;*/
-  /*background-color: rgba(43, 43, 44, 0.85);*/
+.theme {
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+  padding: 8px;
 }
-.themes:hover {
-  transform: scale(1.1);
-
+.theme:hover {
+  transform: scale(1.04) translateX(4px);
 }
 </style>
