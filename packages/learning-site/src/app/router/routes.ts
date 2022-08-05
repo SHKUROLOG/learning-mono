@@ -6,7 +6,7 @@ import StatisticPage from '../views/StatisticPage.vue'
 import AdminPage from '../views/AdminPage.vue'
 
 export const routes: RouteRecordRaw[] = [
-  { path: '/categories', component: CategoriesPage, name: 'categories' },
+  { path: '/', component: CategoriesPage, name: 'home' },
   { path: '/categories/:categoryId', component: CategoryPage, props: true, name: 'category' },
   { path: '/themes/:themeId', component: ThemePage, props: true, name: 'theme' },
   { path: '/statistic', component: StatisticPage, name: 'statistic' },

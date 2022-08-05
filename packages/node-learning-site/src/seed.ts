@@ -29,7 +29,7 @@ function createTitledItems<T>(options: TitledOptions<T>) {
 
 function createThemesForCategory(categoryId: number) {
   return createTitledItems({
-    count: getRandom(3, 10),
+    count: getRandom(10, 15),
     extension: { categoryId },
   })
 }

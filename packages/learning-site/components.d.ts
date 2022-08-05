@@ -7,6 +7,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     AppLogo: typeof import('./src/app/components/widgets/AppLogo.vue')['default']
     Cookies: typeof import('./src/app/components/Cookies.vue')['default']
+    LoginForm: typeof import('./src/app/components/LoginForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

@@ -1,12 +1,14 @@
 <template>
-  <div :class="$style.BoxCategories">
+  <div :class="$style.root">
     <div v-for="cat in categories"
          :key="cat.id"
-         :class="$style.categoriesContent"
-         class="app">
-      <router-link :to="{ name: 'category', params: { categoryId: cat.id } }">
-        {{ cat.title }}
-      </router-link>
+         :class="$style.category">
+      <div :class="$style.image"
+           :style="{ backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png')` }"/>
+
+      <router-link v-text="cat.title"
+                   :class="$style.link"
+                   :to="{ name: 'category', params: { categoryId: cat.id } }"/>
     </div>
   </div>
 </template>
@@ -24,27 +26,57 @@ watchEffect(async () => {
 </script>
 
 <style module>
-.BoxCategories {
+.root {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
-  grid-gap: 10px;
-  grid-auto-rows: minmax(100px, auto);
+  grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
+  grid-gap: 24px;
   justify-content: center;
 }
-.categoriesContent {
+.category {
   justify-content: center;
   font-family: "JetBrains Mono ExtraBold", monospace;
   font-size: 24px;
-  background: rgba( 240, 240, 240, 0.25 );
-  box-shadow: 0 8px 32px 0 rgba(218, 219, 231, 0.37);
-  backdrop-filter: blur( 7px );
-  -webkit-backdrop-filter: blur( 7px );
-  border-radius: 10px;
-  border: 1px solid rgba( 255, 255, 255, 0.25 );
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(3px);
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
 }
-.categoriesContent:hover {
-  transform: scale(1.05);
+.category:hover {
+  box-shadow: 0 2px 5px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+.image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  left: 0;
+  top: 0;
+  transform: rotate(-15deg) translateY(70%);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.category:hover .image {
+  opacity: 0.7;
+  transform: rotate(0) translateY(0);
+}
+.link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  padding: 8px;
+  box-sizing: border-box;
+}
 
+.category:hover .link {
+  background: rgba(0, 0, 0, 0.15);
 }
 </style>

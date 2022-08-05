@@ -3,6 +3,13 @@
   "sourceRoot": "packages/node-learning-site/src",
   "projectType": "application",
   "targets": {
+    "seed": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "packages/node-learning-site",
+        "command": "ts-node --project tsconfig.app.json src/seed.ts"
+      }
+    },
     "prisma-format": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
