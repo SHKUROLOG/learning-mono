@@ -2,6 +2,7 @@ export interface Category {
   id: number
   title: string
   themes: Theme[]
+  image: string
 }
 
 export interface Theme {

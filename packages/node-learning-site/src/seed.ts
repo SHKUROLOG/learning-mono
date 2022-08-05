@@ -41,6 +41,13 @@ function createQuestionsForTheme(themeId: number) {
   })
 }
 
+function createCategoriesWithImages() {
+  return createTitledItems({
+    count: getRandom(3, 6),
+    extension: { image: faker.image.image() },
+  })
+}
+
 interface Answer{
   title: string
   questionId: number
@@ -67,10 +74,7 @@ async function main() {
   await prisma.$connect()
 
   await prisma.category.createMany({
-    data: createTitledItems({
-      count: getRandom(3, 6),
-      extension: {},
-    }),
+    data: createCategoriesWithImages(),
   })
 
   const categoryIds = await prisma.category.findMany().then(getIds)

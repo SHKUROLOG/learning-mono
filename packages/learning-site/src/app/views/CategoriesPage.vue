@@ -4,7 +4,7 @@
          :key="cat.id"
          :class="$style.category">
       <div :class="$style.image"
-           :style="{ backgroundImage: `url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/800px-Unofficial_JavaScript_logo_2.svg.png')` }"/>
+           :style="{ backgroundImage: `url('${cat.image}')` }"/>
 
       <router-link v-text="cat.title"
                    :class="$style.link"
@@ -43,6 +43,7 @@ watchEffect(async () => {
   border-radius: 2px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
+  min-height: 150px;
 }
 .category:hover {
   box-shadow: 0 2px 5px 0 rgba(255, 255, 255, 0.1);

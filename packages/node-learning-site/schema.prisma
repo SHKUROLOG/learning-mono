@@ -38,4 +38,5 @@ model Category {
   id     Int     @id @default(autoincrement())
   title  String
   themes Theme[]
+  image  String
 }
