@@ -16,6 +16,12 @@
         "command": "yarn prisma format --schema packages/node-learning-site/schema.prisma"
       }
     },
+    "prisma-studio": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "yarn prisma studio --schema packages/node-learning-site/schema.prisma"
+      }
+    },
     "prisma-push": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {

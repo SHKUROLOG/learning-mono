@@ -23,3 +23,13 @@ export interface Answer {
   isCorrect: boolean
   isSelected?: boolean
 }
+
+export interface Login {
+  email: string
+  password: string
+}
+
+export interface SignUp extends Login {
+  firstName: string
+  lastName: string
+}

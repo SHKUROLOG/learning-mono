@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker'
 import { PrismaClient } from '@prisma/client'
+import { hash } from 'bcryptjs'
 
 interface Identifiable {
   id: number
@@ -48,7 +49,7 @@ function createCategoriesWithImages() {
   })
 }
 
-interface Answer{
+interface Answer {
   title: string
   questionId: number
   isCorrect?: boolean
@@ -72,6 +73,14 @@ const prisma = new PrismaClient()
 
 async function main() {
   await prisma.$connect()
+
+  await prisma.user.create({
+    data: {
+      login: 'root',
+      isAdmin: true,
+      password: await hash('12345678', 10),
+    },
+  })
 
   await prisma.category.createMany({
     data: createCategoriesWithImages(),

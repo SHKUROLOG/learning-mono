@@ -1,7 +1,8 @@
 <template>
-  <div :class="$style.root">
+  <div v-if="!user && !isUserLoading"
+       :class="$style.root">
     <div :class="$style.container">
-      > <input v-model="form.login"
+      > <input v-model="formLogin.login"
                :class="$style.input"
                type="text"
                placeholder="Whats your name son?"
@@ -9,7 +10,7 @@
     </div>
 
     <div :class="$style.container">
-      > <input v-model="form.password"
+      > <input v-model="formLogin.password"
                :class="$style.input"
                type="password"
                placeholder="••••••"
@@ -20,18 +21,31 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import { isUserLoading, user } from '@app/store/user'
 
-const form = reactive({
-  login: '',
-  password: '',
+const formLogin = reactive({
+  login: 'root',
+  password: '12345678',
 })
 
-function handleLogin() {
-  if (!form.login.trim() && !form.password.trim())
+async function handleLogin(): Promise<void> {
+  if (!formLogin.login.trim() && !formLogin.password.trim())
     return
 
-  form.login = ''
-  form.password = ''
+  const response = await fetch('http://localhost:3030/login', {
+    method: 'POST',
+    body: JSON.stringify(formLogin),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    mode: 'cors',
+    credentials: 'include',
+  }).then((r) => r.json())
+
+  user.value = response.user
+
+  // formLogin.login = ''
+  // formLogin.password = ''
 }
 </script>
 

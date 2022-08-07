@@ -8,7 +8,7 @@
 
     <LoginForm/>
   </header>
-  <div :class="$style.stackedLinear">
+  <div>
     <router-view/>
   </div>
 </template>
@@ -17,12 +17,15 @@
 import { ref, watchEffect } from 'vue'
 import { Category } from '@app/types'
 import { LoginForm } from '@app/components'
+import { userStoreInit } from '@app/store/user'
 
 const categories = ref<Category[]>([])
 
 watchEffect(async () => {
   categories.value = await fetch('http://localhost:3030/categories').then(v => v.json())
 })
+
+userStoreInit()
 </script>
 
 <style module>

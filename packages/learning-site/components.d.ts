@@ -8,6 +8,8 @@ declare module '@vue/runtime-core' {
     AppLogo: typeof import('./src/app/components/widgets/AppLogo.vue')['default']
     Cookies: typeof import('./src/app/components/Cookies.vue')['default']
     LoginForm: typeof import('./src/app/components/LoginForm.vue')['default']
+    Logout: typeof import('./src/app/components/Logout.vue')['default']
+    RegistrationForm: typeof import('./src/app/components/RegistrationForm.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
