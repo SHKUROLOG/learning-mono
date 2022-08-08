@@ -2,10 +2,9 @@ import { User } from '@prisma/client'
 import cors from 'cors'
 import express from 'express'
 import session from 'express-session'
-import { prisma } from './app/prisma'
+import { initPrisma } from './app/prisma'
 import { authRoute } from './auth/auth.route'
 import { categoryRoute } from './category/category.route'
-import { getAllCategories, getCategoryById } from './category/category.service'
 import { themeRoute } from './theme/theme.route'
 
 declare module 'express-session' {
@@ -15,7 +14,7 @@ declare module 'express-session' {
 }
 
 async function main() {
-  await prisma.$connect()
+  await initPrisma()
 
   const app = express()
   const port = 3030

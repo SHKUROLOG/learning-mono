@@ -1,7 +1,7 @@
-import { prisma } from '../app/prisma'
+import { Deps, inject } from '../app/di'
 
 export async function getThemeById(id: number) {
-  return await prisma.theme.findUnique({
+  return await inject(Deps.PRISMA).theme.findUnique({
     where: {
       id,
     },
@@ -16,5 +16,5 @@ export async function getThemeById(id: number) {
 }
 
 export async function getAllThemes() {
-  return prisma.theme.findMany()
+  return inject(Deps.PRISMA).theme.findMany()
 }

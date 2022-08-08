@@ -1,9 +1,9 @@
 import { User } from '@prisma/client'
 import { compare } from 'bcryptjs'
-import { prisma } from '../app/prisma'
+import { Deps, inject } from '../app/di'
 
 export async function login(login: string, password: string): Promise<User | null> {
-  const user = await prisma.user.findUnique({
+  const user = await inject(Deps.PRISMA).user.findUnique({
     where: {
       login,
     },

@@ -1,7 +1,7 @@
-import { prisma } from '../app/prisma'
+import { Deps, inject } from '../app/di'
 
 export async function getCategoryById(id: number) {
-  return await prisma.category.findUnique({
+  return await inject(Deps.PRISMA).category.findUnique({
     where: {
       id,
     },
@@ -12,5 +12,5 @@ export async function getCategoryById(id: number) {
 }
 
 export async function getAllCategories() {
-  return prisma.category.findMany()
+  return inject(Deps.PRISMA).category.findMany()
 }
