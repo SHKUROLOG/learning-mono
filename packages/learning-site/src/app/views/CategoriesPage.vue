@@ -16,12 +16,12 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import { Category } from '@app/types'
+import { api } from '@app/api'
 
 const categories = ref<Category[]>([])
 
 watchEffect(async () => {
-  categories.value = await fetch('http://localhost:3030/categories')
-    .then(v => v.json())
+  categories.value = await api.getCategories()
 })
 </script>
 

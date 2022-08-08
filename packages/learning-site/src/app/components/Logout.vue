@@ -8,8 +8,12 @@
 </template>
 
 <script lang="ts" setup>
+import { api } from '@app/api'
+import { user } from '@app/store/user'
+
 async function userLogout() {
-  await fetch('http://localhost:3030/logout')
+  await api.logout()
+  user.value = null
 }
 </script>
 

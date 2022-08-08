@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { api } from '../api'
 
 export interface User {
   id: string
@@ -13,14 +14,7 @@ export const user = ref<User | null>(null)
 export async function userStoreInit(): Promise<void> {
   try {
     isUserLoading.value = true
-    const res = await fetch('http://localhost:3030/me', {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      mode: 'cors',
-      credentials: 'include',
-    }).then((v) => v.json())
-    user.value = res.user
+    user.value = await api.getMe()
   } finally {
     isUserLoading.value = false
   }

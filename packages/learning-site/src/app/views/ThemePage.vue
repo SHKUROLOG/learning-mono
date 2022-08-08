@@ -23,6 +23,7 @@ import { Answer } from '@app/types'
 import { shuffle } from 'lodash'
 import { themeData } from '@app/store/themeData'
 import { useRouter } from 'vue-router'
+import { api } from '@app/api'
 
 interface Props {
   themeId: string
@@ -49,8 +50,7 @@ const currentQuestion = computed(() => shuffledQuestions.value[index.value])
 const shuffledQuestions = computed(() => shuffle(themeData.value?.questions ?? []))
 
 watchEffect(async () => {
-  themeData.value = await fetch(`http://localhost:3030/themes/${props.themeId}`)
-    .then(v => v.json())
+  themeData.value = await api.getTheme(props.themeId)
 })
 
 watch(

@@ -17,11 +17,15 @@
                @keydown.enter="handleLogin">
     </div>
   </div>
+
+  <Logout v-if="user"/>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { isUserLoading, user } from '@app/store/user'
+import { api } from '@app/api'
+import Logout from './Logout.vue'
 
 const formLogin = reactive({
   login: 'root',
@@ -32,20 +36,7 @@ async function handleLogin(): Promise<void> {
   if (!formLogin.login.trim() && !formLogin.password.trim())
     return
 
-  const response = await fetch('http://localhost:3030/login', {
-    method: 'POST',
-    body: JSON.stringify(formLogin),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    mode: 'cors',
-    credentials: 'include',
-  }).then((r) => r.json())
-
-  user.value = response.user
-
-  // formLogin.login = ''
-  // formLogin.password = ''
+  user.value = await api.login(formLogin)
 }
 </script>
 

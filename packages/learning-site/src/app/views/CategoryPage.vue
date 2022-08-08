@@ -16,6 +16,7 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import { Category } from '@app/types'
+import { api } from '@app/api'
 
 interface Props {
   categoryId: string
@@ -26,8 +27,7 @@ const props = defineProps<Props>()
 const category = ref<Category | null>(null)
 
 watchEffect(async () => {
-  category.value = await fetch(`http://localhost:3030/categories/${props.categoryId}`)
-    .then(v => v.json())
+  category.value = await api.getCategory(props.categoryId)
 })
 </script>
 
