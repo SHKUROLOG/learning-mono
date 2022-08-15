@@ -1,56 +1,29 @@
 <template>
   <header :class="$style.header">
-    <div :class="$style.menu">
-      <router-link :class="$style.esc" to="/">
-        Esc
-      </router-link>
-    </div>
+    <HeaderMenu/>
 
-    <LoginForm/>
+    <LoginForm v-if="isLoginFormShown && !user "/>
   </header>
+
   <div>
     <router-view/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
-import { Category } from '@app/types'
-import { LoginForm } from '@app/components'
-import { userStoreInit } from '@app/store/user'
-
-const categories = ref<Category[]>([])
-
-watchEffect(async () => {
-  categories.value = await fetch('http://localhost:3030/categories').then(v => v.json())
-})
+import { LoginForm } from '@app/components/LoginForm'
+import { isLoginFormShown, user, userStoreInit } from '@app/store/user'
+import { HeaderMenu } from '@app/components/HeaderMenu'
 
 userStoreInit()
 </script>
 
 <style module>
-.menu {
-  margin: 16px 32px;
-}
-.esc {
-  padding: 8px 16px;
-  font-size: 18px;
-  opacity: 0.8;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  user-select: none;
-}
-.esc:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.05);
-}
-
 .header {
   height: 100px;
   display: grid;
-  justify-items: stretch;
   grid-auto-flow: column;
-
+  grid-template-columns: 1fr max-content;
 }
 </style>
 
@@ -61,8 +34,8 @@ a {
   text-decoration: none;
 }
 body {
+  margin-right: 16px;
   font-family: "JetBrains Mono ExtraBold", monospace;
-  margin: 0;
   color: aliceblue;
   height: 100%;
   background: linear-gradient(to right, #c31432, #240b36);

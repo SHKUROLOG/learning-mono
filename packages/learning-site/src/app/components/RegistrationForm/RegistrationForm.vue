@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts" setup>
-import { SignUp } from '../types'
+import { SignUp } from '../../types'
 import { ref } from 'vue'
 
 // interface Props {

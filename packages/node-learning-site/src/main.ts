@@ -2,9 +2,11 @@ import { User } from '@prisma/client'
 import cors from 'cors'
 import express from 'express'
 import session from 'express-session'
+import { answerRoute } from './answer/answer.route'
 import { initPrisma } from './app/prisma'
 import { authRoute } from './auth/auth.route'
 import { categoryRoute } from './category/category.route'
+import { questionRoute } from './question/question.route'
 import { themeRoute } from './theme/theme.route'
 
 declare module 'express-session' {
@@ -30,6 +32,8 @@ async function main() {
   app.use(authRoute)
   app.use(categoryRoute)
   app.use(themeRoute)
+  app.use(questionRoute)
+  app.use(answerRoute)
 
   app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

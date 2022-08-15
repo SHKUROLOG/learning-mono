@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!user && !isUserLoading"
+  <div v-if="!isUserLoading"
        :class="$style.root">
     <div :class="$style.container">
       > <input v-model="formLogin.login"
@@ -17,15 +17,12 @@
                @keydown.enter="handleLogin">
     </div>
   </div>
-
-  <Logout v-if="user"/>
 </template>
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { isUserLoading, user } from '@app/store/user'
 import { api } from '@app/api'
-import Logout from './Logout.vue'
 
 const formLogin = reactive({
   login: 'root',
@@ -73,5 +70,26 @@ async function handleLogin(): Promise<void> {
 
 .container:hover {
   opacity: 1;
+}
+.menu {
+  margin: 8px 16px;
+}
+.show {
+  padding: 8px 16px;
+  font-size: 18px;
+  opacity: 0.8;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  color: aliceblue;
+  user-select: none;
+  background-color: transparent;
+  border: none;
+  height: 40px;
+  width: 80px;
+  justify-items: right;
+}
+.show:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.05);
 }
 </style>

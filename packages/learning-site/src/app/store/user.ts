@@ -7,6 +7,8 @@ export interface User {
   isAdmin: boolean
 }
 
+export const isLoginFormShown = ref(false)
+
 export const isUserLoading = ref(false)
 
 export const user = ref<User | null>(null)

@@ -4,16 +4,19 @@
     <div :class="$style.title">
       {{ currentQuestion.title }}
       ({{ index + 1 }} OF {{ shuffledQuestions.length }})
+      <RemoveButton @click="removeQuestionAndAnswers(currentQuestion.id)"/>
     </div>
-    <div v-for="answer in currentQuestion.answers"
-         :key="answer.id"
-         :class="$style.answer"
-         @click="handleAnswerClick(answer)">
-      > {{ answer.title }}
-    </div>
-    <button :class="$style.next" @click="moveToNext">
-      SKIP
-    </button>
+
+    <AnswerRow v-for="answer in currentQuestion.answers"
+               :key="answer.id"
+               :answer="answer"
+               @click="handleAnswerClick(answer)"/>
+
+    <BaseButton text="SKIP"
+                :class="$style.next"
+                @click="moveToNext"/>
+
+    <QuestionEditForm :themeId="themeId"/>
   </div>
 </template>
 
@@ -24,16 +27,25 @@ import { shuffle } from 'lodash'
 import { themeData } from '@app/store/themeData'
 import { useRouter } from 'vue-router'
 import { api } from '@app/api'
+import BaseButton from '@app/components/BaseButton/BaseButton.vue'
+import QuestionEditForm from '@app/components/QuestionEditForm/QuestionEditForm.vue'
+import AnswerRow from '@app/components/AnswerRow/AnswerRow.vue'
+import { RemoveButton } from '@app/components/QuestionEditForm/buttons'
 
 interface Props {
   themeId: string
 }
 
-const router = useRouter()
-
 const props = defineProps<Props>()
 
+const router = useRouter()
+
 const index = ref(0)
+
+async function removeQuestionAndAnswers(questionId: number) {
+  await api.removeQuestion(questionId)
+  themeData.value = await api.getTheme(props.themeId)
+}
 
 function moveToNext() {
   if (shuffledQuestions.value.length - 1 > index.value)
@@ -68,16 +80,6 @@ watch(
   padding: 16px;
   align-items: start;
   justify-items: start;
-}
-.answer {
-  transition: all 0.3s ease-in-out;
-  user-select: none;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.answer:hover {
-  transform: scale(1.04) translateX(4px);
 }
 
 .next {
