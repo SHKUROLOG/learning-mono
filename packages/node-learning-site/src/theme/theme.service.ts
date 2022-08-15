@@ -40,10 +40,20 @@ export async function updateTheme(title: string, categoryId: number): Promise<Th
   })
 }
 
-export async function removeTheme(categoryId: number): Promise<Theme> {
+export async function removeTheme(themeId: number) {
   return inject(Deps.PRISMA).theme.delete({
     where: {
-      id: categoryId,
+      id: themeId,
+    },
+  })
+}
+
+export async function removeThemes(categoryId: number) {
+  return inject(Deps.PRISMA).theme.deleteMany({
+    where: {
+      categoryId: {
+        equals: categoryId,
+      },
     },
   })
 }

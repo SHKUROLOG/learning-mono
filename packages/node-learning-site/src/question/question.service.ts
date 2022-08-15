@@ -1,4 +1,4 @@
-import { deleteAnswers } from '../answer/answer.service'
+import { deleteAnswersByQuestionId } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 import { SaveQuestionInput } from './question.types'
 import { findAnswerIdsForDelete, findAnswersForCreate, findAnswersForUpdate } from './question.utils'
@@ -86,8 +86,16 @@ export async function saveQuestion(questionInput: SaveQuestionInput) {
 }
 
 export async function deleteQuestion(questionId: number) {
-  await deleteAnswers(questionId)
+  await deleteAnswersByQuestionId(questionId)
 
+  return inject(Deps.PRISMA).question.delete({
+    where: {
+      id: questionId,
+    },
+  })
+}
+
+export async function removeQuestion(questionId: number) {
   return inject(Deps.PRISMA).question.delete({
     where: {
       id: questionId,

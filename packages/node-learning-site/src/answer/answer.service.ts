@@ -11,7 +11,7 @@ export async function removeAnswer(answerId: number) {
   })
 }
 
-export async function deleteAnswers(questionId: number) {
+export async function deleteAnswersByQuestionId(questionId: number) {
   return inject(Deps.PRISMA).answer.deleteMany({
     where: {
       questionId,
