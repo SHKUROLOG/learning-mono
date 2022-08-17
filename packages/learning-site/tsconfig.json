@@ -2,29 +2,13 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "strict": true,
-    "allowJs": true,
     "jsx": "preserve",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@app/*": [
-        "./src/app/*"
-      ],
-      "@public/*": [
-        "./src/public/*"
-      ]
-    }
+    "allowSyntheticDefaultImports": true
   },
   "references": [
     {
       "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.spec.json"
     },
     {
       "path": "./tsconfig.spec.json"

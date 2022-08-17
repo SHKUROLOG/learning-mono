@@ -43,8 +43,8 @@ const router = useRouter()
 const index = ref(0)
 
 async function removeQuestionAndAnswers(questionId: number) {
-  await api.removeQuestion(questionId)
-  themeData.value = await api.getTheme(props.themeId)
+  await api.question.remove(questionId)
+  themeData.value = await api.theme.getById(props.themeId)
 }
 
 function moveToNext() {
@@ -62,7 +62,7 @@ const currentQuestion = computed(() => shuffledQuestions.value[index.value])
 const shuffledQuestions = computed(() => shuffle(themeData.value?.questions ?? []))
 
 watchEffect(async () => {
-  themeData.value = await api.getTheme(props.themeId)
+  themeData.value = await api.theme.getById(props.themeId)
 })
 
 watch(

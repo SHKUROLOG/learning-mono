@@ -11,7 +11,7 @@ import { user } from '@app/store/user'
 import { BaseButton } from '@app/components/BaseButton'
 
 async function userLogout() {
-  await api.logout()
+  await api.auth.logout()
   user.value = null
 }
 </script>

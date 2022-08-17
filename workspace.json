@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "learning-site": "packages/learning-site",
-    "node-learning-site": "packages/node-learning-site"
+    "node-learning-site": "packages/node-learning-site",
+    "shared": "packages/shared"
   }
 }

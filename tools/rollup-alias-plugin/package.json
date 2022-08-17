@@ -1,0 +1,6 @@
+{
+  "name": "@learning-mono/rollup-alias-plugin",
+  "main": "rollup-alias-plugin.js",
+  "types": "rollup-alias-plugin.d.ts",
+  "version": "1.0.1"
+}

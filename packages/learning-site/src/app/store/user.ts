@@ -16,7 +16,7 @@ export const user = ref<User | null>(null)
 export async function userStoreInit(): Promise<void> {
   try {
     isUserLoading.value = true
-    user.value = await api.getMe()
+    user.value = await api.auth.getMe()
   } finally {
     isUserLoading.value = false
   }

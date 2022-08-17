@@ -15,7 +15,7 @@ import { api } from '@app/api'
 import { editMode } from '@app/store/editmode'
 
 async function removeAnswer(answerId: number) {
-  await api.removeAnswer(answerId)
+  await api.answer.remove(answerId)
 }
 
 defineProps<AnswerRowProps>()

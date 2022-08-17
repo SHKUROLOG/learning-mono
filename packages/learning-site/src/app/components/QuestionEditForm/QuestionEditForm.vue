@@ -60,7 +60,7 @@ function addAnswerForm() {
 }
 
 async function saveQuestionAndAnswers() {
-  await api.createQuestionsAndAnswers(addForm.value)
+  await api.question.create(addForm.value)
 }
 </script>
 

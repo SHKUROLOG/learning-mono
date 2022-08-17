@@ -1,3 +1,4 @@
+import { Answer } from '@prisma/client'
 import { Deps, inject } from '../app/di'
 import { AnswerTypesInput } from './answer.types'
 
@@ -7,6 +8,16 @@ export async function removeAnswer(answerId: number) {
   return prisma.answer.delete({
     where: {
       id: answerId,
+    },
+  })
+}
+
+export async function getAnswersByQuestionId(questionId: number): Promise<Answer[]> {
+  return await inject(Deps.PRISMA).answer.findMany({
+    where: {
+      questionId: {
+        equals: questionId,
+      },
     },
   })
 }

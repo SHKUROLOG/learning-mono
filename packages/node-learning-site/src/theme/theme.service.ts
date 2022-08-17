@@ -57,3 +57,13 @@ export async function removeThemes(categoryId: number) {
     },
   })
 }
+
+export async function getThemesByCategoryId(categoryId: number): Promise<Theme[]> {
+  return inject(Deps.PRISMA).theme.findMany({
+    where: {
+      categoryId: {
+        in: categoryId,
+      },
+    },
+  })
+}

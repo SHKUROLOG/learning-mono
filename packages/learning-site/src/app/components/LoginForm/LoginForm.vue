@@ -33,7 +33,7 @@ async function handleLogin(): Promise<void> {
   if (!formLogin.login.trim() && !formLogin.password.trim())
     return
 
-  user.value = await api.login(formLogin)
+  user.value = await api.auth.login(formLogin)
 }
 </script>
 
@@ -70,26 +70,5 @@ async function handleLogin(): Promise<void> {
 
 .container:hover {
   opacity: 1;
-}
-.menu {
-  margin: 8px 16px;
-}
-.show {
-  padding: 8px 16px;
-  font-size: 18px;
-  opacity: 0.8;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  color: aliceblue;
-  user-select: none;
-  background-color: transparent;
-  border: none;
-  height: 40px;
-  width: 80px;
-  justify-items: right;
-}
-.show:hover {
-  opacity: 1;
-  background: rgba(255, 255, 255, 0.05);
 }
 </style>

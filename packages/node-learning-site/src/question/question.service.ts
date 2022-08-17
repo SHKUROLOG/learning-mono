@@ -1,3 +1,4 @@
+import { Question } from '../../../learning-site/src/app/types'
 import { deleteAnswersByQuestionId } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 import { SaveQuestionInput } from './question.types'
@@ -99,6 +100,19 @@ export async function removeQuestion(questionId: number) {
   return inject(Deps.PRISMA).question.delete({
     where: {
       id: questionId,
+    },
+  })
+}
+
+export async function getQuestionsByThemeId(themeId: number): Promise<Question[]> {
+  return inject(Deps.PRISMA).question.findMany({
+    where: {
+      themeId: {
+        equals: themeId,
+      },
+    },
+    include: {
+      answers: true,
     },
   })
 }

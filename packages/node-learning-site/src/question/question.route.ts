@@ -5,6 +5,7 @@ import { isConfigQuestionDeleteInput } from './question.validator'
 export const questionRoute = Router()
 
 questionRoute.get('/questions/:id?', async (req, res) => {
+  // TODO VALIDATE REQ BODY
   if (req.params.id) {
     const question = await getQuestionById(parseInt(req.params.id))
     res.json(question)
@@ -21,6 +22,7 @@ questionRoute.post('/question', async (req, res) => {
 })
 
 questionRoute.delete('/question', async (req, res) => {
+  // TODO VALIDATE REQ BODY
   if (!isConfigQuestionDeleteInput(req.body))
     return res.status(400).json({ error: 'body invalid' })
 
