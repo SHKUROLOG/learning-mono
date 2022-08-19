@@ -13,14 +13,15 @@
 </template>
 
 <script lang="ts" setup>
-import { CategoryCreateForm, CategoryEditFormEmits, CategoryEditFormProps } from './CategoryEditForm.props'
-import BaseInput from '@app/components/BaseInput/BaseInput.vue'
-import BaseButton from '@app/components/BaseButton/BaseButton.vue'
+import { CategoryEditFormEmits, CategoryEditFormProps } from './CategoryEditForm.props'
 import { ref } from 'vue'
 import { isEqual } from 'lodash'
 import { api } from '../../api'
 import { user } from '../../store/user'
 import { editMode } from '../../store/editmode'
+import { UpdateCategoryInput } from '@learning-mono/shared'
+import { BaseInput } from '../BaseInput'
+import { BaseButton } from '../BaseButton'
 
 const props = defineProps<CategoryEditFormProps>()
 const emit = defineEmits<CategoryEditFormEmits>()
@@ -29,11 +30,11 @@ const currentForm = ref(createForm())
 
 const initialForm = createForm()
 
-function createForm(): CategoryCreateForm {
+function createForm(): UpdateCategoryInput {
   return {
     title: props.category.title,
     image: props.category.image,
-    categoryId: props.category.id,
+    id: props.category.id,
   }
 }
 

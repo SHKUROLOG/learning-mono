@@ -5,7 +5,7 @@ export class CreateAnswerInput {
   title: string
 
   @IsNumber()
-  questionId: number
+  questionId?: number
 
   @IsOptional()
   @IsBoolean()

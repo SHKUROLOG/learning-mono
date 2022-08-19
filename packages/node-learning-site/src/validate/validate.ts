@@ -13,7 +13,7 @@ type Handler<T> = (req: RequestWithInput<T>, res: Response) => Promise<void> | v
 
 type BaseHandler = (req: Request, res: Response) => Promise<void> | void
 
-const themeRoute = defineRoute('theme')
+// const themeRoute = defineRoute('theme')
 
 export function defineRoute(name: string) {
   const router = Router()

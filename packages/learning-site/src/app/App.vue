@@ -14,10 +14,7 @@
 import { isLoginFormShown, user, userStoreInit } from './store/user'
 import { HeaderMenu } from './components/HeaderMenu'
 import { LoginForm } from './components/LoginForm'
-import { CategoryDto } from '../../../shared/src/category/category.dto'
-import { shared } from '@learning-mono/shared'
 
-shared()
 userStoreInit()
 </script>
 

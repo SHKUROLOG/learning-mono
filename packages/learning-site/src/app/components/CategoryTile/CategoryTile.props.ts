@@ -1,5 +1,5 @@
-import { Category } from '../../types'
+import { CategoryDto } from '@learning-mono/shared'
 
 export interface CategoryTileProps {
-  category: Category
+  category: CategoryDto
 }

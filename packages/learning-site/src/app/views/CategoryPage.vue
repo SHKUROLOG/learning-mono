@@ -16,12 +16,12 @@
 
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
-import { Category } from '@app/types'
-import { api } from '@app/api'
-import CategoryThemes from '@app/components/CategoryThemes/CategoryThemes.vue'
-import CategoryEditForm from '@app/components/CategoryEditForm/CategoryEditForm.vue'
-import CategoryRemove from '@app/components/CategoryRemove/CategoryRemove.vue'
-import { editMode } from '@app/store/editmode'
+import { editMode } from '../store/editmode'
+import { CategoryDto } from '@learning-mono/shared'
+import { api } from '../api'
+import { CategoryRemove } from '../components/CategoryRemove'
+import { CategoryThemes } from '../components/CategoryThemes'
+import { CategoryEditForm } from '../components/CategoryEditForm'
 
 interface Props {
   categoryId: string
@@ -29,7 +29,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const category = ref<Category | null>(null)
+const category = ref<CategoryDto | null>(null)
 
 watchEffect(async () => {
   category.value = await api.category.getById(props.categoryId)

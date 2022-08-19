@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts" setup>
-import { editMode } from '@app/store/editmode'
-import BaseButton from '@app/components/BaseButton/BaseButton.vue'
+import { editMode } from '../../../store/editmode'
+import { BaseButton } from '../../BaseButton'
 
 // interface RemoveButtonTargetProps {
 //   targetId: number

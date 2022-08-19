@@ -31,9 +31,9 @@ async function main() {
   }))
 
   app.use(authRoute)
-  app.use(categoryRoute)
-  app.use(themeRoute)
-  app.use(questionRoute)
+  app.use(categoryRoute.router)
+  app.use(themeRoute.router)
+  app.use(questionRoute.router)
   app.use(answerRoute.router)
 
   app.listen(port, () => {

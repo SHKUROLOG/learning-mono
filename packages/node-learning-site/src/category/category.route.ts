@@ -1,9 +1,8 @@
-import { authGuard } from '../auth/auth.guard'
 import { defineRoute } from '../validate/validate'
 import { CreateCategoryInput, UpdateCategoryInput } from '@learning-mono/shared'
 import { createCategory, getCategoryById, removeCategory } from './category.service'
 
-export const categoryRoute = defineRoute('categories')
+export const categoryRoute = defineRoute('category')
 
 categoryRoute.getById(async (req, res) => {
   const categoryById = await getCategoryById(req.body)

@@ -5,6 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { isLoginFormShown, user } from '@app/store/user'
-import { BaseButton } from '@app/components/BaseButton'
+import { isLoginFormShown, user } from '../../../../store/user'
+import { BaseButton } from '../../../BaseButton'
 </script>

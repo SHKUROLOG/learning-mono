@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts" setup>
-import { editMode } from '@app/store/editmode'
-import { user } from '@app/store/user'
-import { BaseButton } from '@app/components/BaseButton'
+import { editMode } from '../../../../store/editmode'
+import { BaseButton } from '../../../BaseButton'
+import { user } from '../../../../store/user'
 </script>
 
 <style module>

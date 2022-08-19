@@ -1,5 +1,5 @@
-import { Theme } from '../../types'
+import { ThemeDto } from '@learning-mono/shared'
 
 export interface CategoryThemesProps {
-  themes: Theme[]
+  themes: ThemeDto[]
 }

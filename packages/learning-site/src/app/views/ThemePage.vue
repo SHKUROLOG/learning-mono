@@ -22,15 +22,14 @@
 
 <script lang="ts" setup>
 import { computed, ref, watch, watchEffect } from 'vue'
-import { Answer } from '@app/types'
 import { shuffle } from 'lodash'
-import { themeData } from '@app/store/themeData'
 import { useRouter } from 'vue-router'
-import { api } from '@app/api'
-import BaseButton from '@app/components/BaseButton/BaseButton.vue'
-import QuestionEditForm from '@app/components/QuestionEditForm/QuestionEditForm.vue'
-import AnswerRow from '@app/components/AnswerRow/AnswerRow.vue'
-import { RemoveButton } from '@app/components/QuestionEditForm/buttons'
+import { api } from '../api'
+import { themeData } from '../store/themeData'
+import { AnswerDto } from '@learning-mono/shared'
+import { RemoveButton } from '../components/QuestionEditForm/buttons'
+import { BaseButton } from '../components/BaseButton'
+import { AnswerRow } from '../components/AnswerRow'
 
 interface Props {
   themeId: string
@@ -52,7 +51,7 @@ function moveToNext() {
     ++index.value
 }
 
-function handleAnswerClick(answer: Answer) {
+function handleAnswerClick(answer: AnswerDto) {
   answer.isSelected = true
   moveToNext()
 }

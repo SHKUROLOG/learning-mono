@@ -30,12 +30,11 @@
 </template>
 
 <script lang="ts" setup>
-import BaseButton from '@app/components/BaseButton/BaseButton.vue'
 import { ref } from 'vue'
-import { SaveQuestionInput } from '../../api/question'
-import { SaveAnswerInput } from '../../api/answer'
 import { api } from '../../api'
 import { editMode } from '../../store/editmode'
+import { CreateAnswerInput, CreateQuestionInput } from '@learning-mono/shared'
+import { BaseButton } from '../BaseButton'
 
 interface Props {
   themeId: string
@@ -45,19 +44,20 @@ const props = defineProps<Props>()
 
 const addState = ref(false)
 
-const addForm = ref<SaveQuestionInput>({
+const addForm = ref<CreateQuestionInput>({
   title: '',
   themeId: parseInt(props.themeId),
   answers: [],
 })
 
-function removeAnswerForm(removeAnswer: SaveAnswerInput) {
-  addForm.value.answers = addForm.value.answers.filter(answer => answer !== removeAnswer)
+function removeAnswerForm(removeAnswer: CreateAnswerInput) {
+  addForm.value.answers = addForm.value.answers?.filter(answer => answer !== removeAnswer)
 }
 
 function addAnswerForm() {
-  addForm.value.answers.push({
+  addForm.value.answers?.push({
     title: '',
+    isCorrect: false,
   })
 }
 

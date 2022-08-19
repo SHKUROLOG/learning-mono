@@ -12,6 +12,7 @@
 import { AnswerRowProps } from './AnswerRow.props'
 import { api } from '../../api'
 import { BaseButton } from '../BaseButton'
+import { editMode } from '../../store/editmode'
 
 async function removeAnswer(answerId: number) {
   await api.answer.remove(answerId)

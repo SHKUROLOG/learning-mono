@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts" setup>
-import { themeData } from '@app/store/themeData'
 import { computed } from 'vue'
-import { Answer, Question } from '@app/types'
+import { themeData } from '../store/themeData'
+import { AnswerDto, QuestionDto } from '@learning-mono/shared'
 
 const questions = computed(() => themeData.value?.questions ?? [])
 
@@ -37,11 +37,11 @@ const amountCorrectAnswers = computed(() => isCorrectAnswers.value.filter(Boolea
 
 const percent = computed(() => amountCorrectAnswers.value / questions.value.length)
 
-function isQuestionCorrect(question: Question) {
+function isQuestionCorrect(question: QuestionDto) {
   return question.answers.some(a => a.isSelected && a.isCorrect)
 }
 
-function getAnswerSign(answer: Answer) {
+function getAnswerSign(answer: AnswerDto) {
   if (answer.isSelected && !answer.isCorrect)
     return 'x'
 

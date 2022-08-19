@@ -6,9 +6,9 @@
 </template>
 
 <script lang="ts" setup>
-import { api } from '@app/api'
-import { user } from '@app/store/user'
-import { BaseButton } from '@app/components/BaseButton'
+import { api } from '../../../../api'
+import { user } from '../../../../store/user'
+import { BaseButton } from '../../../BaseButton'
 
 async function userLogout() {
   await api.auth.logout()

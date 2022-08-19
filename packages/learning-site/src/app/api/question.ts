@@ -1,35 +1,18 @@
-import { QuestionDto } from '@learning-mono/shared'
-import { SaveAnswerInput } from './answer'
+import { CreateQuestionInput, QuestionDto, UpdateQuestionInput } from '@learning-mono/shared'
 import { instance } from './axios'
 
-export interface ConfigQuestionDeleteInput {
-  data: {
-    id: number
-  }
-}
-
-export interface SaveQuestionInput {
-  title: string
-  themeId: number
-  answers: SaveAnswerInput[]
-  id?: number
-}
-
 export const question = {
-  async create(addForm: SaveQuestionInput): Promise<QuestionDto> {
-    return await instance.post('/question', addForm)
+  async create(createQuestionInput: CreateQuestionInput): Promise<QuestionDto> {
+    return await instance.post('/question', createQuestionInput)
+      .then(v => v.data)
+  },
+
+  async update(updateQuestionInput: UpdateQuestionInput): Promise<QuestionDto> {
+    return await instance.put('/question', updateQuestionInput)
       .then(v => v.data)
   },
 
   async remove(questionId: number) {
-    const dataToSend: ConfigQuestionDeleteInput = {
-      data: {
-        id: questionId,
-      },
-    }
-
-    await instance.delete('/question', {
-      data: dataToSend,
-    })
+    await instance.delete(`/question/${questionId}`)
   },
 }

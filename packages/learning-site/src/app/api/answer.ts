@@ -1,32 +1,14 @@
-import { CreateAnswerInput } from '@learning-mono/shared'
+import { CreateAnswerInput, UpdateAnswerInput } from '@learning-mono/shared'
 import { instance } from './axios'
 
-// export interface AnswerInput {
-//   title: string
-//   answerId?: number
-//   questionId?: number
-// }
-//
-// export interface ConfigAnswerDeleteInput {
-//   data: {
-//     id: number
-//   }
-// }
-//
-// export interface SaveAnswerInput {
-//   title: string
-//   id?: number
-//   isCorrect?: boolean
-// }
-
 export const answer = {
-  async create(answerInput: CreateAnswerInput) {
-    return await instance.post('/answer', answerInput)
+  async create(createAnswerInput: CreateAnswerInput) {
+    return await instance.post('/answer', createAnswerInput)
       .then(v => v.data)
   },
 
-  async update(answerInput: AnswerInput) {
-    return await instance.put('/answer', answerInput)
+  async update(updateAnswerInput: UpdateAnswerInput) {
+    return await instance.put('/answer', updateAnswerInput)
       .then(v => v.data)
   },
 

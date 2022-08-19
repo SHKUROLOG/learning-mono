@@ -1,15 +1,9 @@
-import { Category } from '@app/types'
+import { CategoryDto } from '@learning-mono/shared'
 
 export interface CategoryEditFormProps {
-  category: Category
-}
-
-export interface CategoryCreateForm {
-  title: string
-  image: string
-  categoryId: number
+  category: CategoryDto
 }
 
 export interface CategoryEditFormEmits {
-  (event: 'update:category', value: Category): void
+  (event: 'update:category', value: CategoryDto): void
 }

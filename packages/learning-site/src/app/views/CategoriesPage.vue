@@ -10,12 +10,12 @@
 
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
-import { Category } from '@app/types'
-import { api } from '@app/api'
-import CategoryTile from '@app/components/CategoryTile/CategoryTile.vue'
-import CreateEmptyCategory from '@app/components/CreateEmptyCategory/CreateEmptyCategory.vue'
+import { CategoryDto } from '@learning-mono/shared'
+import { api } from '../api'
+import { CreateEmptyCategory } from '../components/CreateEmptyCategory'
+import { CategoryTile } from '../components/CategoryTile'
 
-const categories = ref<Category[]>([])
+const categories = ref<CategoryDto[]>([])
 
 watchEffect(async () => {
   categories.value = await api.category.getAll()
