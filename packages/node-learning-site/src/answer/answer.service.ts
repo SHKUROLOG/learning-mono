@@ -1,3 +1,4 @@
+import { CreateAnswerInput } from '@learning-mono/shared'
 import { Answer } from '@prisma/client'
 import { Deps, inject } from '../app/di'
 import { AnswerTypesInput } from './answer.types'
@@ -43,14 +44,13 @@ export async function updateAnswer(inputAnswer: AnswerTypesInput) {
   })
 }
 
-export async function createAnswer(inputAnswer: AnswerTypesInput) {
+export async function createAnswer(inputAnswer: CreateAnswerInput) {
   const prisma = inject(Deps.PRISMA)
-  if (inputAnswer.questionId) {
-    prisma.answer.create({
-      data: {
-        title: inputAnswer.title,
-        questionId: inputAnswer.questionId,
-      },
-    })
-  }
+  prisma.answer.create({
+    data: {
+      title: inputAnswer.title,
+      isCorrect: inputAnswer.isCorrect,
+      questionId: inputAnswer.questionId,
+    },
+  })
 }

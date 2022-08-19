@@ -6,10 +6,10 @@
 </template>
 
 <script lang="ts" setup>
-import { api } from '@app/api'
 import { CategoryRemoveProps } from './CategoryRemove.props'
-import { BaseButton } from '@app/components/BaseButton'
-import { editMode } from '@app/store/editmode'
+import { api } from '../../api'
+import { BaseButton } from '../BaseButton'
+import { editMode } from '../../store/editmode'
 
 const props = defineProps<CategoryRemoveProps>()
 

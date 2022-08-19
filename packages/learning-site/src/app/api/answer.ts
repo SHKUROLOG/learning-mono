@@ -1,25 +1,26 @@
-import { instance } from '@app/api/axios'
+import { CreateAnswerInput } from '@learning-mono/shared'
+import { instance } from './axios'
 
-export interface AnswerInput {
-  title: string
-  answerId?: number
-  questionId?: number
-}
-
-export interface ConfigAnswerDeleteInput {
-  data: {
-    id: number
-  }
-}
-
-export interface SaveAnswerInput {
-  title: string
-  id?: number
-  isCorrect?: boolean
-}
+// export interface AnswerInput {
+//   title: string
+//   answerId?: number
+//   questionId?: number
+// }
+//
+// export interface ConfigAnswerDeleteInput {
+//   data: {
+//     id: number
+//   }
+// }
+//
+// export interface SaveAnswerInput {
+//   title: string
+//   id?: number
+//   isCorrect?: boolean
+// }
 
 export const answer = {
-  async create(answerInput: AnswerInput) {
+  async create(answerInput: CreateAnswerInput) {
     return await instance.post('/answer', answerInput)
       .then(v => v.data)
   },
@@ -30,14 +31,6 @@ export const answer = {
   },
 
   async remove(answerId: number) {
-    const dataToSend: ConfigAnswerDeleteInput = {
-      data: {
-        id: answerId,
-      },
-    }
-
-    await instance.delete('/answer', {
-      data: dataToSend,
-    })
+    return await instance.delete(`/answer/${answerId}`)
   },
 }

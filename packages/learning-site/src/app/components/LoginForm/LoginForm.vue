@@ -21,8 +21,8 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { isUserLoading, user } from '@app/store/user'
-import { api } from '@app/api'
+import { isUserLoading, user } from '../../store/user'
+import { api } from '../../api'
 
 const formLogin = reactive({
   login: 'root',

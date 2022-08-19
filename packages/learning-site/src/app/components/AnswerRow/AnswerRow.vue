@@ -10,9 +10,8 @@
 
 <script lang="ts" setup>
 import { AnswerRowProps } from './AnswerRow.props'
-import { BaseButton } from '@app/components/BaseButton'
-import { api } from '@app/api'
-import { editMode } from '@app/store/editmode'
+import { api } from '../../api'
+import { BaseButton } from '../BaseButton'
 
 async function removeAnswer(answerId: number) {
   await api.answer.remove(answerId)

@@ -1,4 +1,4 @@
-import { Answer } from '@app/types'
+import { Answer } from '../../types'
 
 export interface AnswerRowProps {
   answer: Answer

@@ -1,6 +1,6 @@
-import { SaveAnswerInput } from '@app/api/api'
-import { instance } from '@app/api/axios'
-import { Question } from '@app/types'
+import { Question } from '@learning-mono/shared'
+import { SaveAnswerInput } from './answer'
+import { instance } from './axios'
 
 export interface ConfigQuestionDeleteInput {
   data: {

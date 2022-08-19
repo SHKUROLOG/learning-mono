@@ -1,8 +1,8 @@
-import { answer } from '@app/api/answer'
-import { auth } from '@app/api/auth'
-import { category } from '@app/api/category'
-import { question } from '@app/api/question'
-import { theme } from '@app/api/theme'
+import { answer } from './answer'
+import { auth } from './auth'
+import { category } from './category'
+import { question } from './question'
+import { theme } from './theme'
 
 export const api = {
   auth,

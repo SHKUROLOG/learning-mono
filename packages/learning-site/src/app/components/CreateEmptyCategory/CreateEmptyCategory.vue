@@ -7,9 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { api } from '@app/api'
-import { editMode } from '@app/store/editmode'
 import { ref } from 'vue'
+import { api } from '../../api'
+import { editMode } from '../../store/editmode'
 
 interface CreateCategoryForm {
   title: string

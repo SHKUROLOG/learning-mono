@@ -1,4 +1,4 @@
-import { Question } from '../../../learning-site/src/app/types'
+import { Question } from '@learning-mono/shared'
 import { deleteAnswersByQuestionId } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 import { SaveQuestionInput } from './question.types'

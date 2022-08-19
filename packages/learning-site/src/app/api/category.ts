@@ -1,5 +1,5 @@
-import { instance } from '@app/api/axios'
-import { Category } from '@app/types'
+import { Category } from '@learning-mono/shared'
+import { instance } from './axios'
 
 export interface CategoryInput {
   title: string

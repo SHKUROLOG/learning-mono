@@ -1,5 +1,5 @@
-import { instance } from '@app/api/axios'
-import { Theme } from '@app/types'
+import { Theme } from '@learning-mono/shared'
+import { instance } from './axios'
 
 export interface ThemeInput {
   title: string
@@ -24,12 +24,6 @@ export const theme = {
   },
 
   async remove(themeId: number) {
-    const dataToSend = {
-      data: {
-        id: themeId,
-      },
-    }
-
-    return await instance.delete('/themes', dataToSend)
+    return await instance.delete(`/themes/${themeId}`)
   },
 }

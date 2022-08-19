@@ -1,4 +1,4 @@
-import { Theme } from '@app/types'
+import { Theme } from '../../types'
 
 export interface CategoryThemesProps {
   themes: Theme[]

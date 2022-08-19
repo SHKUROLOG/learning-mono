@@ -1,4 +1,4 @@
-import { Category } from '@app/types'
+import { Category } from '../../types'
 
 export interface CategoryTileProps {
   category: Category

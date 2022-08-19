@@ -1,5 +1,5 @@
-import { instance } from '@app/api/axios'
-import { User } from '@app/store/user'
+import { User } from '../store/user'
+import { instance } from './axios'
 
 export interface FormLogin {
   login: string

@@ -17,10 +17,10 @@ import { CategoryCreateForm, CategoryEditFormEmits, CategoryEditFormProps } from
 import BaseInput from '@app/components/BaseInput/BaseInput.vue'
 import BaseButton from '@app/components/BaseButton/BaseButton.vue'
 import { ref } from 'vue'
-import { api } from '@app/api'
-import { editMode } from '@app/store/editmode'
 import { isEqual } from 'lodash'
-import { user } from '@app/store/user'
+import { api } from '../../api'
+import { user } from '../../store/user'
+import { editMode } from '../../store/editmode'
 
 const props = defineProps<CategoryEditFormProps>()
 const emit = defineEmits<CategoryEditFormEmits>()

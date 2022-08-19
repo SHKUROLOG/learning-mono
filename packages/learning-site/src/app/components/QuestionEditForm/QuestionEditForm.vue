@@ -31,9 +31,11 @@
 
 <script lang="ts" setup>
 import BaseButton from '@app/components/BaseButton/BaseButton.vue'
-import { api, SaveAnswerInput, SaveQuestionInput } from '@app/api'
 import { ref } from 'vue'
-import { editMode } from '@app/store/editmode'
+import { SaveQuestionInput } from '../../api/question'
+import { SaveAnswerInput } from '../../api/answer'
+import { api } from '../../api'
+import { editMode } from '../../store/editmode'
 
 interface Props {
   themeId: string
