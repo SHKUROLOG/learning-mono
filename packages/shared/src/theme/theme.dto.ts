@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer'
 import { IsNumber, IsString, ValidateNested } from 'class-validator'
-import { Question } from '../question'
+import { QuestionDto } from '../question'
 
 export class Theme {
   @IsNumber()
@@ -10,6 +10,6 @@ export class Theme {
   title: string
 
   @ValidateNested()
-  @Type(() => Question)
-  questions: Question[]
+  @Type(() => QuestionDto)
+  questions: QuestionDto[]
 }

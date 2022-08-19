@@ -5,10 +5,7 @@ export class UpdateAnswerInput {
   title: string
 
   @IsNumber()
-  QuestionId: number
-
-  @IsNumber()
-  Id: number
+  id: number
 
   @IsOptional()
   @IsBoolean()

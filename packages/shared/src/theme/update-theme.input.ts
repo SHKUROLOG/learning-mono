@@ -1,9 +1,9 @@
 import { IsNumber, IsString } from 'class-validator'
 
-export class CreateQuestionInput {
+export class UpdateThemeInput {
+  @IsNumber()
+  id: number
+
   @IsString()
   title: string
-
-  @IsNumber()
-  themeId: number
 }

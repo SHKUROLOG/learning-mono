@@ -1,4 +1,4 @@
-import { Question } from '@learning-mono/shared'
+import { QuestionDto } from '@learning-mono/shared'
 import { SaveAnswerInput } from './answer'
 import { instance } from './axios'
 
@@ -16,7 +16,7 @@ export interface SaveQuestionInput {
 }
 
 export const question = {
-  async create(addForm: SaveQuestionInput): Promise<Question> {
+  async create(addForm: SaveQuestionInput): Promise<QuestionDto> {
     return await instance.post('/question', addForm)
       .then(v => v.data)
   },

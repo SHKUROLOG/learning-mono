@@ -2,7 +2,7 @@ import { Type } from 'class-transformer'
 import { IsNumber, IsString, ValidateNested } from 'class-validator'
 import { AnswerDto } from '../answer'
 
-export class Question {
+export class QuestionDto {
   @IsNumber()
   id: number
 

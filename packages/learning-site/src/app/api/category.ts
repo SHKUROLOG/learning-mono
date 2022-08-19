@@ -1,4 +1,4 @@
-import { Category } from '@learning-mono/shared'
+import { CategoryDto } from '@learning-mono/shared'
 import { instance } from './axios'
 
 export interface CategoryInput {
@@ -8,22 +8,22 @@ export interface CategoryInput {
 }
 
 export const category = {
-  async getAll(): Promise<Category[]> {
+  async getAll(): Promise<CategoryDto[]> {
     return instance.get('/categories')
       .then(v => v.data)
   },
 
-  async getById(categoryId: string): Promise<Category> {
+  async getById(categoryId: string): Promise<CategoryDto> {
     return instance.get(`/categories/${categoryId}`)
       .then(v => v.data)
   },
 
-  async create(categoryInput: CategoryInput): Promise<Category> {
+  async create(categoryInput: CategoryInput): Promise<CategoryDto> {
     return instance.post('/categories', categoryInput)
       .then(v => v.data)
   },
 
-  async update(categoryInput: CategoryInput): Promise<Category> {
+  async update(categoryInput: CategoryInput): Promise<CategoryDto> {
     return instance.put('/categories', categoryInput)
       .then(v => v.data)
   },

@@ -3,6 +3,7 @@ import { removeAnswer } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 import { removeQuestion } from '../question/question.service'
 import { getThemesByCategoryId, removeTheme } from '../theme/theme.service'
+import { CreateCategoryInput } from '@learning-mono/shared'
 
 export async function getCategoryById(id: number) {
   return await inject(Deps.PRISMA).category.findUnique({
@@ -19,11 +20,11 @@ export async function getAllCategories() {
   return inject(Deps.PRISMA).category.findMany()
 }
 
-export async function createCategory(title: string, image: string): Promise<Category> {
+export async function createCategory(categoryInput: CreateCategoryInput): Promise<Category> {
   return inject(Deps.PRISMA).category.create({
     data: {
-      title,
-      image,
+      title: categoryInput.title,
+      image: categoryInput.image,
     },
   })
 }

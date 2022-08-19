@@ -1,5 +1,6 @@
 import { Theme } from '@prisma/client'
 import { Deps, inject } from '../app/di'
+import { CreateThemeInput, UpdateThemeInput } from '@learning-mono/shared'
 
 export async function getThemeById(id: number) {
   return await inject(Deps.PRISMA).theme.findUnique({
@@ -20,22 +21,22 @@ export async function getAllThemes() {
   return inject(Deps.PRISMA).theme.findMany()
 }
 
-export async function createTheme(title: string, categoryId: number): Promise<Theme> {
+export async function createTheme(createThemeInput: CreateThemeInput): Promise<Theme> {
   return inject(Deps.PRISMA).theme.create({
     data: {
-      title,
-      categoryId,
+      title: createThemeInput.title,
+      categoryId: createThemeInput.categoryId,
     },
   })
 }
 
-export async function updateTheme(title: string, categoryId: number): Promise<Theme> {
+export async function updateTheme(updateThemeInput: UpdateThemeInput): Promise<Theme> {
   return inject(Deps.PRISMA).theme.update({
     data: {
-      title,
+      title: updateThemeInput.title,
     },
     where: {
-      id: categoryId,
+      id: updateThemeInput.id,
     },
   })
 }
