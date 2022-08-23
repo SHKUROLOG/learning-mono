@@ -1,7 +1,7 @@
 import { Category } from '@prisma/client'
-import { removeAnswer } from '../answer/answer.service'
+import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
-import { removeQuestion } from '../question/question.service'
+import { getQuestionsByThemeId, removeQuestion } from '../question/question.service'
 import { getThemesByCategoryId, removeTheme } from '../theme/theme.service'
 import { CreateCategoryInput } from '@learning-mono/shared'
 
@@ -16,7 +16,7 @@ export async function getCategoryById(id: number) {
   })
 }
 
-export async function getAllCategories() {
+export async function getAllCategories(): Promise<Category[]> {
   return inject(Deps.PRISMA).category.findMany()
 }
 
@@ -29,7 +29,7 @@ export async function createCategory(categoryInput: CreateCategoryInput): Promis
   })
 }
 
-export async function updateCategory(title: string, categoryId: number, image: string): Promise<Category> { // image? no required
+export async function updateCategory(title: string, categoryId: number, image: string): Promise<Category> {
   return inject(Deps.PRISMA).category.update({
     data: {
       title,
@@ -54,34 +54,35 @@ export async function removeCategory(categoryId: number): Promise<Category> {
   })
 }
 
-export async function destroyCategory(removeCategoryId: number): Promise<void> {
-  const themeIds = await getThemeIds(removeCategoryId)
+export async function destroyCategory(categoryId: number | number[]): Promise<void> {
+  const themes = await getThemesByCategoryId(categoryId)
+  const themesIds = themes.map(v => v.id)
 
-  const questionIds = await Promise.all(themeIds.map(getQuestionIds))
-  const flatQuestionIds = questionIds.flat()
+  const questions = await getQuestionsByThemeId(themesIds)
+  const questionsIds = questions.map(v => v.id)
 
-  const answerIds = await Promise.all(flatQuestionIds.map(getAnswerIds))
-  const flatAnswerIds = answerIds.flat()
+  const answers = await getAnswersByQuestionId(questionsIds)
+  const answerIds = answers.map(v => v.id)
 
-  await Promise.all(flatAnswerIds.map(removeAnswer))
-  await Promise.all(flatQuestionIds.map(removeQuestion))
-  await Promise.all(themeIds.map(removeTheme))
+  await removeAnswer(answerIds)
+  await removeQuestion(questionsIds)
+  await removeTheme(themesIds)
 }
 
-async function getThemeIds(removeCategoryId: number): Promise<number[]> {
-  const themes = await getThemesByCategoryId(removeCategoryId)
-
-  return themes.map(v => v.id)
-}
-
-async function getQuestionIds(themeIds: number): Promise<number[]> {
-  const themes = await getThemesByCategoryId(themeIds)
-
-  return themes.map(v => v.id)
-}
-
-async function getAnswerIds(questionIds: number): Promise<number[]> {
-  const themes = await getThemesByCategoryId(questionIds)
-
-  return themes.map(v => v.id)
-}
+// async function getThemeIds(removeCategoryId: number): Promise<number[]> {
+//   const themes = await getThemesByCategoryId(removeCategoryId)
+//
+//   return themes.map(v => v.id)
+// }
+//
+// async function getQuestionIds(themeIds: number): Promise<number[]> {
+//   const themes = await getQuestionsByThemeId(themeIds)
+//
+//   return themes.map(v => v.id)
+// }
+//
+// async function getAnswerIds(questionIds: number): Promise<number[]> {
+//   const themes = await getAnswersByQuestionId(questionIds)
+//
+//   return themes.map(v => v.id)
+// }

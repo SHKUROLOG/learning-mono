@@ -1,6 +1,6 @@
 import { CreateAnswerInput, UpdateAnswerInput } from '@learning-mono/shared'
 import { defineRoute } from '../validate/validate'
-import { createAnswer } from './answer.service'
+import { createAnswer, removeAnswer } from './answer.service'
 
 export const answerRoute = defineRoute('answer')
 
@@ -15,6 +15,6 @@ answerRoute.update(UpdateAnswerInput, async (req, res) => {
 })
 
 answerRoute.remove(async (req, res) => {
-  const removedAnswer = await createAnswer(req.body)
+  const removedAnswer = await removeAnswer(parseInt(req.params.id))
   res.json(removedAnswer)
 })

@@ -1,6 +1,8 @@
 import { Theme } from '@prisma/client'
 import { Deps, inject } from '../app/di'
 import { CreateThemeInput, UpdateThemeInput } from '@learning-mono/shared'
+import { getQuestionsByThemeId, removeQuestion } from '../question/question.service'
+import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
 
 export async function getThemeById(id: number) {
   return await inject(Deps.PRISMA).theme.findUnique({
@@ -41,25 +43,42 @@ export async function updateTheme(updateThemeInput: UpdateThemeInput): Promise<T
   })
 }
 
-export async function removeTheme(themeId: number) {
-  return inject(Deps.PRISMA).theme.delete({
-    where: {
-      id: themeId,
-    },
-  })
-}
+export async function removeTheme(themeId: number | number[]) {
+  await destroyTheme(themeId)
 
-export async function removeThemes(categoryId: number) {
   return inject(Deps.PRISMA).theme.deleteMany({
     where: {
-      categoryId: {
-        equals: categoryId,
+      id: {
+        in: themeId,
       },
     },
   })
 }
 
-export async function getThemesByCategoryId(categoryId: number): Promise<Theme[]> {
+export async function destroyTheme(themeId: number | number[]): Promise<void> {
+  const questions = await getQuestionsByThemeId(themeId)
+  const questionsIds = questions.map(v => v.id)
+
+  const answers = await getAnswersByQuestionId(questionsIds)
+  const answerIds = answers.map(v => v.id)
+
+  await removeAnswer(answerIds)
+  await removeQuestion(questionsIds)
+}
+
+// export async function removeThemesByCategoryId(categoryId: number) {
+//   // destroyTheme(categoryId)
+//
+//   return inject(Deps.PRISMA).theme.deleteMany({
+//     where: {
+//       categoryId: {
+//         equals: categoryId,
+//       },
+//     },
+//   })
+// }
+
+export async function getThemesByCategoryId(categoryId: number | number[]): Promise<Theme[]> {
   return inject(Deps.PRISMA).theme.findMany({
     where: {
       categoryId: {

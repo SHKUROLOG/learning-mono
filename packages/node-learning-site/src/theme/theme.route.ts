@@ -5,7 +5,7 @@ import { CreateThemeInput, UpdateThemeInput } from '@learning-mono/shared'
 export const themeRoute = defineRoute('theme')
 
 themeRoute.getById(async (req, res) => {
-  const themeById = await getThemeById(req.body)
+  const themeById = await getThemeById(parseInt(req.params.id))
   res.json(themeById)
 })
 
@@ -20,7 +20,7 @@ themeRoute.update(UpdateThemeInput, async (req, res) => {
 })
 
 themeRoute.remove(async (req, res) => {
-  const removedTheme = await removeTheme(req.body)
+  const removedTheme = await removeTheme(parseInt(req.params.id))
   res.json(removedTheme)
 })
 

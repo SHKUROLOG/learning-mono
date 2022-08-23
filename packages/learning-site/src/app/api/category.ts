@@ -9,7 +9,7 @@ export interface CategoryInput {
 
 export const category = {
   async getAll(): Promise<CategoryDto[]> {
-    return instance.get('/category')
+    return instance.get('/categories')
       .then(v => v.data)
   },
 

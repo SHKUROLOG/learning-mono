@@ -5,7 +5,7 @@ import { CreateQuestionInput, UpdateQuestionInput } from '@learning-mono/shared'
 export const questionRoute = defineRoute('question')
 
 questionRoute.getById(async (req, res) => {
-  const questionById = await getQuestionById(req.body)
+  const questionById = await getQuestionById(parseInt(req.params.id))
   res.json(questionById)
 })
 
@@ -20,7 +20,7 @@ questionRoute.update(UpdateQuestionInput, async (req, res) => {
 })
 
 questionRoute.remove(async (req, res) => {
-  const removedQuestion = await removeQuestion(req.body)
+  const removedQuestion = await removeQuestion(parseInt(req.params.id))
   res.json(removedQuestion)
 })
 

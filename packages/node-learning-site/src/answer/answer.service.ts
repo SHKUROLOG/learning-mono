@@ -13,13 +13,23 @@ import { Deps, inject } from '../app/di'
 //   })
 // }
 
+export async function getAnswersByQuestionId(questionId: number | number[]): Promise<Answer[]> {
+  return await inject(Deps.PRISMA).answer.findMany({
+    where: {
+      questionId: {
+        in: questionId,
+      },
+    },
+  })
+}
+
 export async function createAnswer(inputAnswer: CreateAnswerInput) {
   const prisma = inject(Deps.PRISMA)
   prisma.answer.create({
     data: {
       title: inputAnswer.title,
-      isCorrect: inputAnswer.isCorrect,
-      questionId: inputAnswer.questionId,
+      isCorrect: inputAnswer.isCorrect!,
+      questionId: inputAnswer.questionId!,
     },
   })
 }
@@ -37,29 +47,23 @@ export async function updateAnswer(inputAnswer: UpdateAnswerInput) {
   })
 }
 
-export async function removeAnswer(answerId: number) {
+export async function removeAnswer(answerId: number | number[]) {
   const prisma = inject(Deps.PRISMA)
 
-  return prisma.answer.delete({
+  return prisma.answer.deleteMany({
     where: {
-      id: answerId,
+      id: {
+        in: answerId,
+      },
     },
   })
 }
 
-export async function deleteAnswersByQuestionId(questionId: number) {
+export async function removeAnswersByQuestionId(questionId: number | number[]) {
   return inject(Deps.PRISMA).answer.deleteMany({
     where: {
-      questionId,
-    },
-  })
-}
-
-export async function getAnswersByQuestionId(questionId: number): Promise<Answer[]> {
-  return await inject(Deps.PRISMA).answer.findMany({
-    where: {
       questionId: {
-        equals: questionId,
+        in: questionId,
       },
     },
   })

@@ -1,5 +1,5 @@
 import { CreateQuestionInput, QuestionDto, UpdateQuestionInput } from '@learning-mono/shared'
-import { deleteAnswersByQuestionId } from '../answer/answer.service'
+import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 
 export async function getQuestionById(id: number) {
@@ -104,21 +104,40 @@ export async function updateQuestion(updateQuestionInput: UpdateQuestionInput) {
   })
 }
 
-export async function removeQuestion(questionId: number) {
-  await deleteAnswersByQuestionId(questionId)
+export async function removeQuestion(questionId: number | number[]) {
+  await destroyQuestion(questionId)
 
-  return inject(Deps.PRISMA).question.delete({
+  return inject(Deps.PRISMA).question.deleteMany({
     where: {
-      id: questionId,
+      id: {
+        in: questionId,
+      },
     },
   })
 }
 
-export async function getQuestionsByThemeId(themeId: number): Promise<QuestionDto[]> {
+// export async function removeQuestionsByThemeId(themeId: number | number[]) {
+//   return inject(Deps.PRISMA).question.deleteMany({
+//     where: {
+//       themeId: {
+//         in: themeId,
+//       },
+//     },
+//   })
+// }
+
+export async function destroyQuestion(questionId: number | number[]) {
+  const answers = await getAnswersByQuestionId(questionId)
+  const answerIds = answers.map(v => v.id)
+
+  await removeAnswer(answerIds)
+}
+
+export async function getQuestionsByThemeId(themeId: number | number[]): Promise<QuestionDto[]> {
   return inject(Deps.PRISMA).question.findMany({
     where: {
       themeId: {
-        equals: themeId,
+        in: themeId,
       },
     },
     include: {

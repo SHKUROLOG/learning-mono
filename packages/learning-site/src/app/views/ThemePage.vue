@@ -30,6 +30,7 @@ import { AnswerDto } from '@learning-mono/shared'
 import { RemoveButton } from '../components/QuestionEditForm/buttons'
 import { BaseButton } from '../components/BaseButton'
 import { AnswerRow } from '../components/AnswerRow'
+import { QuestionEditForm } from '../components/QuestionEditForm'
 
 interface Props {
   themeId: string
@@ -79,6 +80,7 @@ watch(
   padding: 16px;
   align-items: start;
   justify-items: start;
+  user-select: none;
 }
 
 .next {
