@@ -9,8 +9,9 @@
 
       <CategoryRemove :category="category"/>
     </div>
-
-    <CategoryThemes :themes="category.themes"/>
+    <div>
+      <CategoryThemes :themes="category.themes"/>
+    </div>
   </div>
 </template>
 

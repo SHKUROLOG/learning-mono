@@ -1,12 +1,15 @@
 <template>
   <BaseButton v-if="editMode"
-              text="Remove question"
+              :text="text"
               type="button"/>
 </template>
 
 <script lang="ts" setup>
 import { editMode } from '../../../store/editmode'
 import { BaseButton } from '../../BaseButton'
+import { RemoveButtonProps } from './RemoveButton.props'
+
+defineProps<RemoveButtonProps>()
 
 // interface RemoveButtonTargetProps {
 //   targetId: number

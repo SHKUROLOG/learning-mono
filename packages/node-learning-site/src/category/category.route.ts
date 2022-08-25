@@ -1,6 +1,6 @@
 import { defineRoute } from '../validate/validate'
 import { CreateCategoryInput, UpdateCategoryInput } from '@learning-mono/shared'
-import { createCategory, getAllCategories, getCategoryById, removeCategory } from './category.service'
+import { createCategory, getAllCategories, getCategoryById, removeCategory, updateCategory } from './category.service'
 
 export const categoryRoute = defineRoute('category')
 
@@ -15,7 +15,7 @@ categoryRoute.create(CreateCategoryInput, async (req, res) => {
 })
 
 categoryRoute.update(UpdateCategoryInput, async (req, res) => {
-  const updatedCategory = await createCategory(req.body)
+  const updatedCategory = await updateCategory(req.body)
   res.json(updatedCategory)
 })
 

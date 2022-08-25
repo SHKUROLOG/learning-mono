@@ -43,7 +43,7 @@ async function saveCategory() {
   emit('update:category', updatedCategory)
 }
 
-if (!initialForm.title && !initialForm.image && user.value)
+if (!initialForm.title && !initialForm.image && user.value?.isAdmin)
   editMode.value = true
 </script>
 

@@ -1,4 +1,4 @@
 import { ref } from 'vue'
-import { Theme } from '../types'
+import { ThemeDto } from '@learning-mono/shared'
 
-export const themeData = ref<Theme | null>(null)
+export const themeData = ref<ThemeDto | null>(null)

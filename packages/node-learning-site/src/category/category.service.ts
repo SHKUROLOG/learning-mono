@@ -3,7 +3,7 @@ import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 import { getQuestionsByThemeId, removeQuestion } from '../question/question.service'
 import { getThemesByCategoryId, removeTheme } from '../theme/theme.service'
-import { CreateCategoryInput } from '@learning-mono/shared'
+import { CreateCategoryInput, UpdateCategoryInput } from '@learning-mono/shared'
 
 export async function getCategoryById(id: number) {
   return await inject(Deps.PRISMA).category.findUnique({
@@ -29,14 +29,14 @@ export async function createCategory(categoryInput: CreateCategoryInput): Promis
   })
 }
 
-export async function updateCategory(title: string, categoryId: number, image: string): Promise<Category> {
+export async function updateCategory(updateCategoryInput :UpdateCategoryInput): Promise<Category> {
   return inject(Deps.PRISMA).category.update({
     data: {
-      title,
-      image,
+      title: updateCategoryInput.title,
+      image: updateCategoryInput.image,
     },
     where: {
-      id: categoryId,
+      id: updateCategoryInput.id,
     },
     include: {
       themes: true,

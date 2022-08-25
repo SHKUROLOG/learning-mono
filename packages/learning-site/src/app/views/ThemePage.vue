@@ -4,17 +4,19 @@
     <div :class="$style.title">
       {{ currentQuestion.title }}
       ({{ index + 1 }} OF {{ shuffledQuestions.length }})
-      <RemoveButton @click="removeQuestionAndAnswers(currentQuestion.id)"/>
+      <RemoveButton text="[X]" @click="removeQuestionAndAnswers(currentQuestion.id)"/>
     </div>
 
-    <AnswerRow v-for="answer in currentQuestion.answers"
-               :key="answer.id"
-               :answer="answer"
-               @click="handleAnswerClick(answer)"/>
+    <div v-if="!editMode">
+      <AnswerRow v-for="answer in currentQuestion.answers"
+                 :key="answer.id"
+                 :answer="answer"
+                 @click="handleAnswerClick(answer)"/>
 
-    <BaseButton text="SKIP"
-                :class="$style.next"
-                @click="moveToNext"/>
+      <BaseButton text="SKIP"
+                  :class="$style.next"
+                  @click="moveToNext"/>
+    </div>
 
     <QuestionEditForm :themeId="themeId"/>
   </div>
@@ -31,6 +33,7 @@ import { RemoveButton } from '../components/QuestionEditForm/buttons'
 import { BaseButton } from '../components/BaseButton'
 import { AnswerRow } from '../components/AnswerRow'
 import { QuestionEditForm } from '../components/QuestionEditForm'
+import { editMode } from '../store/editmode'
 
 interface Props {
   themeId: string

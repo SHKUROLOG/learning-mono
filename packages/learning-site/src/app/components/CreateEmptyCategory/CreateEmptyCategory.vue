@@ -10,13 +10,9 @@
 import { ref } from 'vue'
 import { api } from '../../api'
 import { editMode } from '../../store/editmode'
+import { CreateCategoryInput } from '@learning-mono/shared'
 
-interface CreateCategoryForm {
-  title: string
-  image: string
-}
-
-const emptyCategoryForm = ref<CreateCategoryForm>({
+const emptyCategoryForm = ref<CreateCategoryInput>({
   title: '',
   image: '',
 })
