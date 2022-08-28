@@ -1,33 +1,18 @@
-import { defineRoute } from '../validate/validate'
 import { CreateCategoryInput, UpdateCategoryInput } from '@learning-mono/shared'
+import { defineRoute } from '../validate/validate'
 import { createCategory, getAllCategories, getCategoryById, removeCategory, updateCategory } from './category.service'
 
 export const categoryRoute = defineRoute('category')
 
-categoryRoute.getById(async (req, res) => {
-  const categoryById = await getCategoryById(parseInt(req.params.id))
-  res.json(categoryById)
-})
+categoryRoute.getById(getCategoryById)
 
-categoryRoute.create(CreateCategoryInput, async (req, res) => {
-  const createdCategory = await createCategory(req.body)
-  res.json(createdCategory)
-})
+categoryRoute.create(CreateCategoryInput, createCategory)
 
-categoryRoute.update(UpdateCategoryInput, async (req, res) => {
-  const updatedCategory = await updateCategory(req.body)
-  res.json(updatedCategory)
-})
+categoryRoute.update(UpdateCategoryInput, updateCategory)
 
-categoryRoute.remove(async (req, res) => {
-  const removedCategory = await removeCategory(parseInt(req.params.id))
-  res.json(removedCategory)
-})
+categoryRoute.remove(removeCategory)
 
-categoryRoute.custom('get', '/categories', Object, async (req, res) => {
-  const allCategories = await getAllCategories()
-  res.json(allCategories)
-})
+categoryRoute.custom('get', '/categories', getAllCategories)
 
 // export const categoryRoute = Router()
 

@@ -1,10 +1,17 @@
 <template>
-  <BaseInput v-model="currentForm.title"
-             placeholder="Theme title"/>
+  <div :class="$style.root">
+    <BaseInput v-model="currentForm.title"
+               placeholder="Theme title"/>
 
-  <BaseButton v-if="!isEqual(currentForm, initialForm)"
-              text="Save changes"
-              @click="saveTheme"/>
+    <div :class="$style.buttons">
+      <BaseButton v-if="!isEqual(currentForm, initialForm)"
+                  text="Save"
+                  @click="saveTheme"/>
+
+      <BaseButton text="Remove"
+                  @click="removeTheme(currentForm.id)"/>
+    </div>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -32,8 +39,27 @@ function createForm(): UpdateThemeInput {
 async function saveTheme() {
   await api.theme.update(currentForm.value)
 }
+
+async function removeTheme(themeId: number) {
+  await api.theme.remove(themeId)
+}
 </script>
 
-<style>
+<style module>
+.root {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: start;
+}
 
+.buttons {
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.root:hover .buttons {
+  opacity: 1;
+  pointer-events: all;
+}
 </style>

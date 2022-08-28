@@ -1,24 +1,28 @@
 <template>
-  <div v-if="themeData" :class="$style.themes">
+  <div v-if="themeData"
+       :class="$style.themes">
     <h1>{{ themeData.title }}</h1>
-    <div :class="$style.title">
-      {{ currentQuestion.title }}
-      ({{ index + 1 }} OF {{ shuffledQuestions.length }})
-      <RemoveButton text="[X]" @click="removeQuestionAndAnswers(currentQuestion.id)"/>
-    </div>
 
-    <div v-if="!editMode">
+    <div v-if="editMode">
+      <QuestionEditForm v-for="question in shuffledQuestions"
+                        :key="question.id"
+                        :question="question"/>
+    </div>
+    <div v-else>
+      <div :class="$style.title">
+        {{ currentQuestion.title }}
+        ({{ index + 1 }} OF {{ shuffledQuestions.length }})
+      </div>
+
       <AnswerRow v-for="answer in currentQuestion.answers"
                  :key="answer.id"
                  :answer="answer"
                  @click="handleAnswerClick(answer)"/>
 
-      <BaseButton text="SKIP"
+      <BaseButton text=">>>"
                   :class="$style.next"
                   @click="moveToNext"/>
     </div>
-
-    <QuestionEditForm :themeId="themeId"/>
   </div>
 </template>
 
@@ -34,6 +38,7 @@ import { BaseButton } from '../components/BaseButton'
 import { AnswerRow } from '../components/AnswerRow'
 import { QuestionEditForm } from '../components/QuestionEditForm'
 import { editMode } from '../store/editmode'
+import BaseSaveRemoveButtons from '../components/BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
 
 interface Props {
   themeId: string

@@ -1,8 +1,5 @@
 <template>
-  <div v-if="editMode">
-    <BaseButton text="X"
-                @click="removeCategory"/>
-  </div>
+  <div v-if="editMode"/>
 </template>
 
 <script lang="ts" setup>
@@ -12,10 +9,6 @@ import { BaseButton } from '../BaseButton'
 import { editMode } from '../../store/editmode'
 
 const props = defineProps<CategoryRemoveProps>()
-
-function removeCategory() {
-  api.category.remove(props.category.id)
-}
 </script>
 
 <style>

@@ -2,27 +2,48 @@ import { plainToInstance } from 'class-transformer'
 import { ClassConstructor } from 'class-transformer/types/interfaces/class-constructor.type'
 import { validate } from 'class-validator'
 import { Request, Response, Router } from 'express'
+import { HttpError } from './HttpError'
+import { InvalidIdError } from './InvalidIdError'
+import {} from '@prisma/client'
 
 type RequestWithInput<T> = Request & {
   input: T
 }
 
+type MaybePromise<T> = Promise<T> | T
+
 type Method = 'get' | 'post' | 'put' | 'delete'
 
-type Handler<T> = (req: RequestWithInput<T>, res: Response) => Promise<void> | void
+type HandlerWithInput<T, R> = (input: T, req: RequestWithInput<T>, res: Response) => MaybePromise<R>
 
-type BaseHandler = (req: Request, res: Response) => Promise<void> | void
+type BaseHandler<R> = (req: Request, res: Response) => MaybePromise<R>
+
+type HandlerWithId<R> = (id: number, req: Request, res: Response) => MaybePromise<R>
 
 // const themeRoute = defineRoute('theme')
 
 export function defineRoute(name: string) {
   const router = Router()
 
-  function useHandlerWithInput<T extends object>(
+  function useHandlerWithId<R>(
+    method: Method,
+    path: string,
+    handler: HandlerWithId<R>,
+  ) {
+    useHandler(method, path, async (req, res) => {
+      const id = parseInt(req.params.id)
+      if (Number.isNaN(id))
+        throw new InvalidIdError(req.params.id)
+
+      return handler(id, req, res)
+    })
+  }
+
+  function useHandlerWithInput<T extends object, R>(
     method: Method,
     path: string,
     inputClass: ClassConstructor<T>,
-    handler: Handler<T>,
+    handler: HandlerWithInput<T, R>,
   ) {
     useHandler(method, path, async (req, res) => {
       const input = plainToInstance(inputClass, req.body)
@@ -36,28 +57,40 @@ export function defineRoute(name: string) {
       const reqWithInput = req as RequestWithInput<T>
       reqWithInput.input = input
 
-      await handler(reqWithInput, res)
+      return handler(input, reqWithInput, res)
     })
   }
 
-  function useHandler(
+  function useHandler<R>(
     method: Method,
     path: string,
-    handler: BaseHandler,
+    handler: BaseHandler<R>,
   ) {
     router[method](path, async (req, res) => {
       try {
-        await handler(req, res)
+        const result = await handler(req, res)
+        res.json(result)
       } catch (error) {
-        res.status(500).json({ error })
+        if (error instanceof HttpError)
+          res.status(error.code).json({ error })
+        else
+          res.status(500).json({ error })
       }
     })
   }
 
-  const create = useHandlerWithInput.bind(null, 'post', `/${name}`)
-  const update = useHandlerWithInput.bind(null, 'put', `/${name}`)
-  const remove = useHandler.bind(null, 'delete', `/${name}/:id`)
-  const getById = useHandler.bind(null, 'get', `/${name}/:id`)
+  const create = <T extends object, R>(
+    inputClass: ClassConstructor<T>,
+    handler: HandlerWithInput<T, R>,
+  ) => useHandlerWithInput('post', `/${name}`, inputClass, handler)
+
+  const update = <T extends object, R>(
+    inputClass: ClassConstructor<T>,
+    handler: HandlerWithInput<T, R>,
+  ) => useHandlerWithInput('put', `/${name}`, inputClass, handler)
+
+  const remove = useHandlerWithId.bind(null, 'delete', `/${name}/:id`)
+  const getById = useHandlerWithId.bind(null, 'get', `/${name}/:id`)
 
   return {
     router,
@@ -65,38 +98,7 @@ export function defineRoute(name: string) {
     update,
     remove,
     getById,
-    custom: useHandlerWithInput,
+    customWithInput: useHandlerWithInput,
+    custom: useHandler,
   }
 }
-//
-// route.create()
-//
-// route.create(CreateThemeInput, (req: Req<CreateThemeInput>, res) => themeService.createTheme(req.input))
-//
-// /// #########/// #########/// #########/// #########
-//
-// const route = Route()
-//
-// answerRoute.post('/answer', async (req, res) => {
-//   const error = validateClass(CreateAnswerInput, req, res)
-//
-//   const createdAnswer = await createAnswer(request)
-//   res.json(createdAnswer)
-// })
-//
-// export async function validateClass<T extends object>(
-//   validateClass: ClassConstructor<T>,
-//   req: RequestWithInput<T>,
-//   res: Response<T>,
-// ): Promise<Response<T> | undefined> {
-//   const input = plainToInstance(validateClass, req.body)
-//   const errors = await validate(request)
-//   if (errors.length)
-//     return res.status(400).json({ errors })
-//   req.input = input
-//   try {
-//     await handler(req, res)
-//   } catch (error) {
-//     res.status(500).json({ error })
-//   }
-// }

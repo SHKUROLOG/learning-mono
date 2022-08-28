@@ -28,7 +28,7 @@ export const category = {
       .then(v => v.data)
   },
 
-  async remove(categoryId: number) {
+  async remove(categoryId: number): Promise<CategoryDto> {
     return instance.delete(`/category/${categoryId}`)
   },
 }

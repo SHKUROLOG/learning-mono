@@ -1,71 +1,57 @@
 <template>
-  <div v-if="editMode">
-    <BaseButton text="Edit form" @click="addState = !addState"/>
+  <div :class="$style.root">
+    <BaseInput v-model="currentForm.title"
+               placeholder="Question title"/>
 
-    <div v-if="addState">
-      <input v-model="addForm.title"
-             type="text"
-             placeholder="Text question">
-
-      <div v-for="(answer, index) in addForm.answers"
-           :key="index">
-        <input v-model="answer.title"
-               type="text"
-               placeholder="answers">
-
-        <input v-model="answer.isCorrect"
-               type="checkbox">
-
-        <BaseButton text="Remove answer"
-                    @click="removeAnswerForm(answer)"/>
-      </div>
-
-      <BaseButton text="Add Answer"
-                  @click="addAnswerForm"/>
-
-      <BaseButton text="Add Changes"
-                  @click="saveQuestionAndAnswers"/>
-    </div>
+    <BaseSaveRemoveButtons :initialForm="initialForm"
+                           :currentForm="currentForm"
+                           @save="saveQuestion"
+                           @remove="removeQuestion(currentForm.id)"/>
   </div>
+
+  <AnswerEditForm v-for="answer in question.answers"
+                  :key="answer.id"
+                  :answer="answer"/>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { api } from '../../api'
-import { editMode } from '../../store/editmode'
-import { CreateAnswerInput, CreateQuestionInput } from '@learning-mono/shared'
-import { BaseButton } from '../BaseButton'
+import { UpdateQuestionInput } from '@learning-mono/shared'
+import BaseInput from '../BaseInput/BaseInput.vue'
+import { QuestionEditFormEmits, QuestionEditFormProps } from './QuestionEditForm.props'
+import { AnswerEditForm } from '../AnswerEditForm'
+import BaseSaveRemoveButtons from '../BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
 
-interface Props {
-  themeId: string
+const props = defineProps<QuestionEditFormProps>()
+
+const emits = defineEmits<QuestionEditFormEmits>()
+
+const initialForm = createForm()
+
+const currentForm = ref(createForm())
+
+function createForm(): UpdateQuestionInput {
+  return {
+    title: props.question.title,
+    id: props.question.id,
+  }
 }
 
-const props = defineProps<Props>()
-
-const addState = ref(false)
-
-const addForm = ref<CreateQuestionInput>({
-  title: '',
-  themeId: parseInt(props.themeId),
-  answers: [],
-})
-
-function removeAnswerForm(removeAnswer: CreateAnswerInput) {
-  addForm.value.answers = addForm.value.answers?.filter(answer => answer !== removeAnswer)
+async function saveQuestion() {
+  await api.question.update(currentForm.value)
 }
 
-function addAnswerForm() {
-  addForm.value.answers?.push({
-    title: '',
-    isCorrect: false,
-  })
-}
-
-async function saveQuestionAndAnswers() {
-  await api.question.create(addForm.value)
+async function removeQuestion(id: number) {
+  await api.question.remove(id)
 }
 </script>
 
 <style module>
-
+.root {
+  display: grid;
+  justify-content: left;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr;
+}
 </style>

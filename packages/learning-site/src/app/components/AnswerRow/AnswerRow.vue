@@ -1,22 +1,11 @@
 <template>
   <div :class="$style.root">
     > {{ answer.title }}
-
-    <BaseButton v-if="editMode"
-                text="Remove answer"
-                @click.stop="removeAnswer(answer.id)"/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { AnswerRowProps } from './AnswerRow.props'
-import { api } from '../../api'
-import { BaseButton } from '../BaseButton'
-import { editMode } from '../../store/editmode'
-
-async function removeAnswer(answerId: number) {
-  await api.answer.remove(answerId)
-}
 
 defineProps<AnswerRowProps>()
 </script>

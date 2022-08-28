@@ -1,27 +1,28 @@
 <template>
-  <div v-if="editMode">
+  <div v-if="editMode"
+       :class="$style.category_edit">
     <BaseInput v-model="currentForm.title"
                placeholder="Category title"/>
 
+    <BaseSaveRemoveButtons :currentForm="currentForm"
+                           :initialForm="initialForm"
+                           @save="saveCategory"
+                           @remove="removeCategory(currentForm.id)"/>
+
     <BaseInput v-model="currentForm.image"
                placeholder="Link to image"/>
-
-    <BaseButton v-if="!isEqual(currentForm, initialForm)"
-                text="Save"
-                @click="saveCategory"/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { CategoryEditFormEmits, CategoryEditFormProps } from './CategoryEditForm.props'
 import { ref } from 'vue'
-import { isEqual } from 'lodash'
 import { api } from '../../api'
 import { user } from '../../store/user'
 import { editMode } from '../../store/editmode'
 import { UpdateCategoryInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
-import { BaseButton } from '../BaseButton'
+import BaseSaveRemoveButtons from '../BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
 
 const props = defineProps<CategoryEditFormProps>()
 const emit = defineEmits<CategoryEditFormEmits>()
@@ -43,10 +44,19 @@ async function saveCategory() {
   emit('update:category', updatedCategory)
 }
 
+async function removeCategory(id: number) {
+  const removedCategory = await api.category.remove(id)
+  emit('remove:category', removedCategory)
+}
+
 if (!initialForm.title && !initialForm.image && user.value?.isAdmin)
   editMode.value = true
 </script>
 
-<style>
-
+<style module>
+.category_edit {
+  display: grid;
+  /*grid-template-rows: 1fr 1fr;*/
+  grid-template-columns: 1fr 1fr;
+}
 </style>

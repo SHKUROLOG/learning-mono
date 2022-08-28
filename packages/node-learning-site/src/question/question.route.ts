@@ -1,28 +1,16 @@
-import { removeQuestion, getQuestionById, createQuestion, updateQuestion } from './question.service'
-import { defineRoute } from '../validate/validate'
 import { CreateQuestionInput, UpdateQuestionInput } from '@learning-mono/shared'
+import { defineRoute } from '../validate/validate'
+import { createQuestion, getQuestionById, removeQuestion, updateQuestion } from './question.service'
 
 export const questionRoute = defineRoute('question')
 
-questionRoute.getById(async (req, res) => {
-  const questionById = await getQuestionById(parseInt(req.params.id))
-  res.json(questionById)
-})
+questionRoute.getById(getQuestionById)
 
-questionRoute.create(CreateQuestionInput, async (req, res) => {
-  const createdQuestion = await createQuestion(req.body)
-  res.json(createdQuestion)
-})
+questionRoute.create(CreateQuestionInput, createQuestion)
 
-questionRoute.update(UpdateQuestionInput, async (req, res) => {
-  const updatedQuestion = await updateQuestion(req.body)
-  res.json(updatedQuestion)
-})
+questionRoute.update(UpdateQuestionInput, updateQuestion)
 
-questionRoute.remove(async (req, res) => {
-  const removedQuestion = await removeQuestion(parseInt(req.params.id))
-  res.json(removedQuestion)
-})
+questionRoute.remove(removeQuestion)
 
 // export const questionRoute = Router()
 //

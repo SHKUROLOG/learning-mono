@@ -7,7 +7,8 @@
     <div v-else>
       <CategoryEditForm v-model:category="category"/>
 
-      <CategoryRemove :category="category"/>
+      <BaseButton text="Create theme"
+                  @click="createEmptyTheme"/>
     </div>
     <div>
       <CategoryThemes :themes="category.themes"/>
@@ -18,11 +19,11 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import { editMode } from '../store/editmode'
-import { CategoryDto } from '@learning-mono/shared'
+import { CategoryDto, CreateThemeInput, ThemeDto } from '@learning-mono/shared'
 import { api } from '../api'
-import { CategoryRemove } from '../components/CategoryRemove'
 import { CategoryThemes } from '../components/CategoryThemes'
 import { CategoryEditForm } from '../components/CategoryEditForm'
+import BaseButton from '../components/BaseButton/BaseButton.vue'
 
 interface Props {
   categoryId: string
@@ -31,6 +32,21 @@ interface Props {
 const props = defineProps<Props>()
 
 const category = ref<CategoryDto | null>(null)
+
+const emptyTheme: CreateThemeInput = {
+  title: '',
+  categoryId: parseInt(props.categoryId),
+}
+
+async function createEmptyTheme() {
+  const createdEmptyTheme: ThemeDto = await api.theme.create(emptyTheme)
+  // dich
+  await api.question.create({
+    themeId: createdEmptyTheme.id,
+    title: '',
+    answers: [],
+  })
+}
 
 watchEffect(async () => {
   category.value = await api.category.getById(props.categoryId)
