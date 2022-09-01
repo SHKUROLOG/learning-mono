@@ -46,5 +46,5 @@ function createForm():CreateQuestionInput {
 </script>
 
 <style module>
-
+.root{}
 </style>
