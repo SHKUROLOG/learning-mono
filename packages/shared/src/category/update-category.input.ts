@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNumber, IsString } from 'class-validator'
 
 export class UpdateCategoryInput {
   @IsNumber()
@@ -7,7 +7,6 @@ export class UpdateCategoryInput {
   @IsString()
   title: string
 
-  @IsOptional()
   @IsString()
-  image?: string
+  image: string
 }

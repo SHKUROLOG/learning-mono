@@ -1,8 +1,8 @@
-import { Theme } from '@prisma/client'
-import { Deps, inject } from '../app/di'
 import { CreateThemeInput, UpdateThemeInput } from '@learning-mono/shared'
-import { getQuestionsByThemeId, removeQuestion } from '../question/question.service'
+import { Theme } from '@prisma/client'
 import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
+import { Deps, inject } from '../app/di'
+import { getQuestionsByThemeId, removeQuestion } from '../question/question.service'
 
 export async function getThemeById(id: number) {
   return await inject(Deps.PRISMA).theme.findUnique({
@@ -13,6 +13,9 @@ export async function getThemeById(id: number) {
       questions: {
         include: {
           answers: true,
+        },
+        orderBy: {
+          id: 'asc',
         },
       },
     },

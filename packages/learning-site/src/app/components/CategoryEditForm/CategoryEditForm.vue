@@ -28,8 +28,7 @@ const props = defineProps<CategoryEditFormProps>()
 const emit = defineEmits<CategoryEditFormEmits>()
 
 const currentForm = ref(createForm())
-
-const initialForm = createForm()
+const initialForm = ref(createForm())
 
 function createForm(): UpdateCategoryInput {
   return {
@@ -41,6 +40,8 @@ function createForm(): UpdateCategoryInput {
 
 async function saveCategory() {
   await api.category.update(currentForm.value)
+  initialForm.value = createForm()
+  currentForm.value = createForm()
 
   emit('changed')
 }
@@ -51,7 +52,7 @@ async function removeCategory(id: number) {
   emit('removed')
 }
 
-if (!initialForm.title && !initialForm.image && user.value?.isAdmin)
+if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
   editMode.value = true
 </script>
 

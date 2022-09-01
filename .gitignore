@@ -1,8 +1,7 @@
 # database
-.db
-.db-admin
-.bitcoin/*
-!.bitcoin/bitcoin.conf
+db
+db-admin
+
 
 
 

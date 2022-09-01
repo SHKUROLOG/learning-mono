@@ -45,6 +45,7 @@
         "{options.outputPath}"
       ],
       "options": {
+        "generatePackageJson": true,
         "outputPath": "dist/packages/node-learning-site",
         "main": "packages/node-learning-site/src/main.ts",
         "tsConfig": "packages/node-learning-site/tsconfig.app.json",

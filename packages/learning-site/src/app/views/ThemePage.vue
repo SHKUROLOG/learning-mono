@@ -67,7 +67,12 @@ function handleAnswerClick(answer: AnswerDto) {
 
 const currentQuestion = computed(() => shuffledQuestions.value[index.value])
 
-const shuffledQuestions = computed(() => shuffle(themeData.value?.questions ?? []))
+const shuffledQuestions = computed(() => {
+  if (editMode.value)
+    return (themeData.value?.questions ?? [])
+
+  return shuffle(themeData.value?.questions ?? [])
+})
 
 watchEffect(fetchTheme)
 

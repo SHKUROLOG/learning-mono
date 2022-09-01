@@ -63,5 +63,4 @@ function createForm(): CreateCategoryInput {
   position: relative;
   min-height: 150px;
 }
-lox.{}
 </style>
