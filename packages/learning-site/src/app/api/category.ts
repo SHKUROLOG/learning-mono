@@ -30,5 +30,6 @@ export const category = {
 
   async remove(categoryId: number): Promise<CategoryDto> {
     return instance.delete(`/category/${categoryId}`)
+      .then(v => v.data)
   },
 }

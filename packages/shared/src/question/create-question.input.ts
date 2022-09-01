@@ -1,6 +1,4 @@
-import { IsNumber, IsOptional, IsString, ValidateNested } from 'class-validator'
-import { Type } from 'class-transformer'
-import { CreateAnswerInput } from '../answer'
+import { IsNumber, IsString } from 'class-validator'
 
 export class CreateQuestionInput {
   @IsString()
@@ -8,9 +6,4 @@ export class CreateQuestionInput {
 
   @IsNumber()
   themeId: number
-
-  @IsOptional()
-  @ValidateNested()
-  @Type(() => CreateAnswerInput)
-  answers?: CreateAnswerInput[]
 }

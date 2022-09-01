@@ -4,13 +4,12 @@
     <BaseInput v-model="currentForm.title"
                placeholder="Category title"/>
 
-    <BaseSaveRemoveButtons :currentForm="currentForm"
-                           :initialForm="initialForm"
-                           @save="saveCategory"
-                           @remove="removeCategory(currentForm.id)"/>
-
     <BaseInput v-model="currentForm.image"
                placeholder="Link to image"/>
+
+    <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
+                           @save="saveCategory"
+                           @remove="removeCategory(currentForm.id)"/>
   </div>
 </template>
 
@@ -23,6 +22,7 @@ import { editMode } from '../../store/editmode'
 import { UpdateCategoryInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
 import BaseSaveRemoveButtons from '../BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
+import { isEqual } from 'lodash'
 
 const props = defineProps<CategoryEditFormProps>()
 const emit = defineEmits<CategoryEditFormEmits>()
@@ -40,13 +40,15 @@ function createForm(): UpdateCategoryInput {
 }
 
 async function saveCategory() {
-  const updatedCategory = await api.category.update(currentForm.value)
-  emit('update:category', updatedCategory)
+  await api.category.update(currentForm.value)
+
+  emit('changed')
 }
 
 async function removeCategory(id: number) {
-  const removedCategory = await api.category.remove(id)
-  emit('remove:category', removedCategory)
+  await api.category.remove(id)
+
+  emit('removed')
 }
 
 if (!initialForm.title && !initialForm.image && user.value?.isAdmin)

@@ -1,17 +1,25 @@
 <template>
   <div v-if="category"
        :class="$style.root">
-    <div v-if="!editMode"
-         v-text="category.title"
-         :class="$style.title"/>
-    <div v-else>
-      <CategoryEditForm v-model:category="category"/>
+    <div v-if="!editMode">
+      <div v-text="category.title"
+           :class="$style.title"/>
 
-      <BaseButton text="Create theme"
-                  @click="createEmptyTheme"/>
-    </div>
-    <div>
       <CategoryThemes :themes="category.themes"/>
+    </div>
+
+    <div v-else>
+      <CategoryEditForm v-model:category="category"
+                        @changed="fetchCategory"
+                        @removed="removeCategory"/>
+
+      <ThemeEditMode v-for="theme in category.themes"
+                     :key="theme.id"
+                     :theme="theme"
+                     @changed="fetchCategory"/>
+
+      <CreateTheme :categoryId="parseInt(categoryId)"
+                   @created="fetchCategory"/>
     </div>
   </div>
 </template>
@@ -19,11 +27,15 @@
 <script lang="ts" setup>
 import { ref, watchEffect } from 'vue'
 import { editMode } from '../store/editmode'
-import { CategoryDto, CreateThemeInput, ThemeDto } from '@learning-mono/shared'
+import { CategoryDto } from '@learning-mono/shared'
 import { api } from '../api'
 import { CategoryThemes } from '../components/CategoryThemes'
 import { CategoryEditForm } from '../components/CategoryEditForm'
-import BaseButton from '../components/BaseButton/BaseButton.vue'
+import { useRouter } from 'vue-router'
+import { CreateTheme } from '../components/CreateTheme'
+import { ThemeEditMode } from '../components/ThemeEditMode'
+
+const router = useRouter()
 
 interface Props {
   categoryId: string
@@ -33,24 +45,15 @@ const props = defineProps<Props>()
 
 const category = ref<CategoryDto | null>(null)
 
-const emptyTheme: CreateThemeInput = {
-  title: '',
-  categoryId: parseInt(props.categoryId),
+function removeCategory() {
+  router.push({ name: 'home' })
 }
 
-async function createEmptyTheme() {
-  const createdEmptyTheme: ThemeDto = await api.theme.create(emptyTheme)
-  // dich
-  await api.question.create({
-    themeId: createdEmptyTheme.id,
-    title: '',
-    answers: [],
-  })
-}
+watchEffect(fetchCategory)
 
-watchEffect(async () => {
+async function fetchCategory() {
   category.value = await api.category.getById(props.categoryId)
-})
+}
 </script>
 
 <style module>

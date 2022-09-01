@@ -1,25 +1,14 @@
 <template>
-  <div v-if="editMode"
-       :class="$style.theme_edit">
-    <ThemeEditMode v-for="theme in themes"
-                   :key="theme.id"
-                   :theme="theme"/>
-  </div>
-
-  <div v-else>
-    <div v-for="theme in themes"
-         :key="theme.id"
-         :class="$style.theme">
-      <router-link v-text="`> ${theme.title}`"
-                   :to="{ name: 'theme', params: { themeId: theme.id } }"/>
-    </div>
+  <div v-for="theme in themes"
+       :key="theme.id"
+       :class="$style.theme">
+    <router-link v-text="`> ${theme.title}`"
+                 :to="{ name: 'theme', params: { themeId: theme.id } }"/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { CategoryThemesProps } from './CategoryThemes.props'
-import { editMode } from '../../store/editmode'
-import ThemeEditMode from '../ThemeEditMode/ThemeEditMode.vue'
 
 defineProps<CategoryThemesProps>()
 </script>

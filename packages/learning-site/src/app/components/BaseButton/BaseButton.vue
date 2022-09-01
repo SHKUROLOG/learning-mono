@@ -1,21 +1,19 @@
 <template>
-  <button :class="$style.btn">
+  <button :class="[$style.btn, $style[`btn_${buttonSize}`]]">
     {{ text }}
   </button>
 </template>
 
 <script lang="ts" setup>
-interface Props {
-  text: string
-}
+import { BaseButtonProps, ButtonSize } from './BaseButton.props'
 
-defineProps<Props>()
+withDefaults(defineProps<BaseButtonProps>(), {
+  buttonSize: 'm' as ButtonSize,
+})
 </script>
 
 <style module>
 .btn {
-  padding: 8px 16px;
-  font-size: 18px;
   opacity: 0.8;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -24,6 +22,22 @@ defineProps<Props>()
   border: none;
   color: aliceblue;
 }
+
+.btn_s {
+  padding: 4px 8px;
+  font-size: 10px;
+}
+
+.btn_m {
+  padding: 6px 12px;
+  font-size: 14px;
+}
+
+.btn_l {
+  padding: 8px 16px;
+  font-size: 18px;
+}
+
 .btn:hover {
   opacity: 1;
   background: rgba(255, 255, 255, 0.05);

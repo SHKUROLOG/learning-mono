@@ -1,9 +1,9 @@
+import { CreateCategoryInput, UpdateCategoryInput } from '@learning-mono/shared'
 import { Category } from '@prisma/client'
 import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 import { getQuestionsByThemeId, removeQuestion } from '../question/question.service'
 import { getThemesByCategoryId, removeTheme } from '../theme/theme.service'
-import { CreateCategoryInput, UpdateCategoryInput } from '@learning-mono/shared'
 
 export async function getCategoryById(id: number) {
   return await inject(Deps.PRISMA).category.findUnique({
@@ -29,7 +29,7 @@ export async function createCategory(categoryInput: CreateCategoryInput): Promis
   })
 }
 
-export async function updateCategory(updateCategoryInput :UpdateCategoryInput): Promise<Category> {
+export async function updateCategory(updateCategoryInput: UpdateCategoryInput): Promise<Category> {
   return inject(Deps.PRISMA).category.update({
     data: {
       title: updateCategoryInput.title,

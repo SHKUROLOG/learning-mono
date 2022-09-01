@@ -1,14 +1,13 @@
 <template>
   <div :class="$style.root">
-    <BaseInput v-model="answer.title"
+    <BaseInput v-model="currentForm.title"
                placeholder="Answer title"/>
 
     <input v-model="currentForm.isCorrect"
            :class="$style.checkbox"
            type="checkbox">
 
-    <BaseSaveRemoveButtons :currentForm="currentForm"
-                           :initialForm="initialForm"
+    <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
                            @save="saveAnswer"
                            @remove="removeAnswer(currentForm.id)"/>
   </div>
@@ -21,10 +20,11 @@ import { api } from '../../api'
 import { UpdateAnswerInput } from '@learning-mono/shared'
 import { ref } from 'vue'
 import { BaseSaveRemoveButtons } from '../BaseSaveRemoveButtons'
+import { isEqual } from 'lodash'
 
 const props = defineProps<AnswersEditFormProps>()
 
-const emits = defineEmits<AnswersEditFormEmits>()
+const emit = defineEmits<AnswersEditFormEmits>()
 
 const initialForm = createForm()
 
@@ -39,11 +39,13 @@ function createForm(): UpdateAnswerInput {
 }
 
 async function saveAnswer() {
-  await api.question.update(currentForm.value)
+  await api.answer.update(currentForm.value)
+  emit('changed')
 }
 
 async function removeAnswer(id: number) {
-  await api.question.remove(id)
+  await api.answer.remove(id)
+  emit('changed')
 }
 </script>
 
@@ -51,10 +53,6 @@ async function removeAnswer(id: number) {
 .root {
   display: grid;
   grid-auto-flow: column;
-  /*align-items: start;*/
-  /*padding-left: 16px;*/
-  /*grid-template-columns: 1fr;*/
-  /*grid-column: 2;*/
 }
 .checkbox {
   width: 10px;

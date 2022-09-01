@@ -4,7 +4,7 @@
                   :key="category.id"
                   :category="category"/>
 
-    <CreateEmptyCategory/>
+    <CreateCategory @created="fetchCategories"/>
   </div>
 </template>
 
@@ -12,14 +12,16 @@
 import { ref, watchEffect } from 'vue'
 import { CategoryDto } from '@learning-mono/shared'
 import { api } from '../api'
-import { CreateEmptyCategory } from '../components/CreateEmptyCategory'
+import { CreateCategory } from '../components/CreateCategory'
 import { CategoryTile } from '../components/CategoryTile'
 
 const categories = ref<CategoryDto[]>([])
 
-watchEffect(async () => {
+watchEffect(fetchCategories)
+
+async function fetchCategories() {
   categories.value = await api.category.getAll()
-})
+}
 </script>
 
 <style module>

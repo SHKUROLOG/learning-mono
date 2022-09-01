@@ -5,25 +5,28 @@
 
     <div :class="$style.buttons">
       <BaseButton v-if="!isEqual(currentForm, initialForm)"
+                  :buttonSize="ButtonSize.S"
                   text="Save"
                   @click="saveTheme"/>
 
       <BaseButton text="Remove"
+                  :buttonSize="ButtonSize.S"
                   @click="removeTheme(currentForm.id)"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { BaseButton } from '../BaseButton'
+import { BaseButton, ButtonSize } from '../BaseButton'
 import { BaseInput } from '../BaseInput'
 import { isEqual } from 'lodash'
-import { ThemeEditModeProps } from './ThemeEditMode.props'
+import { ThemeEditModeEmits, ThemeEditModeProps } from './ThemeEditMode.props'
 import { ref } from 'vue'
 import { UpdateThemeInput } from '@learning-mono/shared'
 import { api } from '../../api'
 
 const props = defineProps<ThemeEditModeProps>()
+const emit = defineEmits<ThemeEditModeEmits>()
 
 const currentForm = ref(createForm())
 
@@ -38,10 +41,14 @@ function createForm(): UpdateThemeInput {
 
 async function saveTheme() {
   await api.theme.update(currentForm.value)
+
+  emit('changed')
 }
 
 async function removeTheme(themeId: number) {
   await api.theme.remove(themeId)
+
+  emit('changed')
 }
 </script>
 

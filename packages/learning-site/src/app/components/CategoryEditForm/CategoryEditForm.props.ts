@@ -5,6 +5,6 @@ export interface CategoryEditFormProps {
 }
 
 export interface CategoryEditFormEmits {
-  (event: 'update:category', value: CategoryDto): void
-  (event: 'remove:category', value: CategoryDto): void
+  (event: 'changed'): void
+  (event: 'removed'): void
 }

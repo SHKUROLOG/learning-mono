@@ -5,5 +5,5 @@ export interface QuestionEditFormProps {
 }
 
 export interface QuestionEditFormEmits {
-  (event: 'update:question', value: QuestionDto): void
+  (event: 'changed'): void
 }

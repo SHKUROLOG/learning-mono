@@ -1,6 +1,5 @@
 export interface BaseSaveRemoveButtonsProps {
-  initialForm: object
-  currentForm: object
+  isSaveShow: boolean
 }
 
 export interface BaseSaveRemoveButtonsEmits {

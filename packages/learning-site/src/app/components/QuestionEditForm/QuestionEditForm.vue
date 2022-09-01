@@ -3,15 +3,15 @@
     <BaseInput v-model="currentForm.title"
                placeholder="Question title"/>
 
-    <BaseSaveRemoveButtons :initialForm="initialForm"
-                           :currentForm="currentForm"
+    <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
                            @save="saveQuestion"
                            @remove="removeQuestion(currentForm.id)"/>
   </div>
 
   <AnswerEditForm v-for="answer in question.answers"
                   :key="answer.id"
-                  :answer="answer"/>
+                  :answer="answer"
+                  @changed="$emit('changed')"/>
 </template>
 
 <script lang="ts" setup>
@@ -22,10 +22,11 @@ import BaseInput from '../BaseInput/BaseInput.vue'
 import { QuestionEditFormEmits, QuestionEditFormProps } from './QuestionEditForm.props'
 import { AnswerEditForm } from '../AnswerEditForm'
 import BaseSaveRemoveButtons from '../BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
+import { isEqual } from 'lodash'
 
 const props = defineProps<QuestionEditFormProps>()
 
-const emits = defineEmits<QuestionEditFormEmits>()
+const emit = defineEmits<QuestionEditFormEmits>()
 
 const initialForm = createForm()
 
@@ -40,10 +41,14 @@ function createForm(): UpdateQuestionInput {
 
 async function saveQuestion() {
   await api.question.update(currentForm.value)
+
+  emit('changed')
 }
 
 async function removeQuestion(id: number) {
   await api.question.remove(id)
+
+  emit('changed')
 }
 </script>
 

@@ -1,20 +1,21 @@
 <template>
   <div :class="$style.root">
-    <BaseButton v-if="!isEqual(currentForm, initialForm)"
+    <BaseButton v-if="isSaveShow"
+                :buttonSize="ButtonSize.S"
                 :class="$style.save_btn"
                 text="Save"
                 @click="$emit('save')"/>
 
-    <BaseButton :class="$style.remove_btn"
+    <BaseButton :buttonSize="ButtonSize.S"
+                :class="$style.remove_btn"
                 text="Remove"
                 @click="$emit('remove')"/>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { BaseButton } from '../BaseButton'
+import { BaseButton, ButtonSize } from '../BaseButton'
 import { BaseSaveRemoveButtonsEmits, BaseSaveRemoveButtonsProps } from './BaseSaveRemoveButtons.props'
-import { isEqual } from 'lodash'
 
 defineProps<BaseSaveRemoveButtonsProps>()
 defineEmits<BaseSaveRemoveButtonsEmits>()

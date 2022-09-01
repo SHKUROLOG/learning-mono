@@ -12,7 +12,8 @@ export const question = {
       .then(v => v.data)
   },
 
-  async remove(questionId: number) {
-    await instance.delete(`/question/${questionId}`)
+  async remove(questionId: number): Promise<QuestionDto> {
+    return await instance.delete(`/question/${questionId}`)
+      .then(v => v.data)
   },
 }

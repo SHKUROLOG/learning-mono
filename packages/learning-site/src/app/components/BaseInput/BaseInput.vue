@@ -6,7 +6,7 @@
              type="text"
              :placeholder="placeholder"
              :value="modelValue"
-             @input="$emit('update:modelValue', $event.target.value)">
+             @input.stop="$emit('update:modelValue', $event.target.value)">
     </div>
   </div>
 </template>

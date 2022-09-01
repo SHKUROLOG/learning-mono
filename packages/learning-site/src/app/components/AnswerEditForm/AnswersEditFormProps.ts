@@ -5,6 +5,5 @@ export interface AnswersEditFormProps {
 }
 
 export interface AnswersEditFormEmits {
-  (event: 'update:answer', value: AnswerDto): void
-  (event: 'remove:answer', value: AnswerDto): void
+  (event: 'changed'): void
 }
