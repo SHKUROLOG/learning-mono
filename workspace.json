@@ -2,8 +2,8 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "learning-site": "packages/learning-site",
-    "node-learning-site": "packages/node-learning-site",
+    "frontend": "packages/frontend",
+    "backend": "packages/backend",
     "shared": "packages/shared"
   }
 }

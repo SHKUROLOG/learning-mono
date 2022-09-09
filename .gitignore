@@ -140,3 +140,5 @@ Cargo.lock
 /target
 
 .electrumx
+
+.data

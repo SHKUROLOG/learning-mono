@@ -1,15 +1,36 @@
 version: '3.8'
 services:
-  node-learning-site-serve:
-    image: node-learning-site-serve
+  frontend:
+    image: frontend
     build:
+      args:
+        - NODE_ENV=production
+        - VITE_SERVER_URL=http://localhost:3030
       context: .
-      dockerfile: packages/node-learning-site/Dockerfile
+      dockerfile: packages/frontend/Dockerfile
+    ports:
+      - "8080:80"
+
+  backend:
+    image: backend
+    # working_dir: /app/node_modules/.prisma/client
+    # command: ls
+    build:
+      args:
+        - NODE_ENV=production
+        - CLIENT_URL=http://localhost:8080
+        - DATABASE_URL=postgres://user:pass@db:5432/mydb?schema=learning
+      context: .
+      dockerfile: packages/backend/Dockerfile
     restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/mydb?schema=learning
+      - CLIENT_URL=http://localhost:8080
     ports:
       - '3030:3030'
     links: 
       - 'db'
+
   db:
     image: postgres:latest
     restart: unless-stopped
@@ -17,7 +38,7 @@ services:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U user -d moon" ]
+      test: [ "CMD-SHELL", "pg_isready -U user -d mydb" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -25,14 +46,15 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - './db:/var/lib/postgresql/data'
+      - './.data/db:/var/lib/postgresql/data'
+
   db-admin:
     image: dpage/pgadmin4:latest
     restart: unless-stopped
     ports:
       - '5050:80'
     volumes:
-      - './db-admin:/var/lib/pgadmin'
+      - './.data/db-admin:/var/lib/pgadmin'
     environment:
       - PGADMIN_DEFAULT_EMAIL=user@mail.ru
       - PGADMIN_DEFAULT_PASSWORD=pass

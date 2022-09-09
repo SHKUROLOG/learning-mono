@@ -1,0 +1,100 @@
+{
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
+  "sourceRoot": "packages/backend/src",
+  "projectType": "application",
+  "targets": {
+    "seed": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "cwd": "packages/backend",
+        "command": "ts-node --project tsconfig.app.json src/seed.ts"
+      }
+    },
+    "prisma-format": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "yarn prisma format --schema packages/backend/schema.prisma"
+      }
+    },
+    "prisma-studio": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "yarn prisma studio --schema packages/backend/schema.prisma"
+      }
+    },
+    "prisma-push": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "yarn prisma db push --force-reset --schema packages/backend/schema.prisma"
+      }
+    },
+    "prisma-generate": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "yarn prisma generate --schema packages/backend/schema.prisma"
+      },
+      "configurations": {
+        "watch": {
+          "command": "yarn prisma generate --watch --schema packages/backend/schema.prisma"
+        }
+      }
+    },
+    "build": {
+      "executor": "@nrwl/node:webpack",
+      "outputs": [
+        "{options.outputPath}"
+      ],
+      "dependsOn": ["prisma-generate"],
+      "options": {
+        "generatePackageJson": true,
+        "outputPath": "dist/packages/backend",
+        "main": "packages/backend/src/main.ts",
+        "tsConfig": "packages/backend/tsconfig.app.json",
+        "assets": [
+          "packages/backend/src/assets"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "packages/backend/src/environments/environment.ts",
+              "with": "packages/backend/src/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/node:node",
+      "options": {
+        "buildTarget": "backend:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "packages/backend/**/*.ts"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": [
+        "coverage/packages/backend"
+      ],
+      "options": {
+        "jestConfig": "packages/backend/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}
