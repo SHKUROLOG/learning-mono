@@ -41,6 +41,17 @@
         "jestConfig": "packages/frontend/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "testVite": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "vitest run --dir packages/frontend --passWithNoTests"
+      },
+      "configurations": {
+        "serve": {
+          "command": "vitest --dir packages/frontend --passWithNoTests --ui --watch"
+        }
+      }
     }
   },
   "tags": []

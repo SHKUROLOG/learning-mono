@@ -1,33 +1,35 @@
 <template>
-  <span v-text="view" :class="[$style.text, { [$style.cube]: isRunning }]"/>
+  <span v-text="view"
+        :class="[$style.text, { [$style.cube]: printer?.isActive }]"/>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
 import { BaseTextProps } from './BaseText.props'
-import { textManager } from './TextManager'
+import { Printer } from './Printer'
+import { printManager } from './PrintManager'
 
 const props = defineProps<BaseTextProps>()
 
 const view = ref('')
-const index = ref(0)
-const isRunning = ref(false)
+const printer = ref<Printer>()
 
-onMounted(() => textManager.add(run))
+// onMounted(() => printManager.add(printer.value))
+onBeforeUnmount(() => printer.value && printManager.remove(printer.value))
 
-function * run() {
-  isRunning.value = true
-
-  while (index.value < props.text.length)
-    yield writeNextChar()
-
-  isRunning.value = false
+function setView(value: string) {
+  view.value = value
 }
 
-function writeNextChar() {
-  view.value += props.text[index.value]
-  index.value++
-}
+watch(() => props.text, (value) => {
+  console.log({ value })
+  const oldPrinter = printer.value
+
+  printer.value = new Printer(value, setView)
+  printManager.add(printer.value)
+
+  oldPrinter && printManager.remove(oldPrinter)
+}, { immediate: true })
 </script>
 
 <style module>

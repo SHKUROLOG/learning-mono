@@ -3,6 +3,7 @@
   "compilerOptions": {
     "target": "es2019",
     "module": "esnext",
+    "strict": true,
     "alwaysStrict": true,
     "strictNullChecks": true,
     "strictBindCallApply": true,

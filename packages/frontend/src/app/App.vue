@@ -43,6 +43,6 @@ body {
   font-family: "JetBrains Mono ExtraBold", monospace;
   color: #19e57c;
   height: 100%;
-  background: linear-gradient(to right, #212121, #171717);
+  background: linear-gradient(to right, #141912, #171717);
 }
 </style>

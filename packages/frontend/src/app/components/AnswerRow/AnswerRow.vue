@@ -1,11 +1,13 @@
 <template>
   <div :class="$style.root">
-    > {{ answer.title }}
+    <!-- {{ answer.title }} -->
+    <BaseText :text="'> ' + answer.title"/>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { AnswerRowProps } from './AnswerRow.props'
+import { BaseText } from '../BaseText'
 
 defineProps<AnswerRowProps>()
 </script>
@@ -22,6 +24,6 @@ defineProps<AnswerRowProps>()
 .root:hover {
   transform: scale(1.04) translateX(4px);
   color: #000;
-  background: linear-gradient(to right, #14d071, #19e57c );
+  background: linear-gradient(to right, #14d071, #19e57c);
 }
 </style>

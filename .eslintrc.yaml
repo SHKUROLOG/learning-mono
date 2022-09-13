@@ -21,7 +21,7 @@ globals:
   Maybe: true
 
 rules:
-
+  no-cond-assign: off
   import/no-webpack-loader-syntax: off
   no-import-assign: error
   comma-dangle: [error, always-multiline]

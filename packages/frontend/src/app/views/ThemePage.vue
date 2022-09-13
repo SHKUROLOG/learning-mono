@@ -10,14 +10,19 @@
 
     <div v-if="!editMode">
       <div :class="$style.title">
-        <h1>{{ currentQuestion.title }}</h1>
+        <h1 :key="currentQuestion.id">
+          <BaseText :text="currentQuestion.title"/>
+        </h1>
+        <hr width="100%" color="#19e57c">
         ({{ index + 1 }} OF {{ shuffledQuestions.length }})
       </div>
 
-      <AnswerRow v-for="answer in currentQuestion.answers"
-                 :key="answer.id"
-                 :answer="answer"
-                 @click="handleAnswerClick(answer)"/>
+      <div :key="currentQuestion.id">
+        <AnswerRow v-for="answer in currentQuestion.answers"
+                   :key="answer.id"
+                   :answer="answer"
+                   @click="handleAnswerClick(answer)"/>
+      </div>
 
       <BaseButton :buttonSize="ButtonSize.L"
                   text=">>>"
@@ -25,7 +30,7 @@
                   @click="moveToNext"/>
     </div>
 
-    <div v-if="editMode">
+    <div v-else>
       <QuestionEditForm v-for="question in shuffledQuestions"
                         :key="question.id"
                         :question="question"
@@ -50,6 +55,7 @@ import { QuestionEditForm } from '../components/QuestionEditForm'
 import { editMode } from '../store/editmode'
 import { ProgressBar } from '../components/ProgressBar'
 import { CreateQuestion } from '../components/CreateQuestion'
+import BaseText from '../components/BaseText/BaseText.vue'
 
 interface Props {
   themeId: string

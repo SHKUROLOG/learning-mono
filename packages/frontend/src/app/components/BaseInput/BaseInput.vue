@@ -33,7 +33,7 @@ export default {
 
 .input {
   background: transparent;
-  color: aliceblue;
+  color: #19e57c;
   border: none;
   width: 200px;
   border-bottom: 1px solid transparent;
@@ -42,12 +42,12 @@ export default {
 }
 
 .input::placeholder {
-  color: aliceblue;
+  color: #0fc66c;
 }
 
 .input:focus {
   outline: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid #19e57c;
 }
 
 .container {

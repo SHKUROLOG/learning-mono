@@ -4,7 +4,7 @@
     <div v-if="!editMode">
       <div :class="$style.glitch">
         <h1 :class="$style.line">
-          {{ category.title }}
+          <BaseText :text="'[' + category.title + ']'"/>
         </h1>
       </div>
 
@@ -38,6 +38,7 @@ import { CategoryEditForm } from '../components/CategoryEditForm'
 import { useRouter } from 'vue-router'
 import { CreateTheme } from '../components/CreateTheme'
 import { ThemeEditMode } from '../components/ThemeEditMode'
+import BaseText from '../components/BaseText/BaseText.vue'
 
 const router = useRouter()
 
