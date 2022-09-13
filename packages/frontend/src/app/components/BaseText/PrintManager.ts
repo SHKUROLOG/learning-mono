@@ -7,7 +7,6 @@ export class PrintManager {
 
   add(printer: Printer) {
     this.queue.push(printer)
-    console.table([...this.queue])
 
     this.tryRun()
   }
