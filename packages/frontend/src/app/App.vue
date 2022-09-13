@@ -124,14 +124,12 @@ $scan-opacity: .75;
 @keyframes scanline {
     0% {
         transform: translate3d(0,200000%,0);
-        // bottom: 0%; // to have a continuous scanline move, use this line (here in 0% step) instead of transform and write, in &:before, { position: absolute; bottom: 100%; }
     }
 }
 
 @keyframes scanlines {
     0% {
         background-position: 0 50%;
-        // bottom: 0%; // to have a continuous scanline move, use this line (here in 0% step) instead of transform and write, in &:before, { position: absolute; bottom: 100%; }
     }
 }
 </style>

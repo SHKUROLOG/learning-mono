@@ -24,7 +24,7 @@ import { EscButton, EditMode, SignIn, LogoutButton } from './buttons'
   justify-content: stretch;
   grid-auto-flow: column;
   align-items: start;
-  border: 1px solid #19e57c;
+  border: 2px solid #19e57c;
   align-items: center;
   padding: 0px 40px;
 }
