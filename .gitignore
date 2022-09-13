@@ -140,5 +140,5 @@ Cargo.lock
 /target
 
 .electrumx
-
+.vscode
 .data

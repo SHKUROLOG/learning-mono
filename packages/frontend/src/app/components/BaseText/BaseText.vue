@@ -4,7 +4,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUnmount, onMounted, onUnmounted, Ref, ref, watch } from 'vue'
+import { onBeforeUnmount, ref, watch } from 'vue'
 import { BaseTextProps } from './BaseText.props'
 import { Printer } from './Printer'
 import { printManager } from './PrintManager'
@@ -22,7 +22,6 @@ function setView(value: string) {
 }
 
 watch(() => props.text, (value) => {
-  console.log({ value })
   const oldPrinter = printer.value
 
   printer.value = new Printer(value, setView)
