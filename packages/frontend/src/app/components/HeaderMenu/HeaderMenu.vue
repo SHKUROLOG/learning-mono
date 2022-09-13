@@ -6,7 +6,6 @@
 
     <div :class="$style.right">
       <EditMode/>
-
       <LogoutButton/>
       <SignIn/>
     </div>
