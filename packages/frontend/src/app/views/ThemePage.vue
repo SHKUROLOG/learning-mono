@@ -3,9 +3,11 @@
        :class="$style.root">
     <div :class="$style.theme">
       <h1>{{ '>> ' + themeData.title }} </h1>
+
       <ProgressBar :ammount="shuffledQuestions.length"
                    :current="index"/>
     </div>
+
     <hr width="100%" color="#19e57c">
 
     <div v-if="!editMode">
@@ -13,6 +15,7 @@
         <h1 :key="currentQuestion.id">
           <BaseText :text="currentQuestion.title"/>
         </h1>
+
         <hr width="100%" color="#19e57c">
         ({{ index + 1 }} OF {{ shuffledQuestions.length }})
       </div>
@@ -74,6 +77,8 @@ function moveToNext() {
 
 function handleAnswerClick(answer: AnswerDto) {
   answer.isSelected = true
+  // if (answer.isSelected && answer.isCorrect)
+
   moveToNext()
 }
 
