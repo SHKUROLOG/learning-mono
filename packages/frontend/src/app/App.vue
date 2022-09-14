@@ -36,13 +36,16 @@ userStoreInit()
 }
 
 a {
-  font-family: "JetBrains Mono ExtraBold", monospace;
   text-decoration: none;
   color: #19e57c;
   cursor: pointer;
 }
+
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+
 body {
-  font-family: "JetBrains Mono ExtraBold", monospace;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: bold;
   color: #19e57c;
   height: 100%;
   background: linear-gradient(to right, #141912, #171717);

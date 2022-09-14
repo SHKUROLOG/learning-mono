@@ -5,18 +5,29 @@
          :class="[$style.box, { [$style.active_box] : i <= current }] "/>
 
     <div :class="$style.percent">
-      [ {{ percent + '%' }} ]
+      [ {{ dynamicPercent + '%' }} ]
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { tween } from '@learning-mono/shared'
+import { computed, ref, watch } from 'vue'
 import { ProgressBarProps } from './ProgressBar.props'
 
 const props = defineProps<ProgressBarProps>()
 
-const percent = computed(() => (props.current / props.ammount * 100).toFixed(0))
+const time = 1000
+
+const dynamicPercent = ref(0)
+
+const percent = computed(() => (props.current / props.ammount * 100))
+
+watch(percent, (value, oldValue) => {
+  tween(oldValue, value, time, (result) => {
+    dynamicPercent.value = +result.toFixed(0)
+  })
+})
 </script>
 
 <style module>
