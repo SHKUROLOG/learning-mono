@@ -4,8 +4,9 @@
     <div :class="$style.theme">
       <h1>{{ '>> ' + themeData.title }} </h1>
 
-      <ProgressBar :ammount="shuffledQuestions.length"
-                   :current="index"/>
+      <ProgressBar :ammount="shuffledQuestions.length -1"
+                   :current="index"
+                   :isCorrect="isCorrect"/>
     </div>
 
     <hr width="100%" color="#19e57c">
@@ -17,7 +18,7 @@
         </h1>
 
         <hr width="100%" color="#19e57c">
-        ({{ index + 1 }} OF {{ shuffledQuestions.length }})
+        ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
       </div>
 
       <div :key="currentQuestion.id">
@@ -69,6 +70,7 @@ const props = defineProps<Props>()
 const router = useRouter()
 
 const index = ref(0)
+const isCorrect = ref(false)
 
 function moveToNext() {
   if (shuffledQuestions.value.length - 1 > index.value)
@@ -77,7 +79,10 @@ function moveToNext() {
 
 function handleAnswerClick(answer: AnswerDto) {
   answer.isSelected = true
-  // if (answer.isSelected && answer.isCorrect)
+  if (answer.isSelected && answer.isCorrect)
+    isCorrect.value = true
+  else
+    isCorrect.value = false
 
   moveToNext()
 }
@@ -103,6 +108,7 @@ watch(
     name: 'statistic',
   }),
 )
+//
 </script>
 
 <style module>

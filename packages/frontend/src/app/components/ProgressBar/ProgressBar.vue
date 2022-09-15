@@ -1,8 +1,8 @@
 <template>
   <div :class="$style.root">
-    <div v-for="i in ammount -1"
+    <div v-for="i in ammount"
          :key="i"
-         :class="[$style.box, { [$style.active_box] : i <= current }, { [$style.active_box_red] : !isCorrect }] "/>
+         :class="[$style.box, { [$style.active_box] : i <= current } ]"/>
 
     <div :class="$style.percent">
       [ {{ dynamicPercent + '%' }} ]
