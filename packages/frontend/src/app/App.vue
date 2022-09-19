@@ -41,7 +41,7 @@ a {
   cursor: pointer;
 }
 
-  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
 
 body {
   font-family: 'JetBrains Mono', monospace;
@@ -49,11 +49,12 @@ body {
   color: #19e57c;
   height: 100%;
   background: linear-gradient(to right, #141912, #171717);
+  /* background:  #000000; */
 }
 </style>
 
 <style lang="scss">
-$scan-width: 1px;
+$scan-width: 2px;
 $scan-crt: true;
 $scan-fps: 60;
 $scan-color: rgba(20, 25, 18, .3);
@@ -67,7 +68,7 @@ $scan-opacity: .75;
 
 @mixin scan-crt($scan-crt) {
     @if $scan-crt == true {
-        animation: scanlines 1s steps($scan-fps) infinite;
+        animation: scanlines 1000ms steps($scan-fps) infinite;
     }
     @else { animation: none; }
 }

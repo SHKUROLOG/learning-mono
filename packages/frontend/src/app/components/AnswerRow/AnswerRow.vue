@@ -1,6 +1,5 @@
 <template>
   <div :class="$style.root">
-    <!-- {{ answer.title }} -->
     <BaseText :text="'> ' + answer.title"/>
   </div>
 </template>

@@ -3,6 +3,7 @@
        :class="$style.root">
     <div v-if="!editMode">
       <div :class="$style.glitch">
+        <!-- <ExploreBar :categoryTitle="category.title"/> -->
         <h1 :class="$style.line">
           <BaseText :text="'[' + category.title + ']'"/>
         </h1>
@@ -38,7 +39,8 @@ import { CategoryEditForm } from '../components/CategoryEditForm'
 import { useRouter } from 'vue-router'
 import { CreateTheme } from '../components/CreateTheme'
 import { ThemeEditMode } from '../components/ThemeEditMode'
-import BaseText from '../components/BaseText/BaseText.vue'
+import { ExploreBar } from '../components/ExploreBar'
+import { BaseText } from '../components/BaseText'
 
 const router = useRouter()
 

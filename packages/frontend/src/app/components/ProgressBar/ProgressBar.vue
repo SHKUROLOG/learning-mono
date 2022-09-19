@@ -1,8 +1,11 @@
 <template>
   <div :class="$style.root">
-    <div v-for="i in ammount"
-         :key="i"
-         :class="[$style.box, { [$style.active_box] : i <= current } ]"/>
+    <div v-for="actual in ammount"
+         :key="actual"
+         :class="[$style.box, {
+           [$style.active_box]: actual <= current,
+           [$style.active_box_red]: !correctItems[actual-1] && actual <= current
+         }]"/>
 
     <div :class="$style.percent">
       [ {{ dynamicPercent + '%' }} ]
@@ -17,7 +20,7 @@ import { ProgressBarProps } from './ProgressBar.props'
 
 const props = defineProps<ProgressBarProps>()
 
-// const time = 10000
+const time = 500
 
 const dynamicPercent = ref(0)
 
@@ -25,7 +28,7 @@ const percent = computed(() => (props.current / props.ammount * 100))
 
 watch(percent, (value, oldValue) => {
   tween(oldValue, value, {
-    // time,
+    time,
     progress: (result) => {
       dynamicPercent.value = +result.toFixed(1)
     },
@@ -50,16 +53,16 @@ watch(percent, (value, oldValue) => {
   background: #19e57c;
   opacity: 0.1;
   margin-right: 4px;
-
+  box-shadow: 0px 1px 3px 1px rgba(26, 255, 167, 0.3);
 }
 
 .active_box {
   opacity: 1;
-  box-shadow: 0px 1px 3px 1px rgba(26, 255, 167, 0.3);
 }
 
 .active_box_red {
   background: #ff0000;
+  box-shadow: 0px 1px 3px 1px rgba(255, 0, 0, 0.3);
 }
 
 .percent {

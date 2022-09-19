@@ -2,14 +2,17 @@
   <div v-if="themeData"
        :class="$style.root">
     <div :class="$style.theme">
+      <!-- <ExploreBar :themeTitle="themeData.title"/> -->
       <h1>{{ '>> ' + themeData.title }} </h1>
 
       <ProgressBar :ammount="shuffledQuestions.length -1"
                    :current="index"
-                   :isCorrect="isCorrect"/>
+                   :correctItems="correctItems"/>
     </div>
 
-    <hr width="100%" color="#19e57c">
+    <hr width="100%"
+        color="#19e57c"
+        size="4px">
 
     <div v-if="!editMode">
       <div :class="$style.title">
@@ -17,7 +20,9 @@
           <BaseText :text="currentQuestion.title"/>
         </h1>
 
-        <hr width="100%" color="#19e57c">
+        <hr width="100%"
+            color="#19e57c"
+            size="4px">
         ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
       </div>
 
@@ -52,14 +57,15 @@ import { shuffle } from 'lodash'
 import { useRouter } from 'vue-router'
 import { api } from '../api'
 import { themeData } from '../store/themeData'
-import { AnswerDto } from '@learning-mono/shared'
+import { AnswerDto, QuestionDto } from '@learning-mono/shared'
 import { BaseButton, ButtonSize } from '../components/BaseButton'
 import { AnswerRow } from '../components/AnswerRow'
 import { QuestionEditForm } from '../components/QuestionEditForm'
 import { editMode } from '../store/editmode'
 import { ProgressBar } from '../components/ProgressBar'
 import { CreateQuestion } from '../components/CreateQuestion'
-import BaseText from '../components/BaseText/BaseText.vue'
+import { BaseText } from '../components/BaseText'
+import { ExploreBar } from '../components/ExploreBar'
 
 interface Props {
   themeId: string
@@ -70,19 +76,20 @@ const props = defineProps<Props>()
 const router = useRouter()
 
 const index = ref(0)
-const isCorrect = ref(false)
+
+// const categoryTitle = themeData.value.
 
 function moveToNext() {
   if (shuffledQuestions.value.length - 1 > index.value)
     ++index.value
 }
 
+function isQuestionCorrect(question: QuestionDto) {
+  return question.answers.some(a => a.isSelected && a.isCorrect)
+}
+
 function handleAnswerClick(answer: AnswerDto) {
   answer.isSelected = true
-  if (answer.isSelected && answer.isCorrect)
-    isCorrect.value = true
-  else
-    isCorrect.value = false
 
   moveToNext()
 }
@@ -95,6 +102,8 @@ const shuffledQuestions = computed(() => {
 
   return shuffle(themeData.value?.questions ?? [])
 })
+
+const correctItems = computed(() => shuffledQuestions.value.map(isQuestionCorrect))
 
 watchEffect(fetchTheme)
 
@@ -138,8 +147,8 @@ watch(
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
-
 }
+
 .next:hover {
   opacity: 1;
   background: #19e57c;
