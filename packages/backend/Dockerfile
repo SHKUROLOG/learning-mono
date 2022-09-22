@@ -5,9 +5,9 @@ ARG CLIENT_URL
 RUN echo "CLIENT_URL=$CLIENT_URL" >> .env 
 RUN echo "DATABASE_URL=$DATABASE_URL" >> .env 
 RUN yarn
-COPY ./packages/backend/schema.prisma dist/packages/backend
+COPY ./packages/backend/prisma/schema.prisma dist/packages/backend
 RUN yarn nx build backend
-RUN yarn prisma migrate deploy --schema dist/packages/backend/schema.prisma
+RUN yarn prisma migrate deploy --schema learning-mono/packages/backend/prisma/schema.prisma
 
 FROM node:lts-alpine
 WORKDIR /app
