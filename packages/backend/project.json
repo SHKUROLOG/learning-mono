@@ -13,29 +13,29 @@
     "prisma-format": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "yarn prisma format --schema packages/backend/schema.prisma"
+        "command": "yarn prisma format --schema prisma/"
       }
     },
     "prisma-studio": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "yarn prisma studio --schema packages/backend/schema.prisma"
+        "command": "yarn prisma studio --schema packages/backend/prisma/schema.prisma"
       }
     },
     "prisma-push": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "yarn prisma db push --force-reset --schema packages/backend/schema.prisma"
+        "command": "yarn prisma db push --force-reset --schema packages/backend/prisma/schema.prisma"
       }
     },
     "prisma-generate": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
-        "command": "yarn prisma generate --schema packages/backend/schema.prisma"
+        "command": "yarn prisma generate --schema packages/backend/prisma/schema.prisma"
       },
       "configurations": {
         "watch": {
-          "command": "yarn prisma generate --watch --schema packages/backend/schema.prisma"
+          "command": "yarn prisma generate --watch --schema packages/backend/prisma/schema.prisma"
         }
       }
     },

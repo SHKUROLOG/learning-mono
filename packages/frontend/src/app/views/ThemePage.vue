@@ -2,17 +2,17 @@
   <div v-if="themeData"
        :class="$style.root">
     <div :class="$style.theme">
-      <!-- <ExploreBar :themeTitle="themeData.title"/> -->
-      <h1>{{ '>> ' + themeData.title }} </h1>
-
-      <ProgressBar :ammount="shuffledQuestions.length -1"
-                   :current="index"
-                   :correctItems="correctItems"/>
+      <ExploreBar :categoryTitle="themeData.title"/>
+      <!-- <h1>{{ '>> ' + themeData.title }} </h1> -->
     </div>
 
-    <hr width="100%"
+    <ProgressBar :ammount="shuffledQuestions.length -1"
+                 :current="index"
+                 :correctItems="correctItems"/>
+
+    <!-- <hr width="100%"
         color="#19e57c"
-        size="4px">
+        size="4px"> -->
 
     <div v-if="!editMode">
       <div :class="$style.title">
@@ -23,6 +23,7 @@
         <hr width="100%"
             color="#19e57c"
             size="4px">
+
         ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
       </div>
 

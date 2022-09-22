@@ -3,13 +3,13 @@
        :class="$style.root">
     <div v-if="!editMode">
       <div :class="$style.glitch">
-        <!-- <ExploreBar :categoryTitle="category.title"/> -->
-        <h1 :class="$style.line">
+        <ExploreBar :categoryTitle="category.title"/>
+        <!-- <h1 :class="$style.line">
           <BaseText :text="'[' + category.title + ']'"/>
-        </h1>
+        </h1> -->
       </div>
 
-      <hr width="100%" color="#19e57c">
+      <!-- <hr width="100%" color="#19e57c">s -->
 
       <CategoryThemes :themes="category.themes"/>
     </div>
@@ -76,6 +76,10 @@ async function fetchCategory() {
   padding: 16px 0;
   user-select: none;
   align-items: center;
+}
+
+.glitch {
+  margin-bottom: 16px;
 }
 
 /* ANIMATION */

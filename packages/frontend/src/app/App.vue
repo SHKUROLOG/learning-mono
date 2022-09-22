@@ -57,7 +57,7 @@ body {
 $scan-width: 2px;
 $scan-crt: true;
 $scan-fps: 60;
-$scan-color: rgba(20, 25, 18, .3);
+$scan-color: rgba(6, 46, 23, 0.3);
 $scan-z-index: 2147483648;
 
 /* MOVING SCANLINE SETTINGS */
@@ -68,7 +68,7 @@ $scan-opacity: .75;
 
 @mixin scan-crt($scan-crt) {
     @if $scan-crt == true {
-        animation: scanlines 1000ms steps($scan-fps) infinite;
+        animation: scanlines 1s steps($scan-fps) infinite;
     }
     @else { animation: none; }
 }
@@ -119,7 +119,7 @@ $scan-opacity: .75;
           transparent 50%,
           $scan-color 51%
       );
-      background-size: 100% $scan-width*2;
+      background-size: 100% $scan-width * 2;
       @include scan-crt($scan-crt);
   }
 }
@@ -127,7 +127,7 @@ $scan-opacity: .75;
 /* ANIMATE UNIQUE SCANLINE */
 @keyframes scanline {
     0% {
-        transform: translate3d(0,200000%,0);
+        transform: translate3d(0%, 200000%, 0);
     }
 }
 

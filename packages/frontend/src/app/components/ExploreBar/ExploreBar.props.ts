@@ -1,4 +1,4 @@
 export interface ExploreBarProps {
-  categoryTitle: string
+  categoryTitle?: string
   themeTitle?: string
 }

@@ -1,10 +1,12 @@
 <template>
   <div :class="$style.root">
-    <div :class="$style.explore_bar">
+    <div v-if="categoryTitle"
+         :class="$style.explore_bar">
       {{ categoryTitle }}
     </div>
 
-    <div v-if="props.themeTitle" :class="$style.explore_bar">
+    <div v-if="themeTitle"
+         :class="$style.explore_bar">
       {{ themeTitle }}
     </div>
   </div>
@@ -14,6 +16,8 @@
 import { ExploreBarProps } from './ExploreBar.props'
 
 const props = defineProps<ExploreBarProps>()
+
+// const themeTitle = props.category.themes.find(v => v.id === props.themeId)
 </script>
 
 <style module>

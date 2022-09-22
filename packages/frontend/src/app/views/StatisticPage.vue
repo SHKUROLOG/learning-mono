@@ -1,9 +1,10 @@
 <template>
   <div :class="$style.summary">
-    Correct: {{ amountCorrectAnswers }} of {{ questions.length }} ({{ (percent * 100).toFixed(2) }}%)
+    [ Correct: {{ amountCorrectAnswers }} of {{ questions.length }} ({{ (percent * 100).toFixed(2) }}%) ]
+    <!-- <hr width="100%" color="#19e57c"> -->
   </div>
 
-  <div :class="$style.stat">
+  <div :class="$style.root">
     <div v-for="(question, index) in questions"
          :key="question.id"
          :class="[$style.question, isCorrectAnswers[index] && $style.correct]">
@@ -53,10 +54,11 @@ function getAnswerSign(answer: AnswerDto) {
 </script>
 
 <style module>
-.stat {
+.root {
   display: grid;
   text-align: left;
   padding: 16px;
+  margin-left: 16px;
   align-items: start;
   justify-items: start;
 }
@@ -71,11 +73,13 @@ function getAnswerSign(answer: AnswerDto) {
 }
 
 .question {
+  padding-left: 16px;
+  border-left: 3px solid #ff0000;
   margin: 24px 0;
 }
 
 .correct {
-  opacity: 0.6;
+  border-left: 3px solid #19e57c;
 }
 
 .summary {
