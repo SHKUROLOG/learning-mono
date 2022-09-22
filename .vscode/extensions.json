@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "nrwl.angular-console",
-    "esbenp.prettier-vscode",
-    "johnsoncodehk.volar",
-    "samatech.postcss-vue",
-    "dbaeumer.vscode-eslint"
-  ]
-}
