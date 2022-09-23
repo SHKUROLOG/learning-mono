@@ -7,7 +7,6 @@ RUN echo "DATABASE_URL=$DATABASE_URL" >> .env
 RUN yarn
 COPY ./packages/backend/prisma/schema.prisma dist/packages/backend
 RUN yarn nx build backend
-RUN yarn prisma migrate deploy --schema packages/backend/prisma/schema.prisma
 
 FROM node:lts-alpine
 WORKDIR /app

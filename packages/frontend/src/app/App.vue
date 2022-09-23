@@ -37,18 +37,18 @@ userStoreInit()
 
 a {
   text-decoration: none;
-  color: #19e57c;
+  color: #21ea5e;
   cursor: pointer;
 }
-
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap'); */
 
 body {
   font-family: 'JetBrains Mono', monospace;
   font-weight: bold;
-  color: #19e57c;
+  color: #21ea5e;
   height: 100%;
-  background: linear-gradient(to right, #141912, #171717);
+  /* background: linear-gradient(to right, #141912, #171717); */
+  background: #0a4628;
   /* background:  #000000; */
 }
 </style>
@@ -57,7 +57,7 @@ body {
 $scan-width: 2px;
 $scan-crt: true;
 $scan-fps: 60;
-$scan-color: rgba(6, 46, 23, 0.3);
+$scan-color: rgba(26, 96, 60, 0.3);
 $scan-z-index: 2147483648;
 
 /* MOVING SCANLINE SETTINGS */

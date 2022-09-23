@@ -1,0 +1,6 @@
+FROM node:lts-alpine as build
+WORKDIR /app
+RUN yarn add prisma
+COPY ./prisma ./prisma
+ENV DATABASE_URL $DATABASE_URL
+CMD yarn prisma migrate deploy --schema ./prisma/schema.prisma

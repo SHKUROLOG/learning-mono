@@ -1,0 +1,2 @@
+INSERT INTO learning."User"
+VALUES (1, 'root', '$2a$10$i5CRsMk58UeXLUNGLcX.seK6vT8BEkR380PJ0gFQxu4OJEPn7D98C', 'true')

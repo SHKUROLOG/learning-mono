@@ -11,6 +11,16 @@ services:
     ports:
       - "8080:80"
 
+  migrations: 
+    image: migrations
+    build:
+      args:
+        - NODE_ENV=production
+      context: ./packages/backend
+      dockerfile: ./Dockerfile.migrations
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning
+    
   backend:
     image: backend
     # working_dir: /app/node_modules/.prisma/client
@@ -18,14 +28,14 @@ services:
     build:
       args:
         - NODE_ENV=production
-        - CLIENT_URL=http://localhost:8080
-        - DATABASE_URL=postgres://user:pass@db:5432/mydb?schema=learning
+        - CLIENT_URL=http://localhost:3000
+        - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning
       context: .
       dockerfile: packages/backend/Dockerfile
     restart: unless-stopped
     environment:
-      - DATABASE_URL=postgres://user:pass@db:5432/mydb?schema=learning
-      - CLIENT_URL=http://localhost:8080
+      - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning
+      - CLIENT_URL=http://localhost:3000
     ports:
       - '3030:3030'
     links: 

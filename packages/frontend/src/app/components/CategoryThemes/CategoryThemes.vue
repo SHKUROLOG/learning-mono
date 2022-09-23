@@ -32,7 +32,7 @@ defineProps<CategoryThemesProps>()
 
 .theme:hover {
   transform: scale(1.04) translateX(4px);
-  background: linear-gradient(to right, #14d071, #19e57c);
+  background: linear-gradient(to right, #21ea5e, #0ded50);
   color: #000;
   box-shadow: 0px -5px -5px 0px rgba(0, 0, 0, 0.6) inset;
 }
