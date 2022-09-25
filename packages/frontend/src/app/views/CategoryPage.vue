@@ -19,7 +19,8 @@
                      :theme="theme"
                      @changed="fetchCategory"/>
 
-      <CreateTheme :categoryId="parseInt(categoryId)" @created="fetchCategory"/>
+      <CreateTheme :categoryId="parseInt(categoryId)"
+                   @created="fetchCategory"/>
     </div>
   </div>
 </template>
@@ -35,7 +36,6 @@ import { useRouter } from 'vue-router'
 import { CreateTheme } from '../components/CreateTheme'
 import { ThemeEditMode } from '../components/ThemeEditMode'
 import { ExploreBar } from '../components/ExploreBar'
-import { BaseText } from '../components/BaseText'
 
 const router = useRouter()
 
@@ -76,72 +76,4 @@ async function fetchCategory() {
 .glitch {
   margin-bottom: 16px;
 }
-
-/* ANIMATION */
-
-/* .glitch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-}
-
-.glitch div {
-  animation: glitch 1s linear infinite;
-}
-
-@keyframes glitch{
-  2%,64%{
-    transform: translate(1px,0) skew(0deg);
-  }
-  4%,60%{
-    transform: translate(-1px,0) skew(0deg);
-  }
-  62%{
-    transform: translate(0,0) skew(5deg);
-  }
-}
-
-div:before,
-div:after{
-  content: attr(title);
-  position: absolute;
-  left: 0;
-}
-
-div:before{
-  animation: glitchTop 250ms linear infinite;
-  clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
-}
-
-@keyframes glitchTop{
-  2%,64%{
-    transform: translate(2px,-2px);
-  }
-  4%,60%{
-    transform: translate(-2px,2px);
-  }
-  62%{
-    transform: translate(2px,-1px) skew(-13deg);
-  }
-}
-
-div:after{
-  animation: glitchBotom 500ms linear infinite;
-  clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-  -webkit-clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
-}
-
-@keyframes glitchBotom{
-  2%,64%{
-    transform: translate(-1px,0);
-  }
-  4%,60%{
-    transform: translate(-1px,0);
-  }
-  62%{
-    transform: translate(-1px,1px) skew(10deg);
-  }
-} */
 </style>

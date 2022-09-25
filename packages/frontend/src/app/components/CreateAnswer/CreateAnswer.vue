@@ -1,5 +1,5 @@
 <template>
-  <div :class="$style.root">
+  <div v-if="showw" :class="$style.root">
     <BaseButton v-if="!openForm"
                 text="Create answer"
                 :class="$style.create_answer"
@@ -35,6 +35,10 @@ import { CreateAnswerEmits, CreateAnswerProps } from './CreateAnswer.props'
 
 const props = defineProps<CreateAnswerProps>()
 const emit = defineEmits<CreateAnswerEmits>()
+
+const showw = ref(false)
+
+setTimeout(() => showw.value = !showw.value, 3000)
 
 const openForm = ref(false)
 

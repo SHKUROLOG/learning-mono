@@ -80,7 +80,7 @@ function moveToNext() {
 }
 
 function isQuestionCorrect(question: QuestionDto) {
-  return question.answers.some(a => a.isSelected && a.isCorrect)
+  return question.answers.some(answer => answer.isSelected && answer.isCorrect)
 }
 
 function handleAnswerClick(answer: AnswerDto) {

@@ -1,20 +1,24 @@
 <template>
   <div :class="$style.root">
-    <BaseInput v-model="currentForm.title"
-               placeholder="Question title"
-               :border="true"/>
+    <div :class="$style.question">
+      <BaseInput v-model="currentForm.title"
+                 placeholder="Question title"
+                 :border="true"/>
 
-    <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
-                           @save="saveQuestion"
-                           @remove="removeQuestion(currentForm.id)"/>
+      <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
+                             @save="saveQuestion"
+                             @remove="removeQuestion(currentForm.id)"/>
+    </div>
 
-    <CreateAnswer :questionId="currentForm.id"
-                  @created="$emit('changed')"/>
+    <div :class="$style.answers">
+      <AnswerEditForm v-for="answer in question.answers"
+                      :key="answer.id"
+                      :answer="answer"
+                      @changed="$emit('changed')"/>
 
-    <AnswerEditForm v-for="answer in question.answers"
-                    :key="answer.id"
-                    :answer="answer"
-                    @changed="$emit('changed')"/>
+      <CreateAnswer :questionId="question.id"
+                    @created="$emit('changed')"/>
+    </div>
   </div>
 </template>
 
@@ -60,9 +64,17 @@ async function removeQuestion(id: number) {
 
 <style module>
 .root {
-  display: grid;
+  /* display: grid;
   justify-content: left;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; */
+}
+
+.question {
+  display: flex;
+}
+
+.answer {
+  display: block;
 }
 </style>
