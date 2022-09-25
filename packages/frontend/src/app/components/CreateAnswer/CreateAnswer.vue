@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showw" :class="$style.root">
+  <div v-if="questionId" :class="$style.root">
     <BaseButton v-if="!openForm"
                 text="Create answer"
                 :class="$style.create_answer"
