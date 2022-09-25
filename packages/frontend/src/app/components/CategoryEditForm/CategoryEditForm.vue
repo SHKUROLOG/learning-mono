@@ -1,6 +1,6 @@
 <template>
   <div v-if="editMode"
-       :class="$style.category_edit">
+       :class="$style.root">
     <BaseInput v-model="currentForm.title"
                placeholder="Category title"/>
 
@@ -57,9 +57,21 @@ if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
 </script>
 
 <style module>
-.category_edit {
-  display: grid;
-  /*grid-template-rows: 1fr 1fr;*/
-  grid-template-columns: 1fr 1fr;
+.root {
+  justify-content: center;
+  font-size: 24px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  user-select: none;
+  backdrop-filter: blur(3px);
+  border-radius: 2px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  min-height: 150px;
+  margin-bottom: 20px;
+}
+.root:hover {
+  box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
+  border: 2px solid rgba(33, 234, 94, 0.5);
 }
 </style>

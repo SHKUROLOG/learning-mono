@@ -1,16 +1,23 @@
 <template>
-  <BaseButton v-if="!openForm"
-              text="Create theme"
-              :buttonSize="ButtonSize.M"
-              @click="openForm = true"/>
-  <div v-if="openForm">
-    <BaseInput v-model="createThemeForm.title"
-               placeholder="Theme title"/>
-
-    <BaseButton v-if="createThemeForm.title.trim()"
-                text="Create"
+  <div :class="$style.root">
+    <BaseButton v-if="!openForm"
+                text="Create theme"
+                :class="$style.create_theme"
                 :buttonSize="ButtonSize.M"
-                @click.stop="createCategory"/>
+                @click="openForm = true"/>
+
+    <div v-if="openForm"
+         :class="$style.create_form">
+      <BaseInput v-model="createThemeForm.title"
+                 placeholder="Theme title"
+                 :border="true"/>
+
+      <BaseButton v-if="createThemeForm.title.trim()"
+                  text="Create"
+                  :class="$style.create_btn"
+                  :buttonSize="ButtonSize.M"
+                  @click.stop="createTheme"/>
+    </div>
   </div>
 </template>
 
@@ -29,7 +36,7 @@ const openForm = ref(false)
 
 const createThemeForm = ref(createForm())
 
-async function createCategory() {
+async function createTheme() {
   await api.theme.create(createThemeForm.value)
   createThemeForm.value = createForm()
   openForm.value = false
@@ -46,5 +53,22 @@ function createForm():CreateThemeInput {
 </script>
 
 <style module>
+.root {
+  text-align: center;
+}
+.create_theme {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
 
+.create_form {
+  display: flex;
+
+}
+
+.create_btn {
+  font-size: 16px;
+  font-weight: bold;
+}
 </style>

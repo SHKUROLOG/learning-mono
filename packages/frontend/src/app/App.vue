@@ -1,21 +1,20 @@
 <template>
   <div class="scanlines">
-    <header :class="$style.header">
-      <HeaderMenu/>
+    <div class="content">
+      <header :class="$style.header">
+        <HeaderMenu/>
+      </header>
 
-      <LoginForm v-if="isLoginFormShown && !user "/>
-    </header>
-
-    <div>
-      <router-view/>
+      <div>
+        <router-view/>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { isLoginFormShown, user, userStoreInit } from './store/user'
 import { HeaderMenu } from './components/HeaderMenu'
-import { LoginForm } from './components/LoginForm'
+import { userStoreInit } from './store/user'
 
 userStoreInit()
 </script>
@@ -35,20 +34,30 @@ userStoreInit()
   margin: 0;
 }
 
+.content {
+  box-sizing: border-box;
+  backdrop-filter: blur( 20px );
+  box-shadow: inset 0px 0px 20px 20px rgba(32, 78, 57, 0.3);
+  height: 100vh;
+}
+
 a {
   text-decoration: none;
-  color: #21ea5e;
+  color: #25bc50;
   cursor: pointer;
 }
+
 /* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap'); */
 
 body {
   font-family: 'JetBrains Mono', monospace;
   font-weight: bold;
-  color: #21ea5e;
+  color: #25bc50;
   height: 100%;
-  /* background: linear-gradient(to right, #141912, #171717); */
-  background: #0a4628;
+  /* border: 20px solid black; */
+  /* background: linear-gradient(to right, #091f13, #171717); */
+  /* background: radial-gradient(circle, #144128 0%, #091f13 100%); */
+  background: #091f13;
   /* background:  #000000; */
 }
 </style>
@@ -57,7 +66,7 @@ body {
 $scan-width: 2px;
 $scan-crt: true;
 $scan-fps: 60;
-$scan-color: rgba(26, 96, 60, 0.3);
+$scan-color: rgba(26, 96, 60, 0.2);
 $scan-z-index: 2147483648;
 
 /* MOVING SCANLINE SETTINGS */
@@ -82,6 +91,7 @@ $scan-opacity: .75;
 }
 
 .scanlines {
+  // box-sizing: border-box;
   min-height: 100vh;
   position: relative;
   overflow: hidden; // only to animate the unique scanline

@@ -1,5 +1,6 @@
 <template>
-  <div :class="$style.root">
+  <div v-if="current && ammount"
+       :class="$style.root">
     <div v-for="actual in ammount"
          :key="actual"
          :class="[$style.box, {
@@ -41,7 +42,6 @@ watch(percent, (value, oldValue) => {
 <style module>
 .root {
   display: flex;
-  /* border: 1px solid #19e57c; */
   align-items: center;
   padding: 10px;
   margin-left: 20px;
@@ -50,10 +50,10 @@ watch(percent, (value, oldValue) => {
 .box {
   width: 10px;
   height: 10px;
-  background: #19e57c;
+  background: #25bc50;
   opacity: 0.1;
   margin-right: 4px;
-  box-shadow: 0px 1px 3px 1px rgba(26, 255, 167, 0.3);
+  box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
 }
 
 .active_box {

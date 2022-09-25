@@ -18,20 +18,19 @@ defineProps<CategoryTileProps>()
 <style module>
 .root {
   justify-content: center;
-  font-family: "JetBrains Mono ExtraBold", monospace;
   font-size: 24px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
   backdrop-filter: blur(3px);
   border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   position: relative;
   min-height: 150px;
 }
 .root:hover {
-  box-shadow: 0 2px 5px 0 rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
+  border: 2px solid rgba(33, 234, 94, 0.5);
 }
 .image {
   position: absolute;

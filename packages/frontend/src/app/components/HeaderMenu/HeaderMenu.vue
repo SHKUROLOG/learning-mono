@@ -5,6 +5,7 @@
     </div>
 
     <div :class="$style.right">
+      <LoginForm v-if="isLoginFormShown && !user "/>
       <EditMode/>
       <LogoutButton/>
       <SignIn/>
@@ -14,6 +15,8 @@
 
 <script lang="ts" setup>
 import { EscButton, EditMode, SignIn, LogoutButton } from './buttons'
+import LoginForm from '../LoginForm/LoginForm.vue'
+import { isLoginFormShown, user } from '../../store/user'
 </script>
 
 <style module>
@@ -23,7 +26,7 @@ import { EscButton, EditMode, SignIn, LogoutButton } from './buttons'
   justify-content: stretch;
   grid-auto-flow: column;
   align-items: start;
-  border: 2px solid #19e57c;
+  border: 2px solid #25bc50;
   align-items: center;
   padding: 0px 40px;
 }

@@ -2,19 +2,19 @@
   <div v-if="!isUserLoading"
        :class="$style.root">
     <div :class="$style.container">
-      > <input v-model="formLogin.login"
-               :class="$style.input"
-               type="text"
-               placeholder="Whats your name son?"
-               @keydown.enter="handleLogin">
+      [> <input v-model="formLogin.login"
+                :class="$style.input"
+                type="text"
+                placeholder="Whats your name son?"
+                @keydown.enter="handleLogin">]
     </div>
 
     <div :class="$style.container">
-      > <input v-model="formLogin.password"
-               :class="$style.input"
-               type="password"
-               placeholder="••••••"
-               @keydown.enter="handleLogin">
+      [> <input v-model="formLogin.password"
+                :class="$style.input"
+                type="password"
+                placeholder="••••••"
+                @keydown.enter="handleLogin">]
     </div>
   </div>
 </template>
@@ -46,21 +46,23 @@ async function handleLogin(): Promise<void> {
 }
 
 .input {
+  font-weight: bold;
   background: transparent;
-  color: aliceblue;
+  color: #25bc50;
   border: none;
   width: 200px;
   border-bottom: 1px solid transparent;
   transition: all 0.3s ease-in-out;
   padding: 4px;
+}
 
-}
 .input::placeholder {
-  color: aliceblue;
+  color: #25bc50;
 }
+
 .input:focus {
   outline: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(37, 188, 80, 0.8);
 }
 
 .container {

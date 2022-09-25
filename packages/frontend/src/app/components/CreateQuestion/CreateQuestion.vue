@@ -1,16 +1,22 @@
 <template>
-  <BaseButton v-if="!openForm"
-              text="Create question"
-              :buttonSize="ButtonSize.M"
-              @click="openForm = true"/>
-  <div v-if="openForm">
-    <BaseInput v-model="createQuestionForm.title"
-               placeholder="Question title"/>
-
-    <BaseButton v-if="createQuestionForm.title.trim()"
-                text="Create"
+  <div :class="$style.root">
+    <BaseButton v-if="!openForm"
+                text="Create question"
+                :class="$style.create_question"
                 :buttonSize="ButtonSize.M"
-                @click.stop="createCategory"/>
+                @click="openForm = true"/>
+    <div v-if="openForm"
+         :class="$style.create_form">
+      <BaseInput v-model="createQuestionForm.title"
+                 placeholder="Question title"
+                 :border="true"/>
+
+      <BaseButton v-if="createQuestionForm.title.trim()"
+                  text="Create"
+                  :class="$style.create_btn"
+                  :buttonSize="ButtonSize.M"
+                  @click.stop="createCategory"/>
+    </div>
   </div>
 </template>
 
@@ -46,5 +52,22 @@ function createForm():CreateQuestionInput {
 </script>
 
 <style module>
+.root {
+  text-align: center;
+}
+.create_question {
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+}
 
+.create_form {
+  display: flex;
+
+}
+
+.create_btn {
+  font-size: 16px;
+  font-weight: bold;
+}
 </style>

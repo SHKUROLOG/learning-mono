@@ -1,29 +1,26 @@
 <template>
   <div :class="$style.root">
     <BaseInput v-model="currentForm.title"
-               placeholder="Theme title"/>
+               :class="$style.input"
+               placeholder="Theme title"
+               :border="true"/>
 
     <div :class="$style.buttons">
-      <BaseButton v-if="!isEqual(currentForm, initialForm)"
-                  :buttonSize="ButtonSize.S"
-                  text="Save"
-                  @click="saveTheme"/>
-
-      <BaseButton text="Remove"
-                  :buttonSize="ButtonSize.S"
-                  @click="removeTheme(currentForm.id)"/>
+      <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
+                             @save="saveTheme"
+                             @remove="removeTheme(currentForm.id)"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { BaseButton, ButtonSize } from '../BaseButton'
 import { BaseInput } from '../BaseInput'
 import { isEqual } from 'lodash'
 import { ThemeEditModeEmits, ThemeEditModeProps } from './ThemeEditMode.props'
 import { ref } from 'vue'
 import { UpdateThemeInput } from '@learning-mono/shared'
 import { api } from '../../api'
+import BaseSaveRemoveButtons from '../BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
 
 const props = defineProps<ThemeEditModeProps>()
 const emit = defineEmits<ThemeEditModeEmits>()
@@ -59,9 +56,18 @@ async function removeTheme(themeId: number) {
   justify-content: start;
 }
 
+/* .input {
+  border: 1px solid rgba(37, 190, 80, 1);
+  border-left: 3px solid rgba(37, 190, 80, 0.3);
+}
+
+.input:hover {
+    border-left: 3px solid rgba(37, 190, 80, 1);
+} */
+
 .buttons {
   transition: all 0.3s ease-in-out;
-  opacity: 0;
+  opacity: 0.3;
   pointer-events: none;
 }
 

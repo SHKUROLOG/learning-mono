@@ -1,15 +1,16 @@
 <template>
   <div :class="$style.root">
+    <BaseButton :buttonSize="ButtonSize.S"
+                :class="[$style.remove_btn, {
+                  [$style.remove_btn_all]: !isSaveShow
+                }]"
+                text="✖"
+                @click="$emit('remove')"/>
     <BaseButton v-if="isSaveShow"
                 :buttonSize="ButtonSize.S"
                 :class="$style.save_btn"
-                text="Save"
+                text="✔"
                 @click="$emit('save')"/>
-
-    <BaseButton :buttonSize="ButtonSize.S"
-                :class="$style.remove_btn"
-                text="Remove"
-                @click="$emit('remove')"/>
   </div>
 </template>
 
@@ -23,20 +24,31 @@ defineEmits<BaseSaveRemoveButtonsEmits>()
 
 <style module>
 .root {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  transition: all 0.3s ease-in-out;
+  font-weight: bold;
 }
 
 .save_btn {
-  font-size: 12px;
+  font-size: 16px;
   opacity: 0.2;
   pointer-events: none;
+  width: 50%;
+  font-size: 24px;
 }
 
 .remove_btn {
-  font-size: 12px;
+  font-size: 16px;
   opacity: 0.2;
   pointer-events: none;
+  width: 50%;
+  font-size: 24px;
+}
+
+.remove_btn_all {
+  width: 100%;
 }
 .root:hover * {
   opacity: 1;

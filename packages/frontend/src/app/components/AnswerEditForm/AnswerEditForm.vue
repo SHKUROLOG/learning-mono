@@ -1,5 +1,6 @@
 <template>
-  <div :class="$style.root">
+  <div v-if="answer"
+       :class="$style.root">
     <BaseInput v-model="currentForm.title"
                placeholder="Answer title"/>
 

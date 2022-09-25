@@ -20,7 +20,7 @@ withDefaults(defineProps<BaseButtonProps>(), {
   user-select: none;
   background-color: transparent;
   border: none;
-  color: #19e57c;
+  color: #25bc50;
 }
 
 .btn_s {
@@ -40,7 +40,7 @@ withDefaults(defineProps<BaseButtonProps>(), {
 
 .btn:hover {
   opacity: 1;
-  background: #19e57c;;
+  background: #25bc50;
   color: #000;
 }
 </style>

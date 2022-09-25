@@ -30,5 +30,6 @@ async function fetchCategories() {
   grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
   grid-gap: 24px;
   justify-content: center;
+  text-align: center;
 }
 </style>

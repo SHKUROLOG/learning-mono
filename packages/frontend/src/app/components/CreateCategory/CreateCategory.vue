@@ -1,7 +1,11 @@
 <template>
   <div v-if="editMode"
-       :class="$style.create"
+       :class="$style.root"
        @click="openForm = true">
+    <div v-if="!openForm"
+         :class="$style.plus">
+      +
+    </div>
     <div v-if="openForm">
       <BaseInput v-model="createCategoryForm.title"
                  placeholder="Category title"/>
@@ -10,6 +14,7 @@
                  placeholder="Link to image"/>
 
       <BaseButton v-if="createCategoryForm.title.trim()"
+                  :class="$style.create_btn"
                   text="Create"
                   :buttonSize="ButtonSize.L"
                   @click.stop="createCategory"/>
@@ -49,18 +54,38 @@ function createForm(): CreateCategoryInput {
 </script>
 
 <style module>
-.create {
-  display: grid;
+.root {
+  /* display: grid; */
+  text-align: center;
   justify-content: center;
-  font-family: "JetBrains Mono ExtraBold", monospace;
-  font-size: 24px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
   backdrop-filter: blur(3px);
   border-radius: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   position: relative;
   min-height: 150px;
+}
+
+.plus {
+  font-weight: bold;
+  font-size: 100px;
+  opacity: 0.1;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.create_btn {
+  width: 100%;
+}
+
+.root:hover {
+  box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
+  border: 2px solid rgba(33, 234, 94, 0.5);
+}
+
+.root:hover .plus {
+  opacity: 1;
 }
 </style>

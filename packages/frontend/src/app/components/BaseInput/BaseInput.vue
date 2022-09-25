@@ -1,5 +1,7 @@
 <template>
-  <div :class="$style.root">
+  <div :class="[$style.root, {
+    [$style.root_border] : border,
+  }]">
     <div :class="$style.container">
       <input :class="$style.input"
              v-bind="$attrs"
@@ -26,28 +28,39 @@ export default {
 
 <style module>
 .root {
+  box-sizing: border-box;
   display: grid;
-  padding: 16px;
+  padding: 10px;
   justify-self: end;
+}
+
+.root_border {
+  border-left: 3px solid rgba(37, 190, 80, 0.3);
+}
+
+.root_border:hover {
+  border-left: 3px solid rgba(37, 190, 80, 1);
 }
 
 .input {
   background: transparent;
-  color: #19e57c;
+  font-size: 16px;
+  font-weight: 700;
+  color: #25bc50;
   border: none;
   width: 200px;
-  border-bottom: 1px solid transparent;
+  border-bottom: 2px solid transparent;
   transition: all 0.3s ease-in-out;
   padding: 4px;
 }
 
 .input::placeholder {
-  color: #0fc66c;
+  color: #25bc50;
 }
 
 .input:focus {
   outline: none;
-  border-bottom: 1px solid #19e57c;
+  border-bottom: 2px solid #25bc50;
 }
 
 .container {

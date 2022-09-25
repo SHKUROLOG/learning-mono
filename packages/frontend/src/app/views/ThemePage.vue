@@ -10,18 +10,14 @@
                  :current="index"
                  :correctItems="correctItems"/>
 
-    <!-- <hr width="100%"
-        color="#19e57c"
-        size="4px"> -->
-
-    <div v-if="!editMode">
+    <div v-if="!editMode && currentQuestion">
       <div :class="$style.title">
         <h1 :key="currentQuestion.id">
           <BaseText :text="currentQuestion.title"/>
         </h1>
 
         <hr width="100%"
-            color="#19e57c"
+            color="#25bc50"
             size="4px">
 
         ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
@@ -78,8 +74,6 @@ const router = useRouter()
 
 const index = ref(0)
 
-// const categoryTitle = themeData.value.
-
 function moveToNext() {
   if (shuffledQuestions.value.length - 1 > index.value)
     ++index.value
@@ -112,12 +106,15 @@ async function fetchTheme() {
   themeData.value = await api.theme.getById(props.themeId)
 }
 
-watch(
-  () => index.value + 1 === shuffledQuestions.value.length,
-  value => value && router.push({
-    name: 'statistic',
-  }),
-)
+if (shuffledQuestions.value.length > 2) {
+  watch(
+    () => index.value + 1 === shuffledQuestions.value.length,
+    value => value && router.push({
+      name: 'statistic',
+    }),
+  )
+}
+
 //
 </script>
 
@@ -138,7 +135,7 @@ watch(
 
 .next {
   background: transparent;
-  color: #19e57c;
+  color: #25bc50;
   border: 0;
   padding: 16px;
   margin-left: 40px;
@@ -152,7 +149,7 @@ watch(
 
 .next:hover {
   opacity: 1;
-  background: #19e57c;
+  background: #25bc50;
   color: #000;
 }
 

@@ -1,28 +1,34 @@
 <template>
   <div :class="$style.root">
     <BaseInput v-model="currentForm.title"
-               placeholder="Question title"/>
+               placeholder="Question title"
+               :border="true"/>
 
     <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
                            @save="saveQuestion"
                            @remove="removeQuestion(currentForm.id)"/>
-  </div>
 
-  <AnswerEditForm v-for="answer in question.answers"
-                  :key="answer.id"
-                  :answer="answer"
-                  @changed="$emit('changed')"/>
+    <CreateAnswer :questionId="currentForm.id"
+                  @created="$emit('changed')"/>
+
+    <AnswerEditForm v-for="answer in question.answers"
+                    :key="answer.id"
+                    :answer="answer"
+                    @changed="$emit('changed')"/>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { api } from '../../api'
 import { UpdateQuestionInput } from '@learning-mono/shared'
-import BaseInput from '../BaseInput/BaseInput.vue'
+import { BaseInput } from '../BaseInput'
 import { QuestionEditFormEmits, QuestionEditFormProps } from './QuestionEditForm.props'
 import { AnswerEditForm } from '../AnswerEditForm'
-import BaseSaveRemoveButtons from '../BaseSaveRemoveButtons/BaseSaveRemoveButtons.vue'
+import { BaseSaveRemoveButtons } from '../BaseSaveRemoveButtons'
 import { isEqual } from 'lodash'
+import { CreateAnswer } from '../CreateAnswer'
+import { question } from '../../api/question'
 
 const props = defineProps<QuestionEditFormProps>()
 
