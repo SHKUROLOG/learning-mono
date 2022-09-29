@@ -4,7 +4,7 @@
        :class="$style.root">
     <router-link :class="$style.link"
                  :to="{ name: 'theme', params: { themeId: theme.id } }">
-      <BaseText :text="`$ / > ${theme.title}`"/>
+      <BaseText :text="`${theme.title}`"/>
     </router-link>
   </div>
 </template>
@@ -23,7 +23,7 @@ defineProps<CategoryThemesProps>()
   cursor: pointer;
   justify-content: flex-start;
   padding: 10px;
-  margin: 0px 40px;
+  /* margin: 0px 10px; */
   border-left: 3px solid rgba(37, 190, 80, 0.3);
   /* position: relative; */
   /* transition: all .3s ease; */

@@ -1,5 +1,6 @@
 <template>
-  <div v-if="questionId" :class="$style.root">
+  <div v-if="questionId"
+       :class="$style.root">
     <BaseButton v-if="!openForm"
                 text="Create answer"
                 :class="$style.create_answer"
@@ -23,6 +24,7 @@
                   @click.stop="createAnswer"/>
     </div>
   </div>
+  <h1>NO PROPS</h1>
 </template>
 
 <script lang="ts" setup>
@@ -36,9 +38,9 @@ import { CreateAnswerEmits, CreateAnswerProps } from './CreateAnswer.props'
 const props = defineProps<CreateAnswerProps>()
 const emit = defineEmits<CreateAnswerEmits>()
 
-const showw = ref(false)
+// const showw = ref(false)
 
-setTimeout(() => showw.value = !showw.value, 3000)
+// setTimeout(() => showw.value = !showw.value, 3000)
 
 const openForm = ref(false)
 

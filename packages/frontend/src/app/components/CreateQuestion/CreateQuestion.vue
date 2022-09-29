@@ -6,6 +6,7 @@
                 :class="$style.create_question"
                 :buttonSize="ButtonSize.M"
                 @click="openForm = true"/>
+
     <div v-if="openForm"
          :class="$style.create_form">
       <BaseInput v-model="createQuestionForm.title"

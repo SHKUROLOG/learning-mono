@@ -2,11 +2,12 @@
   <div :class="$style.root">
     <BaseButton :buttonSize="ButtonSize.S"
                 :class="[$style.remove_btn, {
-                  [$style.remove_btn_all]: !isSaveShow
+                  [$style.remove_btn_all]: !isShow
                 }]"
                 text="✖"
                 @click="$emit('remove')"/>
-    <BaseButton v-if="isSaveShow"
+
+    <BaseButton v-if="isShow"
                 :buttonSize="ButtonSize.S"
                 :class="$style.save_btn"
                 text="✔"
@@ -15,11 +16,19 @@
 </template>
 
 <script lang="ts" setup>
+import { isEqual } from 'lodash'
+import { watch, ref } from 'vue'
 import { BaseButton, ButtonSize } from '../BaseButton'
 import { BaseSaveRemoveButtonsEmits, BaseSaveRemoveButtonsProps } from './BaseSaveRemoveButtons.props'
 
-defineProps<BaseSaveRemoveButtonsProps>()
+const isShow = ref(false)
+
+const props = defineProps<BaseSaveRemoveButtonsProps>()
 defineEmits<BaseSaveRemoveButtonsEmits>()
+
+watch(props.currentForm || props.initialForm, () => {
+  isShow.value = !isEqual(props.currentForm, props.initialForm)
+})
 </script>
 
 <style module>

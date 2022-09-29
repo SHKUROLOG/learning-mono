@@ -23,18 +23,30 @@ const props = defineProps<ExploreBarProps>()
 <style module>
 .root {
   display: flex;
+  height: 100%;
 }
 .explore_bar {
-  display: flex;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-weight: bold;
+  font-size: 24px;
+  text-transform: uppercase;
+  /* display: flex; */
+  text-align: center;
   justify-content: center;
   align-items: center;
-  padding-left: 35px;
-  padding-right: 25px;
-  min-width: 200px;
-  height: 50px;
-  color: #141912;
+  padding: 8px;
+  /* padding-left: 35px; */
+  /* padding-right: 25px; */
+  /* min-width: 200px; */
+  /* height: 100%; */
+  color: #000;
   background: #25bc50;
-  clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 100% 50%, 90% 100%, 0% 100%, 10% 50%);
+  /* clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 100% 50%, 90% 100%, 0% 100%, 10% 50%); */
+}
+
+.explore_bar:hover {
+
 }
 /* clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 100% 50%, 90% 100%, 0% 100%, 10% 50.3%); */
 </style>

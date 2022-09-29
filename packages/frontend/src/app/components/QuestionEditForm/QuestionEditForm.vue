@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, watchEffect } from 'vue'
 import { api } from '../../api'
 import { UpdateQuestionInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
@@ -33,10 +33,8 @@ import { AnswerEditForm } from '../AnswerEditForm'
 import { BaseSaveRemoveButtons } from '../BaseSaveRemoveButtons'
 import { isEqual } from 'lodash'
 import { CreateAnswer } from '../CreateAnswer'
-import { question } from '../../api/question'
 
 const props = defineProps<QuestionEditFormProps>()
-
 const emit = defineEmits<QuestionEditFormEmits>()
 
 const initialForm = createForm()
@@ -61,6 +59,12 @@ async function removeQuestion(id: number) {
 
   emit('changed')
 }
+
+watchEffect(() => {
+  console.warn(props.question.id)
+  // console.warn(Object.assign(props.question))
+  console.warn({ ...props.question })
+})
 </script>
 
 <style module>

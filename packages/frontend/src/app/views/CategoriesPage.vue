@@ -4,7 +4,8 @@
                   :key="category.id"
                   :category="category"/>
 
-    <CreateCategory @created="fetchCategories"/>
+    <CreateCategory v-if="editMode"
+                    @created="fetchCategories"/>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import { CategoryDto } from '@learning-mono/shared'
 import { api } from '../api'
 import { CreateCategory } from '../components/CreateCategory'
 import { CategoryTile } from '../components/CategoryTile'
+import { editMode } from '../store/editmode'
 
 const categories = ref<CategoryDto[]>([])
 

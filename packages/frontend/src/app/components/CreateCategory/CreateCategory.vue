@@ -1,12 +1,12 @@
 <template>
-  <div v-if="editMode"
-       :class="$style.root"
+  <div :class="$style.root"
        @click="openForm = true">
     <div v-if="!openForm"
          :class="$style.plus">
       +
     </div>
-    <div v-if="openForm">
+    <div v-if="openForm"
+         :class="$style.edit_form">
       <BaseInput v-model="createCategoryForm.title"
                  placeholder="Category title"/>
 
@@ -25,7 +25,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { api } from '../../api'
-import { editMode } from '../../store/editmode'
 import { CreateCategoryInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
 import { BaseButton, ButtonSize } from '../BaseButton'
@@ -55,9 +54,11 @@ function createForm(): CreateCategoryInput {
 
 <style module>
 .root {
+  /* box-sizing: border-box; */
   /* display: grid; */
   text-align: center;
   justify-content: center;
+  vertical-align: bottom;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
@@ -69,6 +70,7 @@ function createForm(): CreateCategoryInput {
 }
 
 .plus {
+  height: 100%;
   font-weight: bold;
   font-size: 100px;
   opacity: 0.1;
@@ -76,7 +78,14 @@ function createForm(): CreateCategoryInput {
   cursor: pointer;
 }
 
+.edit_form {
+  height: 100%;
+}
+
 .create_btn {
+  /* height: 100%; */
+  vertical-align: bottom;
+  margin-top: auto;
   width: 100%;
 }
 

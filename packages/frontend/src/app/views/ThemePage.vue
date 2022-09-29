@@ -3,7 +3,6 @@
        :class="$style.root">
     <div :class="$style.theme">
       <ExploreBar :categoryTitle="themeData.title"/>
-      <!-- <h1>{{ '>> ' + themeData.title }} </h1> -->
     </div>
 
     <ProgressBar :ammount="shuffledQuestions.length -1"
@@ -36,7 +35,7 @@
                   @click="moveToNext"/>
     </div>
 
-    <div v-else>
+    <div v-if="editMode">
       <QuestionEditForm v-for="question in shuffledQuestions"
                         :key="question.id"
                         :question="question"
@@ -103,6 +102,7 @@ const correctItems = computed(() => shuffledQuestions.value.map(isQuestionCorrec
 watchEffect(fetchTheme)
 
 async function fetchTheme() {
+  // Object.freeze(themeData.value = await api.theme.getById(props.themeId))
   themeData.value = await api.theme.getById(props.themeId)
 }
 
