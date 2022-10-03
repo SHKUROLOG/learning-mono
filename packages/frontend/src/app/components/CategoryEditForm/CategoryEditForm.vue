@@ -7,8 +7,7 @@
     <BaseInput v-model="currentForm.image"
                placeholder="Link to image"/>
 
-    <BaseSaveRemoveButtons :currentForm="currentForm"
-                           :initialForm="initialForm"
+    <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
                            @save="saveCategory"
                            @remove="removeCategory(currentForm.id)"/>
   </div>
@@ -16,7 +15,7 @@
 
 <script lang="ts" setup>
 import { CategoryEditFormEmits, CategoryEditFormProps } from './CategoryEditForm.props'
-import { ref, watch } from 'vue'
+import { ref, toRef, watch } from 'vue'
 import { api } from '../../api'
 import { user } from '../../store/user'
 import { editMode } from '../../store/editmode'
@@ -24,6 +23,7 @@ import { UpdateCategoryInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
 import { BaseSaveRemoveButtons } from '../BaseSaveRemoveButtons'
 import { useRouter } from 'vue-router'
+import { isEqual } from 'lodash'
 
 const router = useRouter()
 
@@ -43,8 +43,6 @@ function createForm(): UpdateCategoryInput {
 
 async function saveCategory() {
   await api.category.update(currentForm.value)
-  // initialForm.value = createForm()
-  // currentForm.value = createForm()
 
   emit('changed')
 }
@@ -57,10 +55,10 @@ async function removeCategory(id: number) {
   emit('changed')
 }
 
-watch(props.category, () => {
+watch(toRef(props, 'category'), () => {
   initialForm.value = createForm()
   currentForm.value = createForm()
-})
+}, { deep: true })
 
 if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
   editMode.value = true

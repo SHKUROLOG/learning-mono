@@ -1,48 +1,49 @@
 <template>
   <div v-if="themeData"
        :class="$style.root">
-    <div :class="$style.theme">
-      <ExploreBar :categoryTitle="themeData.title"/>
+    <div :class="$style.explore">
+      <ExploreBar :class="$style.bar" :themeTitle="themeData.title"/>
     </div>
+    <div :class="$style.content">
+      <ProgressBar :ammount="shuffledQuestions.length -1"
+                   :current="index"
+                   :correctItems="correctItems"/>
 
-    <ProgressBar :ammount="shuffledQuestions.length -1"
-                 :current="index"
-                 :correctItems="correctItems"/>
+      <div v-if="!editMode && currentQuestion">
+        <div :class="$style.title">
+          <h1 :key="currentQuestion.id">
+            <BaseText :text="currentQuestion.title"/>
+          </h1>
 
-    <div v-if="!editMode && currentQuestion">
-      <div :class="$style.title">
-        <h1 :key="currentQuestion.id">
-          <BaseText :text="currentQuestion.title"/>
-        </h1>
+          <hr width="100%"
+              color="#25bc50"
+              size="4px">
 
-        <hr width="100%"
-            color="#25bc50"
-            size="4px">
+          ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
+        </div>
 
-        ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
+        <div :key="currentQuestion.id">
+          <AnswerRow v-for="answer in currentQuestion.answers"
+                     :key="answer.id"
+                     :answer="answer"
+                     @click="handleAnswerClick(answer)"/>
+        </div>
+
+        <BaseButton :buttonSize="ButtonSize.L"
+                    text=">>>"
+                    :class="$style.next"
+                    @click="moveToNext"/>
       </div>
 
-      <div :key="currentQuestion.id">
-        <AnswerRow v-for="answer in currentQuestion.answers"
-                   :key="answer.id"
-                   :answer="answer"
-                   @click="handleAnswerClick(answer)"/>
+      <div v-if="editMode">
+        <QuestionEditForm v-for="question in shuffledQuestions"
+                          :key="question.id"
+                          :question="question"
+                          @changed="fetchTheme"/>
+
+        <CreateQuestion :themeId="parseInt(themeId)"
+                        @created="fetchTheme"/>
       </div>
-
-      <BaseButton :buttonSize="ButtonSize.L"
-                  text=">>>"
-                  :class="$style.next"
-                  @click="moveToNext"/>
-    </div>
-
-    <div v-if="editMode">
-      <QuestionEditForm v-for="question in shuffledQuestions"
-                        :key="question.id"
-                        :question="question"
-                        @changed="fetchTheme"/>
-
-      <CreateQuestion :themeId="parseInt(themeId)"
-                      @created="fetchTheme"/>
     </div>
   </div>
 </template>
@@ -106,7 +107,7 @@ async function fetchTheme() {
   themeData.value = await api.theme.getById(props.themeId)
 }
 
-if (shuffledQuestions.value.length > 2) {
+if (shuffledQuestions.value.length > 1) {
   watch(
     () => index.value + 1 === shuffledQuestions.value.length,
     value => value && router.push({
@@ -121,6 +122,8 @@ if (shuffledQuestions.value.length > 2) {
 <style module>
 .root {
   display: grid;
+  /* grid-template-rows: 1fr; */
+  grid-template-columns: 5% 1fr;
   text-align: left;
   padding: 16px;
   align-items: start;
@@ -128,9 +131,14 @@ if (shuffledQuestions.value.length > 2) {
   user-select: none;
 }
 
-.theme {
-  display: flex;
-  margin: 20px;
+.content {
+  grid-column-start: 2;
+
+}
+
+.explore {
+  grid-column-start: 1;
+  height: 320px;
 }
 
 .next {

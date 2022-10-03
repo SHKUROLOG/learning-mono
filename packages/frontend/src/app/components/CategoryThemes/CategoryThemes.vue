@@ -23,12 +23,7 @@ defineProps<CategoryThemesProps>()
   cursor: pointer;
   justify-content: flex-start;
   padding: 10px;
-  /* margin: 0px 10px; */
   border-left: 3px solid rgba(37, 190, 80, 0.3);
-  /* position: relative; */
-  /* transition: all .3s ease; */
-  /* transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-  transform: translateX(10px); */
 }
 
 .root:hover {
@@ -41,14 +36,10 @@ defineProps<CategoryThemesProps>()
 
 .root:hover a {
   color: #000;
-
 }
 .link {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.theme_edit {
 }
 </style>

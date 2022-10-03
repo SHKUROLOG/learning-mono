@@ -28,13 +28,13 @@ const props = defineProps<AnswersEditFormProps>()
 const emit = defineEmits<AnswersEditFormEmits>()
 
 const initialForm = createForm()
-
 const currentForm = ref(createForm())
 
 function createForm(): UpdateAnswerInput {
   return {
     title: props.answer.title,
     id: props.answer.id,
+    questionId: props.answer.questionId,
     isCorrect: props.answer.isCorrect,
   }
 }

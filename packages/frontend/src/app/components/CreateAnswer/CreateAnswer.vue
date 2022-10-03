@@ -24,7 +24,7 @@
                   @click.stop="createAnswer"/>
     </div>
   </div>
-  <h1>NO PROPS</h1>
+  <h1 v-else>NO PROPS</h1>
 </template>
 
 <script lang="ts" setup>
@@ -46,7 +46,7 @@ const openForm = ref(false)
 
 const createAnswerForm = ref(createForm())
 
-function createForm():CreateAnswerInput {
+function createForm(): CreateAnswerInput {
   return {
     title: '',
     questionId: props.questionId,

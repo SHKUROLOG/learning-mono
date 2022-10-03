@@ -54,11 +54,10 @@ function createForm(): CreateCategoryInput {
 
 <style module>
 .root {
-  /* box-sizing: border-box; */
-  /* display: grid; */
+  box-sizing: border-box;
+  display: grid;
+  /* justify-content: stretch; */
   text-align: center;
-  justify-content: center;
-  vertical-align: bottom;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
@@ -79,11 +78,17 @@ function createForm(): CreateCategoryInput {
 }
 
 .edit_form {
+  display: grid;
+  justify-items: center;
+  grid-template-rows: repeat(3, 1fr);
   height: 100%;
+  width: 100%;
+
 }
 
 .create_btn {
   /* height: 100%; */
+
   vertical-align: bottom;
   margin-top: auto;
   width: 100%;

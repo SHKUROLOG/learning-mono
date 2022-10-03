@@ -7,6 +7,9 @@ export class UpdateAnswerInput {
   @IsNumber()
   id: number
 
+  @IsNumber()
+  questionId: number
+
   @IsOptional()
   @IsBoolean()
   isCorrect?: boolean

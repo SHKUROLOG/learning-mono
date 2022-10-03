@@ -64,7 +64,6 @@ function createForm():CreateThemeInput {
 
 .create_form {
   display: flex;
-
 }
 
 .create_btn {

@@ -25,7 +25,8 @@ export async function getAnswersByQuestionId(questionId: number | number[]): Pro
 
 export async function createAnswer(inputAnswer: CreateAnswerInput) {
   const prisma = inject(Deps.PRISMA)
-  prisma.answer.create({
+
+  return prisma.answer.create({
     data: {
       title: inputAnswer.title,
       isCorrect: inputAnswer.isCorrect!,
@@ -36,7 +37,8 @@ export async function createAnswer(inputAnswer: CreateAnswerInput) {
 
 export async function updateAnswer(inputAnswer: UpdateAnswerInput) {
   const prisma = inject(Deps.PRISMA)
-  prisma.answer.update({
+
+  return prisma.answer.update({
     data: {
       title: inputAnswer.title,
     },

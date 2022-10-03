@@ -1,5 +1,5 @@
 <template>
-  <div v-if="current && ammount"
+  <div v-if="ammount"
        :class="$style.root">
     <div v-for="actual in ammount"
          :key="actual"
@@ -45,6 +45,8 @@ watch(percent, (value, oldValue) => {
   align-items: center;
   padding: 10px;
   margin-left: 20px;
+  /* width: 100%; */
+  /* border: 2px solid #25bc50; */
 }
 
 .box {

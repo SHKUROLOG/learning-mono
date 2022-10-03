@@ -1,52 +1,55 @@
 <template>
   <div :class="$style.root">
     <div v-if="categoryTitle"
-         :class="$style.explore_bar">
+         :class="$style.explore_bar"
+         @click="handleClick">
       {{ categoryTitle }}
     </div>
 
     <div v-if="themeTitle"
-         :class="$style.explore_bar">
+         :class="$style.explore_bar"
+         @click="handleClick">
       {{ themeTitle }}
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router'
 import { ExploreBarProps } from './ExploreBar.props'
 
-const props = defineProps<ExploreBarProps>()
+const router = useRouter()
 
-// const themeTitle = props.category.themes.find(v => v.id === props.themeId)
+defineProps<ExploreBarProps>()
+
+function handleClick() {
+  router.go(-1)
+}
 </script>
 
 <style module>
 .root {
   display: flex;
   height: 100%;
+  text-transform: uppercase;
 }
 .explore_bar {
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-weight: bold;
   font-size: 24px;
-  text-transform: uppercase;
-  /* display: flex; */
+  cursor: pointer;
   text-align: center;
   justify-content: center;
   align-items: center;
   padding: 8px;
-  /* padding-left: 35px; */
-  /* padding-right: 25px; */
-  /* min-width: 200px; */
-  /* height: 100%; */
   color: #000;
   background: #25bc50;
-  /* clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 100% 50%, 90% 100%, 0% 100%, 10% 50%); */
 }
 
 .explore_bar:hover {
-
+  color: #25bc50;
+  background: transparent;
+  /* box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3); */
 }
-/* clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 100% 50%, 90% 100%, 0% 100%, 10% 50.3%); */
 </style>

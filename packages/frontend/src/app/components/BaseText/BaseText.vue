@@ -1,5 +1,5 @@
 <template>
-  <span v-text="view"
+  <span v-text="view || ' '"
         :class="[$style.text, { [$style.cube]: printer?.isActive }]"/>
 </template>
 
@@ -14,7 +14,6 @@ const props = defineProps<BaseTextProps>()
 const view = ref('')
 const printer = ref<Printer>()
 
-// onMounted(() => printManager.add(printer.value))
 onBeforeUnmount(() => printer.value && printManager.remove(printer.value))
 
 function setView(value: string) {
@@ -32,6 +31,10 @@ watch(() => props.text, (value) => {
 </script>
 
 <style module>
+.text {
+  display: inline-block;
+  /* min-height: 16px; */
+}
 .cube::after {
   content: "▋";
 }
