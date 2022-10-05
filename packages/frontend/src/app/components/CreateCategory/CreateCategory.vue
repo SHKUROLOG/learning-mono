@@ -6,17 +6,19 @@
       +
     </div>
     <div v-if="openForm"
-         :class="$style.edit_form">
-      <BaseInput v-model="createCategoryForm.title"
-                 placeholder="Category title"/>
+         :class="$style.create_form">
+      <div>
+        <BaseInput v-model="createCategoryForm.title"
+                   placeholder="Category title"/>
 
-      <BaseInput v-model="createCategoryForm.image"
-                 placeholder="Link to image"/>
+        <BaseInput v-model="createCategoryForm.image"
+                   placeholder="Link to image"/>
+      </div>
 
       <BaseButton v-if="createCategoryForm.title.trim()"
                   :class="$style.create_btn"
                   text="Create"
-                  :buttonSize="ButtonSize.L"
+                  :buttonSize="ButtonSize.M"
                   @click.stop="createCategory"/>
     </div>
   </div>
@@ -55,20 +57,21 @@ function createForm(): CreateCategoryInput {
 <style module>
 .root {
   box-sizing: border-box;
-  display: grid;
-  /* justify-content: stretch; */
-  text-align: center;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
   backdrop-filter: blur(3px);
   border-radius: 2px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(37, 188, 80, 0.1);
   position: relative;
   min-height: 150px;
 }
 
 .plus {
+  display: grid;
+  align-items: center;
+  text-align: center;
+  line-height: 100%;
   height: 100%;
   font-weight: bold;
   font-size: 100px;
@@ -77,20 +80,19 @@ function createForm(): CreateCategoryInput {
   cursor: pointer;
 }
 
-.edit_form {
+.create_form {
   display: grid;
-  justify-items: center;
-  grid-template-rows: repeat(3, 1fr);
-  height: 100%;
+  grid-template-rows: 1fr max-content;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: bold;
   width: 100%;
-
+  height: 100%;
 }
 
 .create_btn {
-  /* height: 100%; */
-
-  vertical-align: bottom;
-  margin-top: auto;
+  font-size: 16px;
+  font-weight: bold;
   width: 100%;
 }
 

@@ -1,49 +1,53 @@
 <template>
   <div v-if="themeData"
        :class="$style.root">
-    <div :class="$style.explore">
-      <ExploreBar :class="$style.bar" :themeTitle="themeData.title"/>
-    </div>
-    <div :class="$style.content">
-      <ProgressBar :ammount="shuffledQuestions.length -1"
-                   :current="index"
-                   :correctItems="correctItems"/>
+    <template v-if="!editMode">
+      <div :class="$style.content">
+        <ExploreBar :themeTitle="themeData.title"/>
 
-      <div v-if="!editMode && currentQuestion">
-        <div :class="$style.title">
-          <h1 :key="currentQuestion.id">
-            <BaseText :text="currentQuestion.title"/>
-          </h1>
+        <div v-if="!editMode && currentQuestion">
+          <ProgressBar :ammount="shuffledQuestions.length -1"
+                       :class="$style.progress_bar"
+                       :current="index"
+                       :correctItems="correctItems"/>
 
-          <hr width="100%"
-              color="#25bc50"
-              size="4px">
+          <div :class="$style.title">
+            <h1 :key="currentQuestion.id">
+              <BaseText :text="currentQuestion.title"/>
+            </h1>
 
-          ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
+            <hr width="99%"
+                color="#25bc50"
+                size="4px">
+
+            ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
+          </div>
+
+          <div :key="currentQuestion.id">
+            <AnswerRow v-for="answer in currentQuestion.answers"
+                       :key="answer.id"
+                       :answer="answer"
+                       @click="handleAnswerClick(answer)"/>
+          </div>
+
+          <BaseButton :buttonSize="ButtonSize.L"
+                      text=">>>"
+                      :class="$style.next"
+                      @click="moveToNext"/>
         </div>
-
-        <div :key="currentQuestion.id">
-          <AnswerRow v-for="answer in currentQuestion.answers"
-                     :key="answer.id"
-                     :answer="answer"
-                     @click="handleAnswerClick(answer)"/>
-        </div>
-
-        <BaseButton :buttonSize="ButtonSize.L"
-                    text=">>>"
-                    :class="$style.next"
-                    @click="moveToNext"/>
       </div>
+    </template>
 
-      <div v-if="editMode">
-        <QuestionEditForm v-for="question in shuffledQuestions"
-                          :key="question.id"
-                          :question="question"
-                          @changed="fetchTheme"/>
+    <div v-if="editMode"
+         :class="$style.question_edit">
+      <QuestionEditForm v-for="question in shuffledQuestions"
+                        :key="question.id"
+                        :question="question"
+                        @changed="fetchTheme"/>
 
-        <CreateQuestion :themeId="parseInt(themeId)"
-                        @created="fetchTheme"/>
-      </div>
+      <CreateQuestion :class="$style.create_btn"
+                      :themeId="parseInt(themeId)"
+                      @created="fetchTheme"/>
     </div>
   </div>
 </template>
@@ -103,41 +107,37 @@ const correctItems = computed(() => shuffledQuestions.value.map(isQuestionCorrec
 watchEffect(fetchTheme)
 
 async function fetchTheme() {
-  // Object.freeze(themeData.value = await api.theme.getById(props.themeId))
   themeData.value = await api.theme.getById(props.themeId)
 }
 
-if (shuffledQuestions.value.length > 1) {
-  watch(
-    () => index.value + 1 === shuffledQuestions.value.length,
-    value => value && router.push({
-      name: 'statistic',
-    }),
-  )
-}
+watch(
+  () => index.value + 1 === shuffledQuestions.value.length,
+  value => value && router.push({
+    name: 'statistic',
+  }),
+)
 
 //
 </script>
 
 <style module>
 .root {
+
+}
+
+.content {
   display: grid;
-  /* grid-template-rows: 1fr; */
-  grid-template-columns: 5% 1fr;
+  grid-template-columns: max-content 1fr;
+  grid-auto-flow: column;
   text-align: left;
   padding: 16px;
   align-items: start;
   justify-items: start;
   user-select: none;
-}
-
-.content {
-  grid-column-start: 2;
-
+  width: 700px;
 }
 
 .explore {
-  grid-column-start: 1;
   height: 320px;
 }
 
@@ -161,7 +161,23 @@ if (shuffledQuestions.value.length > 1) {
   color: #000;
 }
 
+.progress_bar {
+  margin-left: 36px;
+}
 .title {
-  padding: 40px 40px;
+  margin: 40px 0 40px 40px;
+}
+
+.question_edit {
+  display: grid;
+  margin: 10px;
+  grid-template-columns: repeat(auto-fill, 350px);
+  width: 100%;
+  grid-gap: 10px;
+}
+
+.create_btn {
+  display: block;
+  width: 100%;
 }
 </style>

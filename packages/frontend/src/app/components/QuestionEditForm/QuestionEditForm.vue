@@ -69,6 +69,7 @@ watchEffect(() => {
 
 <style module>
 .root {
+  /* margin: 20px; */
   /* display: grid;
   justify-content: left;
   grid-template-rows: 1fr;

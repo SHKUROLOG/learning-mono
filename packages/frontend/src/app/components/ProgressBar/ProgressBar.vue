@@ -1,5 +1,5 @@
 <template>
-  <div v-if="ammount"
+  <div v-if="ammount && !editMode"
        :class="$style.root">
     <div v-for="actual in ammount"
          :key="actual"
@@ -17,6 +17,7 @@
 <script lang="ts" setup>
 import { easeInOutCubic, tween } from '@learning-mono/shared'
 import { computed, ref, watch } from 'vue'
+import { editMode } from '../../store/editmode'
 import { ProgressBarProps } from './ProgressBar.props'
 
 const props = defineProps<ProgressBarProps>()
@@ -44,8 +45,6 @@ watch(percent, (value, oldValue) => {
   display: flex;
   align-items: center;
   padding: 10px;
-  margin-left: 20px;
-  /* width: 100%; */
   /* border: 2px solid #25bc50; */
 }
 

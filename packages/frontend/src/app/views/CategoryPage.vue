@@ -1,8 +1,7 @@
 <template>
   <div v-if="category"
        :class="$style.root">
-    <div v-if="!editMode"
-         :class="$style.grid">
+    <template v-if="!editMode">
       <div :class="$style.explore">
         <ExploreBar :categoryTitle="category.title"/>
       </div>
@@ -10,9 +9,9 @@
       <div :class="$style.content">
         <CategoryThemes :themes="category.themes"/>
       </div>
-    </div>
+    </template>
 
-    <div v-else>
+    <div v-if="editMode">
       <CategoryEditForm v-model:category="category"
                         @changed="fetchCategory"/>
 
@@ -56,36 +55,33 @@ async function fetchCategory() {
 <style module>
 .root {
   display: grid;
+  padding: 16px;
+  grid-template-columns: max-content 1fr;
+  grid-auto-flow: column;
   text-align: left;
   padding: 16px;
   align-items: start;
   justify-items: start;
   user-select: none;
-
-  /* display: grid; */
-  /* grid-template-columns: 5% 1fr; */
-  grid-template-rows: 1fr;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  width: 700px;
 }
 
-.grid {
-  display: grid;
-  /* grid-template-columns: 1fr 1fr; */
+.themes {
+  /* display: grid;
+  grid-template-columns: max-content 1fr;
+  align-items: start;
+  justify-items: start; */
 }
 
 .explore {
-  /* grid-column-start: 1; */
-  /* margin-bottom: 16px; */
-  /* grid-area: 1 / 1 / NaN / NaN; */
+  height: 100%;
 }
 
 .content {
-  grid-column-start: 2;
-  /* grid-area: 1 / 2 / 2 / 3; */
+
 }
 .title {
-  display: flex;
+  display: block;
   padding: 16px 0;
   user-select: none;
   align-items: center;

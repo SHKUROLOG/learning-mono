@@ -73,7 +73,7 @@ if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
   user-select: none;
   backdrop-filter: blur(3px);
   border-radius: 2px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(37, 188, 80, 0.1);
   position: relative;
   min-height: 150px;
   margin-bottom: 20px;

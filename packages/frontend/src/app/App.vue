@@ -38,7 +38,7 @@ userStoreInit()
   box-sizing: border-box;
   backdrop-filter: blur( 20px );
   box-shadow: inset 0px 0px 20px 20px rgba(32, 78, 57, 0.3);
-  height: 100vh;
+  min-height: 100vh;
 }
 
 a {
@@ -54,11 +54,7 @@ body {
   font-weight: bold;
   color: #25bc50;
   height: 100%;
-  /* border: 20px solid black; */
-  /* background: linear-gradient(to right, #091f13, #171717); */
-  /* background: radial-gradient(circle, #144128 0%, #091f13 100%); */
   background: #091f13;
-  /* background:  #000000; */
 }
 </style>
 
