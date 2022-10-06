@@ -1,18 +1,16 @@
 <template>
   <div v-if="answer"
        :class="$style.root">
-    <!-- <CustomCheckbox :group="props.answer.questionId.toString()"
+    <CustomCheckbox :group="props.answer.questionId.toString()"
                     :isChecked="answer.isCorrect"
-                    :value="answer.title"
-                    @click="emit('correct:toggle')"/> -->
-    <section>
+                    @click="emit('correct:toggle')"/>
+    <!-- <section>
       <input type="radio"
              :class="$style.radio"
              :checked="answer.isCorrect"
              :name="answer.questionId.toString()"
-             :value="answer.title"
              @input="handleClick">
-    </section>
+    </section> -->
 
     <BaseInput v-model="currentForm.title"
                placeholder="Answer title"/>
@@ -77,7 +75,7 @@ watch(toRef(props, 'answer'), () => {
 
 <style module>
 .root {
-  display: grid;
+  display: flex;
   align-items: center;
   /* grid-template-columns: max-content auto auto auto; */
   grid-auto-flow: column;
