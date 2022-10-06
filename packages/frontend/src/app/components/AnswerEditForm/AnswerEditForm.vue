@@ -9,7 +9,7 @@
              :class="$style.radio"
              :checked="answer.isCorrect"
              :name="answer.questionId.toString()"
-             @input="handleClick">
+             @input="emit('correct:toggle')">
     </section> -->
 
     <BaseInput v-model="currentForm.title"
@@ -44,15 +44,6 @@ function createForm(): UpdateAnswerInput {
     id: props.answer.id,
     questionId: props.answer.questionId,
   }
-}
-
-async function handleClick() {
-  // await api.answer.update({
-  //   ...props.answer,
-  //   isCorrect: !props.answer.isCorrect,
-  // })
-
-  emit('correct:toggle')
 }
 
 async function saveAnswer() {

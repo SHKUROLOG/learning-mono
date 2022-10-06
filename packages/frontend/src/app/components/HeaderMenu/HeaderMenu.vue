@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { EscButton, EditMode, SignIn, LogoutButton } from './buttons'
-import LoginForm from '../LoginForm/LoginForm.vue'
+import { LoginForm } from '../LoginForm'
 import { isLoginFormShown, user } from '../../store/user'
 </script>
 
@@ -26,9 +26,13 @@ import { isLoginFormShown, user } from '../../store/user'
   justify-content: stretch;
   grid-auto-flow: column;
   align-items: start;
-  border: 2px solid #25bc50;
+  border: 2px solid rgba(37, 188, 80, 0.5);
   align-items: center;
   padding: 0px 40px;
+}
+
+.menu:hover {
+  border: 2px solid rgba(37, 188, 80, 1);
 }
 
 .left, .right {
