@@ -1,5 +1,5 @@
 import { CreateQuestionInput, QuestionDto, UpdateQuestionInput } from '@learning-mono/shared'
-import { getAnswersByQuestionId, removeAnswer } from '../answer/answer.service'
+import { getAnswersByQuestionId, removeAnswer, updateAnswer } from '../answer/answer.service'
 import { Deps, inject } from '../app/di'
 
 export async function getQuestionById(id: number) {
@@ -94,6 +94,9 @@ export async function createQuestion(createQuestionInput: CreateQuestionInput) {
 }
 
 export async function updateQuestion(updateQuestionInput: UpdateQuestionInput) {
+  if (updateQuestionInput.answers)
+    await Promise.all(updateQuestionInput.answers.map(updateAnswer))
+
   return inject(Deps.PRISMA).question.update({
     data: {
       title: updateQuestionInput.title,

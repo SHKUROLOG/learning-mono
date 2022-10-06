@@ -56,15 +56,6 @@ async function removeTheme(themeId: number) {
   justify-content: start;
 }
 
-/* .input {
-  border: 1px solid rgba(37, 190, 80, 1);
-  border-left: 3px solid rgba(37, 190, 80, 0.3);
-}
-
-.input:hover {
-    border-left: 3px solid rgba(37, 190, 80, 1);
-} */
-
 .buttons {
   transition: all 0.3s ease-in-out;
   opacity: 0.3;

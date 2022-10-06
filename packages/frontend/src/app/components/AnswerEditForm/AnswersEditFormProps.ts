@@ -6,4 +6,5 @@ export interface AnswersEditFormProps {
 
 export interface AnswersEditFormEmits {
   (event: 'changed'): void
+  (event: 'correct:toggle'): void
 }

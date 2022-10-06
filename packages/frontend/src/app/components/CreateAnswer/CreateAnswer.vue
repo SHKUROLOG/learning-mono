@@ -9,13 +9,15 @@
 
     <div v-if="openForm"
          :class="$style.create_form">
-      <BaseInput v-model="createAnswerForm.title"
-                 placeholder="Answer title"
-                 :border="true"/>
+      <CustomCheckbox :isChecked="createAnswerForm.isCorrect || false"
+                      :group="createAnswerForm.questionId.toString()"/>
 
-      <input v-model="createAnswerForm.isCorrect"
+      <BaseInput v-model="createAnswerForm.title"
+                 placeholder="Answer title"/>
+
+      <!-- <input v-model="createAnswerForm.isCorrect"
              type="radio"
-             @click="createAnswerForm.isCorrect = !createAnswerForm.isCorrect">
+             @click="createAnswerForm.isCorrect = !createAnswerForm.isCorrect"> -->
 
       <BaseButton v-if="createAnswerForm.title.trim()"
                   text="Create"
@@ -34,6 +36,7 @@ import { api } from '../../api'
 import { ButtonSize, BaseButton } from '../BaseButton'
 import { BaseInput } from '../BaseInput'
 import { CreateAnswerEmits, CreateAnswerProps } from './CreateAnswer.props'
+import { CustomCheckbox } from '../CustomCheckbox'
 
 const props = defineProps<CreateAnswerProps>()
 const emit = defineEmits<CreateAnswerEmits>()
@@ -75,7 +78,7 @@ async function createAnswer() {
 
 .create_form {
   display: flex;
-
+  align-items: center;
 }
 
 .create_btn {

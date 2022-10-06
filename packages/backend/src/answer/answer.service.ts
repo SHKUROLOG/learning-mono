@@ -39,10 +39,7 @@ export async function updateAnswer(inputAnswer: UpdateAnswerInput) {
   const prisma = inject(Deps.PRISMA)
 
   return prisma.answer.update({
-    data: {
-      title: inputAnswer.title,
-    },
-
+    data: inputAnswer,
     where: {
       id: inputAnswer.id,
     },

@@ -110,12 +110,14 @@ async function fetchTheme() {
   themeData.value = await api.theme.getById(props.themeId)
 }
 
-watch(
-  () => index.value + 1 === shuffledQuestions.value.length,
-  value => value && router.push({
-    name: 'statistic',
-  }),
-)
+if (index.value > 2) {
+  watch(
+    () => index.value + 1 === shuffledQuestions.value.length,
+    value => value && router.push({
+      name: 'statistic',
+    }),
+  )
+}
 
 //
 </script>

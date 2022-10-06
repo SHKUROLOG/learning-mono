@@ -15,7 +15,8 @@
       <AnswerEditForm v-for="answer in question.answers"
                       :key="answer.id"
                       :answer="answer"
-                      @changed="$emit('changed')"/>
+                      @changed="$emit('changed')"
+                      @correct:toggle="handleCorrectToggle(answer)"/>
 
       <CreateAnswer :questionId="question.id"
                     @created="$emit('changed')"/>
@@ -24,9 +25,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watchEffect } from 'vue'
+import { ref } from 'vue'
 import { api } from '../../api'
-import { UpdateQuestionInput } from '@learning-mono/shared'
+import { AnswerDto, UpdateQuestionInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
 import { QuestionEditFormEmits, QuestionEditFormProps } from './QuestionEditForm.props'
 import { AnswerEditForm } from '../AnswerEditForm'
@@ -48,6 +49,20 @@ function createForm(): UpdateQuestionInput {
   }
 }
 
+async function handleCorrectToggle(answer: AnswerDto) {
+  const answers = props.question.answers.map(a => ({
+    ...a,
+    isCorrect: a === answer,
+  }))
+
+  await api.question.update({
+    ...currentForm.value,
+    answers,
+  })
+
+  emit('changed')
+}
+
 async function saveQuestion() {
   await api.question.update(currentForm.value)
 
@@ -59,12 +74,6 @@ async function removeQuestion(id: number) {
 
   emit('changed')
 }
-
-watchEffect(() => {
-  console.warn(props.question.id)
-  // console.warn(Object.assign(props.question))
-  console.warn({ ...props.question })
-})
 </script>
 
 <style module>
