@@ -8,6 +8,8 @@
       <div>
         <router-view/>
       </div>
+
+      <Footer/>
     </div>
   </div>
 </template>
@@ -15,6 +17,7 @@
 <script lang="ts" setup>
 import { HeaderMenu } from './components/HeaderMenu'
 import { userStoreInit } from './store/user'
+import { Footer } from './components/Footer'
 
 userStoreInit()
 </script>
@@ -26,6 +29,10 @@ userStoreInit()
   grid-auto-flow: column;
   grid-template-columns: 1fr max-content;
 }
+
+.footer {
+  margin-top: auto;
+}
 </style>
 
 <style lang="css">
@@ -35,6 +42,9 @@ userStoreInit()
 }
 
 .content {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "header" "content" "footer";
   box-sizing: border-box;
   backdrop-filter: blur( 20px );
   box-shadow: inset 0px 0px 20px 20px rgba(32, 78, 57, 0.3);
