@@ -8,7 +8,7 @@
 .esc {
   padding: 8px 16px;
   font-size: 18px;
-  opacity: 0.8;
+  opacity: 1;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;

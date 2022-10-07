@@ -21,7 +21,9 @@ withDefaults(defineProps<BaseButtonProps>(), {
   background-color: transparent;
   border: none;
   color: #25bc50;
+  font-family: 'JetBrains Mono', monospace;
   font-weight: bold;
+  font-size: 18px;
 }
 
 .btn_s {

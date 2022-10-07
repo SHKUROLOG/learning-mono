@@ -2,18 +2,24 @@
 <template>
   <div :class="$style.root">
     <div :class="$style.social">
-      <hr width="40%"
+      <hr width="50%"
           color="#25bc50"
           size="2px"
           style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
 
-      <a href="https://github.com/SHKUROLOG/learning-mono"
+      <!-- <a href="https://github.com/SHKUROLOG/learning-mono"
          target="_blank"
-         text="<GITHUB>"/>
+         text="<GITHUB>"/> -->
+
+      <a href="https://github.com/SHKUROLOG/learning-mono"
+         target="_blank"> <img src="./icons/github.svg"></a>
+
+      <!-- <a href="https://t.me/SYNTAXNAME"
+         target="_blank"
+         text="<TELEGRAM>"/> -->
 
       <a href="https://t.me/SYNTAXNAME"
-         target="_blank"
-         text="<TELEGRAM>"/>
+         target="_blank"> <img src="./icons/telegram.svg"></a>
     </div>
   </div>
 </template>
@@ -38,10 +44,14 @@
   margin: 8px;
 }
 
-.root a:hover {
+.root img:hover {
+  scale: 1.2;
+}
+
+/* .root a:hover {
   background-color: #25bc50;
   color: #000;
-}
+} */
 
 .social {
   padding: 8px;

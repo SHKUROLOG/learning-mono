@@ -22,17 +22,17 @@ import { isLoginFormShown, user } from '../../store/user'
 <style module>
 .menu {
   display: grid;
-  margin: 8px 16px;
+  margin: 16px 16px;
   justify-content: stretch;
   grid-auto-flow: column;
   align-items: start;
-  border: 2px solid rgba(37, 188, 80, 0.5);
+  border-bottom: 2px solid rgba(37, 188, 80, 0.3);
   align-items: center;
   padding: 0px 40px;
 }
 
 .menu:hover {
-  border: 2px solid rgba(37, 188, 80, 1);
+  border-bottom: 2px solid rgba(37, 188, 80, 1);
 }
 
 .left, .right {

@@ -2,7 +2,7 @@
   <BaseButton v-if="user"
               :class="{ [$style.active]: editMode }"
               :buttonSize="ButtonSize.L"
-              text="Edit mode"
+              text="<Edit mode>"
               @click="editMode = !editMode"/>
 </template>
 

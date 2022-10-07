@@ -1,12 +1,15 @@
 <template>
   <div :class="$style.root">
     <div :class="$style.image"
-         :style="{ backgroundImage: `url('${category.image}')` }"/>
+         :style="{ backgroundImage: `url('src/app/components/CategoryTile/icons/${category.image}')` }"/>
 
     <router-link v-text="category.title"
                  :class="$style.link"
                  :to="{ name: 'category', params: { categoryId: category.id } }"/>
   </div>
+  <div :class="$style.svg"/>
+  <div :class="$style.svg"
+       :style="{ backgroundImage: `url('./icons/vue.svg')` }"/>
 </template>
 
 <script lang="ts" setup>
@@ -17,7 +20,9 @@ defineProps<CategoryTileProps>()
 
 <style module>
 .root {
+  box-sizing: border-box;
   justify-content: center;
+  text-align: center;
   font-size: 24px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -32,7 +37,16 @@ defineProps<CategoryTileProps>()
   box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
   border: 2px solid rgba(33, 234, 94, 0.5);
 }
+
+.svg {
+  background-image: url("./icons/vue.svg");
+  width: 300px;
+  height: 150px;
+  background-repeat: no-repeat;
+}
 .image {
+  /* background-image: url('./icons/vue.svg'); */
+  /* border: 1px solid red; */
   position: absolute;
   width: 100%;
   height: 100%;
@@ -47,7 +61,7 @@ defineProps<CategoryTileProps>()
   background-repeat: no-repeat;
 }
 .root:hover .image {
-  opacity: 0.7;
+  opacity: 1;
   transform: rotate(0) translateY(0);
 }
 .link {
