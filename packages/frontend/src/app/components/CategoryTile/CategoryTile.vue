@@ -7,9 +7,6 @@
                  :class="$style.link"
                  :to="{ name: 'category', params: { categoryId: category.id } }"/>
   </div>
-  <div :class="$style.svg"/>
-  <div :class="$style.svg"
-       :style="{ backgroundImage: `url('./icons/vue.svg')` }"/>
 </template>
 
 <script lang="ts" setup>
@@ -51,11 +48,11 @@ defineProps<CategoryTileProps>()
   width: 100%;
   height: 100%;
   transition: all 0.3s ease-in-out;
-  opacity: 0;
+  opacity: 0.1;
   pointer-events: none;
   left: 0;
   top: 0;
-  transform: rotate(-15deg) translateY(70%);
+  /* transform: rotate(-15deg) translateY(70%); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
