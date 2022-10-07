@@ -1,13 +1,20 @@
 // eslint-disable-next-line vue/multi-word-component-names
 <template>
   <div :class="$style.root">
-    <a href="https://github.com/SHKUROLOG/learning-mono" target="_blank">
-      <!-- <span class="material-icons">code</span> -->
-      <!-- <img :class="$style.github_img" src="./github.svg"> -->
-      <!-- <svg :class="$style.github_img">
-        <use href="./github.svg"/>
-      </svg> -->
-    </a>
+    <div :class="$style.social">
+      <hr width="40%"
+          color="#25bc50"
+          size="2px"
+          style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
+
+      <a href="https://github.com/SHKUROLOG/learning-mono"
+         target="_blank"
+         text="<GITHUB>"/>
+
+      <a href="https://t.me/SYNTAXNAME"
+         target="_blank"
+         text="<TELEGRAM>"/>
+    </div>
   </div>
 </template>
 
@@ -16,26 +23,29 @@
 </script>
 
 <style module>
-.root a:hover {
-  background-color: #25bc50;
-  color: #000;
-  padding: 8px;
-  line-height: 24px;
-}
 .root {
-  display: block;
+  display: grid;
+  box-sizing: border-box;
+  grid-template-columns: auto;
+  align-items: center;
   text-align: center;
   width: 100%;
   height: 80px;
 }
 
-.github_img {
-  width: 32px;
-  height: 32px;
-  fill: #25bc50;
+.root a {
+  opacity: 0.8;
+  margin: 8px;
 }
 
-/* .root a:hover .github_img path {
-  fill: #000;
-} */
+.root a:hover {
+  background-color: #25bc50;
+  color: #000;
+}
+
+.social {
+  padding: 8px;
+  margin: auto;
+  width: 100%;
+}
 </style>
