@@ -32,12 +32,12 @@ const emit = defineEmits<CustomCheckboxEmits>()
 }
 
 .radio:hover {
-  scale: 1.2;
+  scale: 1.1;
   outline: 2px solid rgba(37, 188, 80, 1);
 }
 
 .radio:checked {
-  outline-color: rgba(37, 188, 80, 0.5);
+  outline-color: rgba(37, 188, 80, 0.3);
   background-color: rgba(37, 188, 80, 1);
 
   animation: outline-checked;
