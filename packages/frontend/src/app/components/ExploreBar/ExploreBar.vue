@@ -50,6 +50,19 @@ function handleClick() {
 .explore_bar:hover {
   color: #25bc50;
   background: transparent;
+  animation-name: textflicker;
+  animation-duration: 0.01s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
   /* box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3); */
+}
+
+@keyframes textflicker {
+  from {
+    text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
+  }
+  to {
+    text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
+  }
 }
 </style>

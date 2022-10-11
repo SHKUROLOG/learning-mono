@@ -57,18 +57,19 @@ function getAnswerSign(answer: AnswerDto) {
 .root {
   display: grid;
   text-align: left;
-  padding: 16px;
+  /* padding: 16px; */
   margin-left: 16px;
   align-items: start;
   justify-items: start;
+  /* user-select: none; */
 }
 
 .answer {
   display: grid;
   grid-template-columns: 24px 1fr;
   transition: all 0.3s ease-in-out;
-  user-select: none;
-  cursor: pointer;
+  /* user-select: none; */
+  cursor: default;
   padding: 8px;
 }
 
@@ -83,7 +84,7 @@ function getAnswerSign(answer: AnswerDto) {
 }
 
 .summary {
-  text-align: left;
+  text-align: center;
   padding: 16px;
 }
 </style>

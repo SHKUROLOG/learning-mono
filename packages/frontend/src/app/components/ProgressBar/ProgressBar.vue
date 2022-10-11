@@ -5,7 +5,7 @@
          :key="actual"
          :class="[$style.box, {
            [$style.active_box]: actual <= current,
-           [$style.active_box_red]: !correctItems[actual-1] && actual <= current
+           [$style.active_box_red]: !correctItems[actual -1] && actual <= current
          }]"/>
 
     <div :class="$style.percent">
@@ -55,6 +55,10 @@ watch(percent, (value, oldValue) => {
   opacity: 0.1;
   margin-right: 4px;
   box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
+}
+
+.not_active_box {
+    background: #fff;
 }
 
 .active_box {

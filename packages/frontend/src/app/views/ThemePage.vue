@@ -6,7 +6,7 @@
         <ExploreBar :themeTitle="themeData.title"/>
 
         <div v-if="!editMode && currentQuestion">
-          <ProgressBar :ammount="shuffledQuestions.length -1"
+          <ProgressBar :ammount="shuffledQuestions.length"
                        :class="$style.progress_bar"
                        :current="index"
                        :correctItems="correctItems"/>
@@ -20,7 +20,7 @@
                 color="#25bc50"
                 size="4px">
 
-            ({{ index + 1 }} OF {{ shuffledQuestions.length -1 }})
+            ({{ index +1 }} OF {{ shuffledQuestions.length }})
           </div>
 
           <div :key="currentQuestion.id">
@@ -79,7 +79,7 @@ const router = useRouter()
 const index = ref(0)
 
 function moveToNext() {
-  if (shuffledQuestions.value.length - 1 > index.value)
+  if (shuffledQuestions.value.length > index.value)
     ++index.value
 }
 
@@ -110,14 +110,12 @@ async function fetchTheme() {
   themeData.value = await api.theme.getById(props.themeId)
 }
 
-if (index.value > 2) {
-  watch(
-    () => index.value + 1 === shuffledQuestions.value.length,
-    value => value && router.push({
-      name: 'statistic',
-    }),
-  )
-}
+watch(
+  () => index.value === shuffledQuestions.value.length,
+  value => value && router.push({
+    name: 'statistic',
+  }),
+)
 
 //
 </script>
