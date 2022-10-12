@@ -74,13 +74,13 @@ const prisma = new PrismaClient()
 async function main() {
   await prisma.$connect()
 
-  await prisma.user.create({
-    data: {
-      login: 'root',
-      isAdmin: true,
-      password: await hash('12345678', 10),
-    },
-  })
+  // await prisma.user.create({
+  //   data: {
+  //     login: 'root',
+  //     isAdmin: true,
+  //     password: await hash('12345678', 10),
+  //   },
+  // })
 
   await prisma.category.createMany({
     data: createCategoriesWithImages(),
