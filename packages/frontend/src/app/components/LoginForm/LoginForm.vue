@@ -25,8 +25,8 @@ import { isUserLoading, user } from '../../store/user'
 import { api } from '../../api'
 
 const formLogin = reactive({
-  login: 'root',
-  password: '12345678',
+  login: '',
+  password: '',
 })
 
 async function handleLogin(): Promise<void> {
