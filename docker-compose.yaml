@@ -23,8 +23,6 @@ services:
     
   backend:
     image: backend
-    # working_dir: /app/node_modules/.prisma/client
-    # command: ls
     build:
       args:
         - NODE_ENV=production
@@ -32,6 +30,17 @@ services:
         - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning
       context: .
       dockerfile: packages/backend/Dockerfile
+    restart: unless-stopped
+    environment:
+      - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning
+      - CLIENT_URL=http://localhost:8080
+    ports:
+      - '3030:3030'
+    links: 
+      - 'db'
+
+  backend2:
+    image: syntaxname/learning-mono-backend:latest
     restart: unless-stopped
     environment:
       - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning

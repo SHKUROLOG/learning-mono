@@ -1,0 +1,40 @@
+name: Deploy to Server
+
+on:
+  # push:
+  #   branches: [ "master" ]
+
+  # pull_request:
+  #   branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  docker_build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+
+      - name: Copy docker-compose.yaml
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: docker-compose.prod.yaml
+          remote: docker-compose.yaml
+          host: ${{ secrets.HOST_ADDRESS }}
+          username: ${{ secrets.HOST_USER }}
+          password: ${{ secrets.HOST_PASSWORD }}
+
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_ADDRESS }}
+          username: ${{ secrets.HOST_USER }}
+          password: ${{ secrets.HOST_PASSWORD }}
+          script: | 
+            docker-compose down
+            docker-compose up -d
+
+
+
+  
