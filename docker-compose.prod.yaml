@@ -40,7 +40,7 @@ services:
       - 'db'
 
   db:
-    image: postgres:latest
+    image: postgres:14
     restart: unless-stopped
     environment:
       - POSTGRES_USER=${DATABASE_USER}
