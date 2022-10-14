@@ -38,7 +38,7 @@ jobs:
             CLIENT_URL=https://learning-mono.aeza.network
             DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@${{ secrets.DATABASE_URL }}?schema=learning
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning-mono-frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning-mono-backend:latest
 
 
   
