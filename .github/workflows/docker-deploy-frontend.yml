@@ -37,6 +37,6 @@ jobs:
           file: ./packages/frontend/Dockerfile
           build-args: |
             NODE_ENV=production
-            VITE_SERVER_URL=https://syntax.fun:3030
+            VITE_SERVER_URL=http://syntax.fun:3030
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning-mono-frontend:latest
