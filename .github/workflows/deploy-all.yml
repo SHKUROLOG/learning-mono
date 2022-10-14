@@ -1,0 +1,26 @@
+name: Deploy All
+
+on:
+  # push:
+  #   branches: [ "master" ]
+
+  # pull_request:
+  #   branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  frontend:
+    uses: ./.github/workflows/docker-deploy-frontend.yml
+    secrets: inherit
+
+  backend: 
+    uses: ./.github/workflows/docker-deploy-backend.yml
+    secrets: inherit
+
+  deploy: 
+    needs: [frontend, backend]
+    uses: ./.github/workflows/deploy-to-server.yml
+    secrets: inherit
+
+
