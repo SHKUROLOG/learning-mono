@@ -27,7 +27,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./
-          file: ./packages/frontend/Dockerfile
+          file: ./learning-mono/packages/frontend/Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning-mono:latest
 
