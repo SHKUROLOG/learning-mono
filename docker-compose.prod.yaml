@@ -2,18 +2,14 @@ version: '3.8'
 services:
   frontend:
     image: syntaxname/learning-mono-frontend:latest
+    restart: unless-stopped
     ports:
       - "80:80"
 
-  # migrations: 
-  #   image: migrations
-  #   build:
-  #     args:
-  #       - NODE_ENV=production
-  #     context: ./packages/backend
-  #     dockerfile: ./Dockerfile.migrations
-  #   environment:
-  #     - DATABASE_URL=postgres://user:pass@db:5432/prod?schema=learning
+  migrations: 
+    image: syntaxname/learning-mono-migrations:latest
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
     
 
   backend:
