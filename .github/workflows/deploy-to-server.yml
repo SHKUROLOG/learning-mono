@@ -18,6 +18,8 @@ jobs:
 
       - name: Create .env
         run: |
+          echo "DATABASE_USER=${{ secrets.DATABASE_USER }}" >> .env
+          echo "DATABASE_PASSWORD=${{ secrets.DATABASE_PASSWORD }}" >> .env
           echo "CLIENT_URL=https://learning-mono.aeza.network" >> .env 
           echo "DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@${{ secrets.DATABASE_URL }}?schema=learning" >> .env 
 
