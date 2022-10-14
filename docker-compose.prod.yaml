@@ -19,6 +19,9 @@ services:
   backend:
     image: syntaxname/learning-mono-backend:latest
     restart: unless-stopped
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - CLIENT_URL=${CLIENT_URL}
     ports:
       - '3030:3030'
     links: 
