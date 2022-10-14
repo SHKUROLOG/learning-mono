@@ -3,7 +3,7 @@ name: Deploy to DockerHub
 on:
   push:
     branches: [ "master" ]
-    
+
   pull_request:
     branches: [ "master" ]
 
@@ -33,6 +33,9 @@ jobs:
         with:
           context: .
           file: ./packages/frontend/Dockerfile
+          build-args: |
+            NODE_ENV=production
+            VITE_SERVER_URL=https://learning-mono.aeza.network
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning-mono-frontend:latest
 
