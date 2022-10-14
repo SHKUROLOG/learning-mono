@@ -16,6 +16,11 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v2
 
+      - name: Create .env
+        run: |
+          echo "CLIENT_URL=$CLIENT_URL" >> .env 
+          echo "DATABASE_URL=$DATABASE_URL" >> .env 
+
       - name: Copy docker-compose.yaml
         uses: garygrossgarten/github-action-scp@release
         with:
@@ -24,6 +29,17 @@ jobs:
           host: ${{ secrets.HOST_ADDRESS }}
           username: ${{ secrets.HOST_USER }}
           password: ${{ secrets.HOST_PASSWORD }}
+
+
+      - name: Copy .env
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: .env
+          remote: .env
+          host: ${{ secrets.HOST_ADDRESS }}
+          username: ${{ secrets.HOST_USER }}
+          password: ${{ secrets.HOST_PASSWORD }}
+
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
