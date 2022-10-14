@@ -22,5 +22,3 @@ jobs:
     needs: [frontend, backend]
     uses: ./.github/workflows/deploy-to-server.yml
     secrets: inherit
-
-

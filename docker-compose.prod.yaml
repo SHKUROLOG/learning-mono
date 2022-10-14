@@ -4,7 +4,7 @@ services:
     image: syntaxname/learning-mono-frontend:latest
     restart: unless-stopped
     ports:
-      - "443:80"
+      - "80:80"
 
   migrations: 
     image: syntaxname/learning-mono-migrations:latest
