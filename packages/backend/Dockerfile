@@ -2,6 +2,7 @@ FROM node:lts-alpine as build
 WORKDIR /app
 COPY . .
 ARG CLIENT_URL
+ARG DATABASE_URL
 RUN echo "CLIENT_URL=$CLIENT_URL" >> .env 
 RUN echo "DATABASE_URL=$DATABASE_URL" >> .env 
 RUN yarn
