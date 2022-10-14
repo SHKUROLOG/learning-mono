@@ -1,4 +1,4 @@
-name: Deploy to DockerHub
+name: Deploy frontend to DockerHub
 
 on:
   # push:
