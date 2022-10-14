@@ -43,9 +43,10 @@ jobs:
       - name: Build and push Migrations
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: ./packages/backend/Dockerfile.migrations
+          context: ./packages/backend
+          file: ./Dockerfile.migrations
           build-args: |
+            NODE_ENV=production
             DATABASE_URL=postgresql://${{ secrets.DATABASE_USER }}:${{ secrets.DATABASE_PASSWORD }}@${{ secrets.DATABASE_URL }}?schema=learning
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/learning-mono-migrations:latest
