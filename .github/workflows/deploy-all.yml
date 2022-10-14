@@ -7,18 +7,32 @@ on:
   # pull_request:
   #   branches: [ "master" ]
 
-  workflow_dispatch:
+  workflow_dispatch: 
+    inputs: 
+      with_frontend: 
+        type: boolean
+        required: true
+        default: true
+        description: "Frontend"
+      with_backend:
+        type: boolean 
+        required: true
+        default: true
+        description: "Backend"
 
 jobs:
   frontend:
+    if: ${{ inputs.with_frontend }}
     uses: ./.github/workflows/docker-deploy-frontend.yml
     secrets: inherit
 
   backend: 
+    if: ${{ inputs.with_backend }}
     uses: ./.github/workflows/docker-deploy-backend.yml
     secrets: inherit
 
   deploy: 
+    if: ${{ (inputs.with_backend || inputs.with_frontend) && !failure() && !cancelled() && always() }}
     needs: [frontend, backend]
     uses: ./.github/workflows/deploy-to-server.yml
     secrets: inherit
