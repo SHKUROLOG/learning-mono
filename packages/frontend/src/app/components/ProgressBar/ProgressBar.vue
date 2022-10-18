@@ -1,6 +1,7 @@
 <template>
   <div v-if="ammount && !editMode"
        :class="$style.root">
+    <div :class="$style.title">PROGRESS</div>
     <div v-for="actual in ammount"
          :key="actual"
          :class="[$style.box, {
@@ -45,7 +46,10 @@ watch(percent, (value, oldValue) => {
   display: flex;
   align-items: center;
   padding: 10px;
-  /* border: 2px solid #25bc50; */
+}
+
+.title {
+  margin-right: 8px;
 }
 
 .box {
@@ -54,11 +58,7 @@ watch(percent, (value, oldValue) => {
   background: #25bc50;
   opacity: 0.1;
   margin-right: 4px;
-  box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
-}
-
-.not_active_box {
-    background: #fff;
+  box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
 }
 
 .active_box {
@@ -71,6 +71,6 @@ watch(percent, (value, oldValue) => {
 }
 
 .percent {
-  margin-left: 10px;
+  margin-left: 16px;
 }
 </style>

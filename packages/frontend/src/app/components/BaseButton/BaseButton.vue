@@ -14,15 +14,17 @@ withDefaults(defineProps<BaseButtonProps>(), {
 
 <style module>
 .btn {
-  opacity: 1;
+  box-sizing: border-box;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  opacity: 0.8;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
   background-color: transparent;
   border: none;
   color: #25bc50;
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: bold;
   font-size: 18px;
 }
 

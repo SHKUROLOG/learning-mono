@@ -58,9 +58,9 @@ function createForm():CreateQuestionInput {
   user-select: none;
   backdrop-filter: blur(3px);
   border-radius: 2px;
-  border: 2px solid rgba(37, 188, 80, 0.1);
+  background: rgba(0, 0, 0, 0.15);
   position: relative;
-  min-height: 150px;
+  min-height: 200px;
 }
 .plus {
   display: grid;
@@ -108,8 +108,12 @@ function createForm():CreateQuestionInput {
 }
 
 .root:hover {
-  border: 2px solid #25bc50;
   box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
+  border: 1px solid rgba(33, 234, 94, 0.5);
+}
+
+.root:hover .plus {
+  opacity: 1;
 }
 
 .create_btn {

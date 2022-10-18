@@ -31,7 +31,7 @@ defineProps<CategoryThemesProps>()
   background: #25bc50;
   color: #000;
   box-shadow: 0px -5px -5px 0px rgba(0, 0, 0, 0.6) inset;
-  /* border-left: 3px solid rgba(37, 190, 80, 1); */
+  border-left: 3px solid rgba(37, 190, 80, 1);
 }
 
 .root:hover a {

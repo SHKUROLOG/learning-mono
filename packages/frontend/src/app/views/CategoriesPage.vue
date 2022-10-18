@@ -29,6 +29,7 @@ async function fetchCategories() {
 <style module>
 .root {
   display: grid;
+  padding: 12px;
   grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
   grid-gap: 24px;
   justify-content: center;

@@ -36,7 +36,6 @@ import { CategoryEditForm } from '../components/CategoryEditForm'
 import { CreateTheme } from '../components/CreateTheme'
 import { ThemeEditMode } from '../components/ThemeEditMode'
 import { ExploreBar } from '../components/ExploreBar'
-import { Loader } from '../components/Loader'
 
 interface Props {
   categoryId: string;

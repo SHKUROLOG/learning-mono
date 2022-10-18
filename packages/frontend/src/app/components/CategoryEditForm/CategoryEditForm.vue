@@ -66,20 +66,22 @@ if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
 
 <style module>
 .root {
+  box-sizing: border-box;
   justify-content: center;
   font-size: 24px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
-  backdrop-filter: blur(3px);
-  border-radius: 2px;
-  border: 2px solid rgba(37, 188, 80, 0.1);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.15);
   position: relative;
   min-height: 150px;
+  min-width: 302px;
   margin-bottom: 20px;
+  border: 1px solid rgba(33, 234, 94, 0.5);
 }
 .root:hover {
   box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
-  border: 2px solid rgba(33, 234, 94, 0.5);
+  border: 1px solid rgba(33, 234, 94, 0.5);
 }
 </style>

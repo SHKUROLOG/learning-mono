@@ -6,7 +6,8 @@
                 }]"
                 text="✖"
                 @click="$emit('remove')"/>
-    <BaseButton v-if="isSaveShow"
+
+    <BaseButton v-show="isSaveShow"
                 :buttonSize="ButtonSize.S"
                 :class="$style.save_btn"
                 text="✔"
@@ -31,7 +32,12 @@ defineEmits<BaseSaveRemoveButtonsEmits>()
   font-weight: bold;
 }
 
+.hidden {
+  display: none;
+}
+
 .save_btn {
+  display: block;
   font-size: 16px;
   opacity: 0.2;
   pointer-events: none;

@@ -12,6 +12,8 @@
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
+  border: 1px solid #25bc50;
+  border-radius: 4px;
 }
 .esc:hover {
   opacity: 1;

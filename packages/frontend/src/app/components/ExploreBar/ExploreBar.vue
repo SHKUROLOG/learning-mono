@@ -32,6 +32,7 @@ function handleClick() {
   display: flex;
   height: 100%;
   text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
 }
 .explore_bar {
   writing-mode: vertical-rl;
@@ -43,26 +44,14 @@ function handleClick() {
   justify-content: center;
   align-items: center;
   padding: 8px;
-  color: #000;
-  background: #25bc50;
+  border: 1px solid rgba(37, 188, 80, 1);
+  border-radius: 4px;
+  background: transparent;
 }
 
 .explore_bar:hover {
-  color: #25bc50;
-  background: transparent;
-  animation-name: textflicker;
-  animation-duration: 0.01s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  /* box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3); */
-}
-
-@keyframes textflicker {
-  from {
-    text-shadow: 1px 0 0 #ea36af, -2px 0 0 #75fa69;
-  }
-  to {
-    text-shadow: 2px 0.5px 2px #ea36af, -1px -0.5px 2px #75fa69;
-  }
+  background: rgba(37, 188, 80, 1);
+  color: #000;
+  box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
 }
 </style>

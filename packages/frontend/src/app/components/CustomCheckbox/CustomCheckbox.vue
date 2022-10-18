@@ -20,8 +20,8 @@ const emit = defineEmits<CustomCheckboxEmits>()
 .radio {
   cursor: pointer;
   margin-left: 10px;
-  accent-color: #25bc50;
-  outline: 2px solid rgba(37, 188, 80, 0.3);
+  accent-color: #fff;
+  outline: 2px solid rgba(255, 255, 255, 0.3);
   appearance: none;
   border: 8px solid transparent;
   border-radius: 50%;

@@ -1,26 +1,15 @@
 // eslint-disable-next-line vue/multi-word-component-names
 <template>
   <div :class="$style.root">
+    <div/>
     <div :class="$style.social">
-      <hr width="50%"
-          color="#25bc50"
-          size="2px"
-          style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
-
-      <!-- <a href="https://github.com/SHKUROLOG/learning-mono"
-         target="_blank"
-         text="<GITHUB>"/> -->
-
       <a href="https://github.com/SHKUROLOG/learning-mono"
          target="_blank"> <img src="./icons/github.svg"></a>
-
-      <!-- <a href="https://t.me/SYNTAXNAME"
-         target="_blank"
-         text="<TELEGRAM>"/> -->
 
       <a href="https://t.me/SYNTAXNAME"
          target="_blank"> <img src="./icons/telegram.svg"></a>
     </div>
+    <div/>
   </div>
 </template>
 
@@ -31,12 +20,19 @@
 <style module>
 .root {
   display: grid;
-  box-sizing: border-box;
-  grid-template-columns: auto;
+  grid-template-columns: auto auto auto;
   align-items: center;
   text-align: center;
   width: 100%;
-  height: 80px;
+  height: 60px;
+  border-top: 1px solid rgba(37, 188, 80, 0.8);
+}
+
+.hr {
+  color: #25bc50;
+  size: 1px;
+  margin-bottom: 18px;
+  opacity: 0.8;
 }
 
 .root a {
@@ -45,7 +41,7 @@
 }
 
 .root img:hover {
-  scale: 1.2;
+  scale: 1.1;
 }
 
 /* .root a:hover {
@@ -54,8 +50,6 @@
 } */
 
 .social {
-  padding: 8px;
-  margin: auto;
-  width: 100%;
+
 }
 </style>

@@ -16,9 +16,10 @@
               <BaseText :text="currentQuestion.title"/>
             </h1>
 
-            <hr width="99%"
+            <hr width="90%"
                 color="#25bc50"
-                size="4px">
+                size="1px"
+                style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
 
             ({{ index +1 }} OF {{ shuffledQuestions.length }})
           </div>
@@ -144,8 +145,6 @@ watch(
 .next {
   background: transparent;
   color: #25bc50;
-  border: 0;
-  padding: 16px;
   margin-left: 40px;
   margin-top: 40px;
   font-size: 18px;

@@ -1,16 +1,14 @@
 <template>
-  <div class="scanlines">
-    <div class="content">
-      <header :class="$style.header">
-        <HeaderMenu/>
-      </header>
+  <div class="root">
+    <header :class="$style.header">
+      <HeaderMenu/>
+    </header>
 
-      <div>
-        <router-view/>
-      </div>
-
-      <Footer/>
+    <div :class="$style.content">
+      <router-view/>
     </div>
+
+    <Footer/>
   </div>
 </template>
 
@@ -23,6 +21,10 @@ userStoreInit()
 </script>
 
 <style module>
+.content {
+  /* overflow: auto; */
+}
+
 .header {
   height: 100px;
   display: grid;
@@ -41,14 +43,9 @@ userStoreInit()
   margin: 0;
 }
 
-.content {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  grid-template-areas: "header" "content" "footer";
-  box-sizing: border-box;
-  backdrop-filter: blur( 20px );
-  box-shadow: inset 0px 0px 20px 20px rgba(32, 78, 57, 0.3);
-  min-height: 100vh;
+#app, body, html {
+  height: 100%;
+  width: 100%;
 }
 
 a {
@@ -74,20 +71,16 @@ $scan-crt: true;
 $scan-fps: 60;
 $scan-color: rgba(26, 96, 60, 0.2);
 $scan-z-index: 2147483648;
-
 /* MOVING SCANLINE SETTINGS */
 $scan-moving-line: true;
 $scan-opacity: .75;
-
 /* MIXINS */
-
 @mixin scan-crt($scan-crt) {
     @if $scan-crt == true {
         animation: scanlines 1s steps($scan-fps) infinite;
     }
     @else { animation: none; }
 }
-
 // apply CRT animation: @include scan-crt($scan-crt);
 @mixin scan-moving($scan-moving-line) {
   @if $scan-moving-line == true {
@@ -96,12 +89,14 @@ $scan-opacity: .75;
   @else { animation: none; }
 }
 
-.scanlines {
-  // box-sizing: border-box;
-  min-height: 100vh;
+.root {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  grid-template-areas: "header" "content" "footer";
+  width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden; // only to animate the unique scanline
-
   &:before,
   &:after {
       display: block;
@@ -109,7 +104,6 @@ $scan-opacity: .75;
       content: '';
       position: absolute;
   }
-
   // unique scanline travelling on the screen
   &:before {
       // position: absolute;
@@ -119,10 +113,9 @@ $scan-opacity: .75;
       z-index: $scan-z-index + 1;
       background: $scan-color;
       opacity: $scan-opacity;
-      // animation: scanline 6s linear infinite;
+      animation: scanline 6s linear infinite;
       @include scan-moving($scan-moving-line);
   }
-
   // the scanlines, so!
   &:after {
       top: 0;
@@ -139,14 +132,12 @@ $scan-opacity: .75;
       @include scan-crt($scan-crt);
   }
 }
-
 /* ANIMATE UNIQUE SCANLINE */
 @keyframes scanline {
     0% {
         transform: translate3d(0%, 200000%, 0);
     }
 }
-
 @keyframes scanlines {
     0% {
         background-position: 0 50%;

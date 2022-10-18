@@ -26,22 +26,20 @@ import { isLoginFormShown, user } from '../../store/user'
   justify-content: stretch;
   grid-auto-flow: column;
   align-items: start;
-  border-bottom: 2px solid rgba(37, 188, 80, 0.3);
+  border-bottom: 1px solid rgba(37, 188, 80, 0.8);
   align-items: center;
   padding: 0px 40px;
-}
-
-.menu:hover {
-  border-bottom: 2px solid rgba(37, 188, 80, 1);
 }
 
 .left, .right {
   display: grid;
   grid-auto-flow: column;
 }
+
 .left {
   justify-content: start;
 }
+
 .right {
   justify-content: end;
 }
