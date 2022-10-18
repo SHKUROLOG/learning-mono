@@ -49,7 +49,7 @@ watch(percent, (value, oldValue) => {
 }
 
 .title {
-  margin-right: 8px;
+  margin-right: 16px;
 }
 
 .box {
