@@ -48,7 +48,7 @@ async function handleLogin(): Promise<void> {
 .input {
   font-weight: bold;
   background: transparent;
-  color: #fff;
+  color: #25bc50;
   border: none;
   width: 200px;
   border-bottom: 1px solid transparent;
@@ -57,12 +57,12 @@ async function handleLogin(): Promise<void> {
 }
 
 .input::placeholder {
-  color: #fff;
+  color: #25bc50;
 }
 
 .input:focus {
   outline: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(37, 188, 80, 0.8);
 }
 
 .container {

@@ -6,7 +6,7 @@
 
     <div :class="$style.right">
       <LoginForm v-if="isLoginFormShown && !user "/>
-      <EditMode/>
+      <EditMode v-if="user"/>
       <LogoutButton/>
       <SignIn/>
     </div>
