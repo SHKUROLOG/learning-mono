@@ -1,7 +1,7 @@
 <template>
   <div v-if="ammount && !editMode"
        :class="$style.root">
-    <div :class="$style.title">PROGRESS</div>
+    <div :class="$style.title">[ PROGRESS</div>
     <div v-for="actual in ammount"
          :key="actual"
          :class="[$style.box, {
@@ -10,7 +10,7 @@
          }]"/>
 
     <div :class="$style.percent">
-      [ {{ dynamicPercent + '%' }} ]
+      {{ dynamicPercent + '%' }} ]
     </div>
   </div>
 </template>
