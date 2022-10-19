@@ -22,7 +22,7 @@ userStoreInit()
 
 <style module>
 .content {
-  /* overflow: auto; */
+  overflow: auto;
 }
 
 .header {
