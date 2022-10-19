@@ -45,7 +45,7 @@ function handleClick() {
   align-items: center;
   padding: 8px;
   border: 1px solid rgba(37, 188, 80, 1);
-  border-radius: 4px;
+  border-radius: 2px;
   background: transparent;
 }
 
