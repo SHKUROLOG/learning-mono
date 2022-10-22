@@ -66,9 +66,9 @@ watch(toRef(props, 'answer'), () => {
 
 <style module>
 .root {
-  display: flex;
+  display: grid;
   align-items: center;
-  /* grid-template-columns: max-content auto auto auto; */
+  grid-template-columns: max-content 1fr max-content;
   grid-auto-flow: column;
 }
 

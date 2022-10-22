@@ -79,14 +79,23 @@ async function removeQuestion(id: number) {
 <style module>
 .root {
   /* margin: 20px; */
+  display: grid;
+  /* width: 100%; */
+  justify-content: center;
+  grid-template-rows: max-content max-content;
+  grid-template-columns: minmax(auto, 700px);
+
+  /* width: 100%; */
   /* display: grid;
-  justify-content: left;
-  grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr; */
+  align-items: center;
+  grid-template-columns: max-content max-content max-content;
+  grid-auto-flow: column; */
 }
 
 .question {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr max-content;
+  grid-auto-flow: column;
 }
 
 .answer {

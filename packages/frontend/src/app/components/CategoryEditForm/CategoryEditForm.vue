@@ -66,9 +66,12 @@ if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
 
 <style module>
 .root {
+  display: grid;
+  grid-template-rows: max-content max-content auto;
   box-sizing: border-box;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: 24px;
+  padding: 8px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
@@ -76,7 +79,7 @@ if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
   background: rgba(0, 0, 0, 0.15);
   position: relative;
   min-height: 150px;
-  min-width: 302px;
+  min-width: 300px;
   margin-bottom: 20px;
   border: 1px solid rgba(33, 234, 94, 0.5);
 }

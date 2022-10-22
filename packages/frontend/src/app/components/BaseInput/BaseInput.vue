@@ -3,21 +3,51 @@
     [$style.root_border] : border,
   }]">
     <div :class="$style.container">
-      <input :class="$style.input"
+      <!-- <input :class="$style.input"
              v-bind="$attrs"
-             type="text"
+             type="textarea"
              :placeholder="placeholder"
              :value="modelValue"
-             @input.stop="$emit('update:modelValue', $event.target.value)">
+             @input.stop="$emit('update:modelValue', $event.target.value)"> -->
+
+      <textarea v-bind="$attrs"
+                ref="el"
+                v-model="modelValue"
+                :class="$style.input"
+                :placeholder="placeholder"
+                @input.stop="$emit('update:modelValue', $event.target.value)"/>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, watch } from 'vue'
 import { BaseInputEmits, BaseInputProps } from './BaseInput.props'
 
-defineProps<BaseInputProps>()
+const props = defineProps<BaseInputProps>()
 defineEmits<BaseInputEmits>()
+
+const el = ref<HTMLTextAreaElement>()
+
+// function adjustHeight({ target: el }: Event): void {
+//   if (!(el instanceof HTMLElement))
+//     return
+
+//   el.style.height = (el.scrollHeight > el.clientHeight) ? `${el.scrollHeight}px` : '60px'
+// }
+
+// function textareaEmit({ target }: Event): void {
+//   if (!(target instanceof HTMLElement))
+//     return
+
+// }
+
+watch([el, () => props.modelValue], ([el]) => {
+  if (!el)
+    return
+
+  el.style.height = (el.scrollHeight > el.clientHeight) ? `${el.scrollHeight}px` : '20px'
+})
 </script>
 
 <script lang="ts">
@@ -29,9 +59,8 @@ export default {
 <style module>
 .root {
   box-sizing: border-box;
-  display: grid;
+  /* display: grid; */
   padding: 10px;
-  justify-self: end;
 }
 
 .root_border {
@@ -44,14 +73,17 @@ export default {
 
 .input {
   background: transparent;
+  resize : none;
+  outline: none;
+  border: none;
+  overflow-y: auto;
+  word-wrap:break-word;
   font-size: 16px;
   font-weight: 700;
   color: #25bc50;
-  border: none;
-  width: 200px;
-  border-bottom: 2px solid transparent;
+  width: 100%;
+  border-bottom: 1px solid transparent;
   transition: all 0.3s ease-in-out;
-  padding: 4px;
 }
 
 .input::placeholder {
@@ -60,7 +92,7 @@ export default {
 
 .input:focus {
   outline: none;
-  border-bottom: 2px solid #25bc50;
+  border-bottom: 1px solid #25bc50;
 }
 
 .container {

@@ -28,16 +28,12 @@ defineEmits<BaseSaveRemoveButtonsEmits>()
   display: flex;
   align-items: center;
   width: 100%;
+  min-width: 80px;
   transition: all 0.3s ease-in-out;
   font-weight: bold;
 }
 
-.hidden {
-  display: none;
-}
-
 .save_btn {
-  display: block;
   font-size: 16px;
   opacity: 0.2;
   pointer-events: none;

@@ -25,7 +25,7 @@
           </div>
 
           <div :key="currentQuestion.id">
-            <AnswerRow v-for="answer in currentQuestion.answers"
+            <AnswerRow v-for="answer in shuffledAnswers"
                        :key="answer.id"
                        :answer="answer"
                        @click="handleAnswerClick(answer)"/>
@@ -103,6 +103,13 @@ const shuffledQuestions = computed(() => {
   return shuffle(themeData.value?.questions ?? [])
 })
 
+const shuffledAnswers = computed(() => {
+  if (editMode.value)
+    return (currentQuestion.value.answers ?? [])
+
+  return shuffle(currentQuestion.value.answers ?? [])
+})
+
 const correctItems = computed(() => shuffledQuestions.value.map(isQuestionCorrect))
 
 watchEffect(fetchTheme)
@@ -170,8 +177,8 @@ watch(
 .question_edit {
   display: grid;
   margin: 10px;
-  grid-template-columns: repeat(auto-fill, 350px);
-  width: 100%;
+  /* grid-template-columns: repeat(auto-fill, 350px); */
+  grid-template-columns: 1fr;
   grid-gap: 10px;
 }
 

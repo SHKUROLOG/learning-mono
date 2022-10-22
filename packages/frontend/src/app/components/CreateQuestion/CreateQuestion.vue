@@ -53,6 +53,7 @@ function createForm():CreateQuestionInput {
 <style module>
 .root {
   box-sizing: border-box;
+  margin: 0 auto;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
@@ -61,6 +62,7 @@ function createForm():CreateQuestionInput {
   background: rgba(0, 0, 0, 0.15);
   position: relative;
   min-height: 200px;
+  max-width: 700px;
 }
 .plus {
   display: grid;
