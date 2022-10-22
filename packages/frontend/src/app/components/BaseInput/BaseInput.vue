@@ -77,8 +77,9 @@ export default {
   outline: none;
   border: none;
   overflow-y: auto;
+  overflow:hidden;
   word-wrap:break-word;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   color: #25bc50;
   width: 100%;

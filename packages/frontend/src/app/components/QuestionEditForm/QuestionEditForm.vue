@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, toRef, watch } from 'vue'
 import { api } from '../../api'
 import { AnswerDto, UpdateQuestionInput } from '@learning-mono/shared'
 import { BaseInput } from '../BaseInput'
@@ -38,7 +38,7 @@ import { CreateAnswer } from '../CreateAnswer'
 const props = defineProps<QuestionEditFormProps>()
 const emit = defineEmits<QuestionEditFormEmits>()
 
-const initialForm = createForm()
+const initialForm = ref(createForm())
 
 const currentForm = ref(createForm())
 
@@ -74,22 +74,21 @@ async function removeQuestion(id: number) {
 
   emit('changed')
 }
+
+watch(toRef(props, 'question'), () => {
+  initialForm.value = createForm()
+  currentForm.value = createForm()
+}, { deep: true })
 </script>
 
 <style module>
 .root {
-  /* margin: 20px; */
   display: grid;
-  /* width: 100%; */
-  justify-content: center;
+  margin: 0 auto;
+  max-width: 700px;
+  border-left: 2px solid rgba(37, 188, 80, 0.3);
   grid-template-rows: max-content max-content;
   grid-template-columns: minmax(auto, 700px);
-
-  /* width: 100%; */
-  /* display: grid;
-  align-items: center;
-  grid-template-columns: max-content max-content max-content;
-  grid-auto-flow: column; */
 }
 
 .question {

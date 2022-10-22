@@ -18,7 +18,7 @@
 
             <hr width="90%"
                 color="#25bc50"
-                size="1px"
+                size="2px"
                 style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
 
             ({{ index +1 }} OF {{ shuffledQuestions.length }})

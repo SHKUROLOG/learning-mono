@@ -1,28 +1,31 @@
 <template>
-  <div v-if="category"
-       :class="$style.root">
-    <template v-if="!editMode">
-      <div :class="$style.explore">
-        <ExploreBar :categoryTitle="category.title"/>
-      </div>
+  <div v-if="category">
+    <div :class="$style.root">
+      <template v-if="!editMode">
+        <div :class="$style.explore">
+          <ExploreBar :categoryTitle="category.title"/>
+        </div>
 
-      <div :class="$style.content">
-        <CategoryThemes :themes="category.themes"/>
+        <div :class="$style.content">
+          <CategoryThemes :themes="category.themes"/>
+        </div>
+      </template>
+    </div>
+
+    <template v-if="editMode">
+      <div :class="$style.root_edit">
+        <CategoryEditForm v-model:category="category"
+                          @changed="fetchCategory"/>
+
+        <ThemeEditMode v-for="theme in category?.themes"
+                       :key="theme.id"
+                       :theme="theme"
+                       @changed="fetchCategory"/>
+
+        <CreateTheme :categoryId="parseInt(categoryId)"
+                     @created="fetchCategory"/>
       </div>
     </template>
-
-    <div v-if="editMode">
-      <CategoryEditForm v-model:category="category"
-                        @changed="fetchCategory"/>
-
-      <ThemeEditMode v-for="theme in category.themes"
-                     :key="theme.id"
-                     :theme="theme"
-                     @changed="fetchCategory"/>
-
-      <CreateTheme :categoryId="parseInt(categoryId)"
-                   @created="fetchCategory"/>
-    </div>
   </div>
 </template>
 
@@ -66,11 +69,11 @@ async function fetchCategory() {
   width: 700px;
 }
 
-.themes {
-  /* display: grid;
-  grid-template-columns: max-content 1fr;
-  align-items: start;
-  justify-items: start; */
+.root_edit {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 700px;
+  margin: 0 auto;
 }
 
 .explore {

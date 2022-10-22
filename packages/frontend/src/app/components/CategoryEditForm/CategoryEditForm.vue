@@ -67,9 +67,8 @@ if (!initialForm.value.title && !initialForm.value.image && user.value?.isAdmin)
 <style module>
 .root {
   display: grid;
-  grid-template-rows: max-content max-content auto;
+  grid-template-rows: max-content max-content max-content;
   box-sizing: border-box;
-  /* justify-content: center; */
   font-size: 24px;
   padding: 8px;
   transition: all 0.3s ease-in-out;

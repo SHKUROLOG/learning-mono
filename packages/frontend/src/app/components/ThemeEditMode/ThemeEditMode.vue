@@ -52,6 +52,7 @@ async function removeTheme(themeId: number) {
 <style module>
 .root {
   display: grid;
+  grid-template-columns: 1fr;
   grid-auto-flow: column;
   justify-content: start;
 }
