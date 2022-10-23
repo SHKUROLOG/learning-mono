@@ -15,7 +15,7 @@
                 v-model="modelValue"
                 :class="$style.input"
                 :placeholder="placeholder"
-                @input.stop="$emit('update:modelValue', $event.target.value)"/>
+                @input.stop="handleInput($event)"/>
     </div>
   </div>
 </template>
@@ -25,22 +25,16 @@ import { ref, watch } from 'vue'
 import { BaseInputEmits, BaseInputProps } from './BaseInput.props'
 
 const props = defineProps<BaseInputProps>()
-defineEmits<BaseInputEmits>()
+const emit = defineEmits<BaseInputEmits>()
 
 const el = ref<HTMLTextAreaElement>()
 
-// function adjustHeight({ target: el }: Event): void {
-//   if (!(el instanceof HTMLElement))
-//     return
+function handleInput($event: Event): void {
+  if (!($event.target instanceof HTMLElement))
+    return
 
-//   el.style.height = (el.scrollHeight > el.clientHeight) ? `${el.scrollHeight}px` : '60px'
-// }
-
-// function textareaEmit({ target }: Event): void {
-//   if (!(target instanceof HTMLElement))
-//     return
-
-// }
+  return emit('update:modelValue', ($event.target as HTMLInputElement).value)
+}
 
 watch([el, () => props.modelValue], ([el]) => {
   if (!el)
