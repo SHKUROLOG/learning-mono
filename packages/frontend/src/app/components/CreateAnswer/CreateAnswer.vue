@@ -68,7 +68,7 @@ async function createAnswer() {
 
 <style module>
 .root {
-  text-align: center;
+  width: 100%;
 }
 .create_answer {
   font-size: 16px;
@@ -77,8 +77,9 @@ async function createAnswer() {
 }
 
 .create_form {
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: max-content 1fr max-content;
 }
 
 .create_btn {

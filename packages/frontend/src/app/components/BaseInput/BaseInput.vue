@@ -40,7 +40,7 @@ watch([el, () => props.modelValue], ([el]) => {
   if (!el)
     return
 
-  el.style.height = (el.scrollHeight > el.clientHeight) ? `${el.scrollHeight}px` : '20px'
+  el.style.height = `${el.scrollHeight}px`
 })
 </script>
 
@@ -71,8 +71,8 @@ export default {
   outline: none;
   border: none;
   overflow-y: auto;
-  overflow:hidden;
-  word-wrap:break-word;
+  overflow: hidden;
+  word-wrap: break-word;
   font-size: 18px;
   font-weight: 700;
   color: #25bc50;
