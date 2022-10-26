@@ -6,7 +6,6 @@
       <input v-if="input"
              :class="$style.input"
              v-bind="$attrs"
-             type="textarea"
              :placeholder="placeholder"
              :value="modelValue"
              @input.stop="handleInput">
@@ -32,10 +31,10 @@ const emit = defineEmits<BaseInputEmits>()
 const el = ref<HTMLTextAreaElement>()
 
 function handleInput(event: Event): void {
-  if (!(event.target instanceof HTMLInputElement))
+  if (!(event.target instanceof HTMLElement))
     return
 
-  emit('update:modelValue', event.target.value)
+  return emit('update:modelValue', (event.target as HTMLInputElement).value)
 }
 
 watch([el, () => props.modelValue], ([el]) => {
@@ -74,6 +73,8 @@ export default {
   font-weight: 700;
   width: 100%;
   color: #25bc50;
+  border-bottom: 1px solid transparent;
+  transition: all 0.3s ease-in-out;
 }
 
 .textarea {
@@ -97,6 +98,15 @@ export default {
 }
 
 .input:focus {
+  outline: none;
+  border-bottom: 1px solid #25bc50;
+}
+
+.textarea::placeholder {
+  color: #25bc50;
+}
+
+.textarea:focus {
   outline: none;
   border-bottom: 1px solid #25bc50;
 }
