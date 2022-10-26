@@ -119,11 +119,16 @@ async function fetchTheme() {
 }
 
 watch(
-  () => index.value === shuffledQuestions.value.length,
-  value => value && router.push({
-    name: 'statistic',
-  }),
+  () => index.value === shuffledQuestions.value.length && index.value,
+  value => value && router.push({ name: 'statistic' }),
 )
+
+// whenever(
+//   () => index.value === shuffledQuestions.value.length,
+//   () => router.push({
+//     name: 'statistic',
+//   }),
+// )
 
 //
 </script>

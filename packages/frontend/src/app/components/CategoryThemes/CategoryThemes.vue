@@ -1,12 +1,14 @@
 <template>
-  <div v-for="theme in themes"
-       :key="theme.id"
-       :class="$style.root">
-    <router-link :class="$style.link"
-                 :to="{ name: 'theme', params: { themeId: theme.id } }">
-      <BaseText :text="`${theme.title}`"/>
-    </router-link>
-  </div>
+  <TransitionGroup name="theme" appear>
+    <div v-for="theme in themes"
+         :key="theme.id"
+         :class="$style.root">
+      <router-link :class="$style.link"
+                   :to="{ name: 'theme', params: { themeId: theme.id } }">
+        <BaseText :text="`${theme.title}`"/>
+      </router-link>
+    </div>
+  </TransitionGroup>
 </template>
 
 <script lang="ts" setup>
@@ -41,5 +43,23 @@ defineProps<CategoryThemesProps>()
   display: block;
   width: 100%;
   height: 100%;
+}
+</style>
+
+<style>
+.theme-move,
+.theme-enter-active,
+.theme-leave-active {
+  transition: all 0.5s ease;
+}
+
+.theme-enter-from,
+.theme-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.theme-leave-active {
+  position: absolute;
 }
 </style>

@@ -15,7 +15,7 @@
                 v-model="modelValue"
                 :class="$style.input"
                 :placeholder="placeholder"
-                @input.stop="handleInput($event)"/>
+                @input.stop="handleInput"/>
     </div>
   </div>
 </template>
@@ -29,11 +29,11 @@ const emit = defineEmits<BaseInputEmits>()
 
 const el = ref<HTMLTextAreaElement>()
 
-function handleInput($event: Event): void {
-  if (!($event.target instanceof HTMLElement))
+function handleInput(event: Event): void {
+  if (!(event.target instanceof HTMLInputElement))
     return
 
-  return emit('update:modelValue', ($event.target as HTMLInputElement).value)
+  emit('update:modelValue', event.target.value)
 }
 
 watch([el, () => props.modelValue], ([el]) => {
