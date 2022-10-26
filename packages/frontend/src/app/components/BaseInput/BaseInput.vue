@@ -3,17 +3,19 @@
     [$style.root_border] : border,
   }]">
     <div :class="$style.container">
-      <!-- <input :class="$style.input"
+      <input v-if="input"
+             :class="$style.input"
              v-bind="$attrs"
              type="textarea"
              :placeholder="placeholder"
              :value="modelValue"
-             @input.stop="$emit('update:modelValue', $event.target.value)"> -->
+             @input.stop="handleInput">
 
-      <textarea v-bind="$attrs"
+      <textarea v-else
+                v-bind="$attrs"
                 ref="el"
                 v-model="modelValue"
-                :class="$style.input"
+                :class="$style.textarea"
                 :placeholder="placeholder"
                 @input.stop="handleInput"/>
     </div>
@@ -66,6 +68,15 @@ export default {
 }
 
 .input {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+  color: #25bc50;
+}
+
+.textarea {
   background: transparent;
   resize : none;
   outline: none;

@@ -10,7 +10,8 @@
          :class="$style.create_form">
       <BaseInput v-model="createThemeForm.title"
                  placeholder="Theme title"
-                 :border="true"/>
+                 :border="true"
+                 :input="true"/>
 
       <BaseButton v-if="createThemeForm.title.trim()"
                   text="Create"
@@ -44,7 +45,7 @@ async function createTheme() {
   emit('created')
 }
 
-function createForm():CreateThemeInput {
+function createForm(): CreateThemeInput {
   return {
     title: '',
     categoryId: props.categoryId,
@@ -63,7 +64,8 @@ function createForm():CreateThemeInput {
 }
 
 .create_form {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr max-content;
 }
 
 .create_btn {
