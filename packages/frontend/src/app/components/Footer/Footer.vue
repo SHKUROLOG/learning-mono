@@ -3,7 +3,7 @@
   <div :class="$style.root">
     <div/>
     <div :class="$style.social">
-      <a href="https://github.com/SHKUROLOG/learning-mono"
+      <a href="https://github.com/syntax-dot/learning-mono"
          target="_blank"> <img src="./icons/github.svg"></a>
 
       <a href="https://t.me/SYNTAXNAME"
