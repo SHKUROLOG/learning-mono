@@ -51,14 +51,14 @@ describe('PrintManager', () => {
     const fnComplete = vi.fn()
     const fnNotComplete = vi.fn(() => console.log('fn not complete'))
 
-    const genComplete = vi.fn(function* (): any {
+    const genComplete = vi.fn(function * (): any {
       let i = lettersCount
 
       while (i-- && !(yield))
         fnComplete()
     })
 
-    const genNotComplete = function* (): any {
+    const genNotComplete = function * (): any {
       let i = lettersCount
 
       while (i--) {

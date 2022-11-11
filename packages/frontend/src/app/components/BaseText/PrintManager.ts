@@ -33,11 +33,11 @@ export class PrintManager {
 
       while (!printer.isComplete) {
         printer.next()
-        await wait(10)
+        await wait(5)
       }
 
       printer.isActive = false
-      await wait(10)
+      await wait(5)
     }
   }
 }
