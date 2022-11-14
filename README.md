@@ -8,15 +8,20 @@ https://user-images.githubusercontent.com/75541723/201732047-05cdc6b7-c800-4ebf-
 
 ## Стек технологий используемый в проекте
 ### FRONTEND
-Vue-TS,
-HTML,
-CSS
+- Vue-TS
+- HTML
+- CSS
 ### BACKEND
-Node.js,
-PostgreSQL,
-Express,
-Prisma,
-Docker
+- Node.js
+- PostgreSQL
+- Express
+- Prisma
+- Docker
+
+## Планы на будующее:
+- [ ] Авторизация
+- [ ] Аутентификация
+- [ ] Регистрация
 
 
 
