@@ -25,7 +25,6 @@ import { isLoginFormShown, user } from '../../store/user'
   margin: 16px 16px;
   justify-content: stretch;
   grid-auto-flow: column;
-  align-items: start;
   border-bottom: 1px solid rgba(37, 188, 80, 0.8);
   align-items: center;
   padding: 0px 40px;
