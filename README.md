@@ -17,6 +17,7 @@ https://user-images.githubusercontent.com/75541723/201732047-05cdc6b7-c800-4ebf-
 - Express
 - Prisma
 - Docker
+- Nginx
 
 ## Планы на будующее:
 - [X] CI/CD
