@@ -4,8 +4,9 @@
        @mousemove="handleMouseMove">
     <div v-for="category in categories"
          :key="category.id"
-         :class="$style.card"
+         ref="card"
          :style="{ '--mouse-x': `${x}px`, '--mouse-y': `${y}px` }"
+         :class="$style.card"
          @click="$router.push('category'+`/${category.id}`)">
       <div :class="$style.card_content">
         <div v-text="category.title"
@@ -27,8 +28,6 @@ function getSvgUrl(name: string): string {
   return new URL(`./icons/${name}.svg`, import.meta.url).pathname
 }
 
-// const svg = computed(() => getSvgUrl(props.category.image))
-
 function handleClick() {
   // router.push()
 }
@@ -36,19 +35,27 @@ function handleClick() {
 const x = ref(0)
 const y = ref(0)
 const cards = ref<HTMLDivElement>()
+const card = ref<HTMLDivElement>()
 
 function handleMouseMove(e: MouseEvent): void {
-  if (!cards.value)
-    return
+  if (typeof card.value !== 'undefined' && card.value !== null && 'getBoundingClientRect' in card.value) {
+    const rect = card.value.getBoundingClientRect()
 
-  const rect = cards.value.getBoundingClientRect()
+    x.value = e.clientX - rect.left
+    y.value = e.clientY - rect.top
+  }
 
-  x.value = e.clientX - rect.left
-  y.value = e.clientY - rect.top
+  // card.value.style.setProperty('--mouse-x', `${x.value}px`)
+  // card.value.style.setProperty('--mouse-y', `${y.value}px`)
 }
 </script>
 
 <style module>
+:root {
+  --mouse-x: 0px;
+  --mouse-y: 0px;
+}
+
 .cards {
   display: grid;
   grid-template-columns: repeat(4, max-content);
