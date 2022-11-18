@@ -30,7 +30,7 @@ const svg = computed(() => getSvgUrl(props.category.image))
   justify-content: center;
   text-align: center;
   font-size: 24px;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
   cursor: pointer;
   user-select: none;
   backdrop-filter: blur(3px);
@@ -50,6 +50,7 @@ const svg = computed(() => getSvgUrl(props.category.image))
   text-align: center;
   width: 100%;
   opacity: 0;
+  transition: opacity .5s;
   background: rgba(37, 188, 80, 0.8);
   /* clip-path: polygon(90% 0%, 100% 100%, 0% 100%, 0% 0%); */
   clip-path: polygon(95% 0%, 100% 100%, 0% 100%, 0% 0%);
@@ -60,8 +61,8 @@ const svg = computed(() => getSvgUrl(props.category.image))
   position: absolute;
   width: 100%;
   height: 100%;
-  transition: all 0.3s ease-in-out;
   opacity: 0.3;
+  transition: opacity .5s;
   pointer-events: none;
   left: 0;
   top: 0;

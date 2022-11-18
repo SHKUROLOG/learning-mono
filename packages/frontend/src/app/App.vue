@@ -77,7 +77,7 @@ $scan-opacity: .75;
 /* MIXINS */
 @mixin scan-crt($scan-crt) {
     @if $scan-crt == true {
-        animation: scanlines 1s steps($scan-fps) infinite;
+        animation: scanlines 3s steps($scan-fps) infinite;
     }
     @else { animation: none; }
 }
