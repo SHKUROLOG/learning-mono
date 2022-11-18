@@ -1,8 +1,10 @@
 <template>
   <div :class="$style.root">
-    <CategoryTile v-for="category in categories"
+    <!-- <CategoryTile v-for="category in categories"
                   :key="category.id"
-                  :category="category"/>
+                  :category="category"/> -->
+
+    <CategoryTiles :categories="categories"/>
 
     <CreateCategory v-if="editMode"
                     @created="fetchCategories"/>
@@ -16,6 +18,7 @@ import { api } from '../api'
 import { CreateCategory } from '../components/CreateCategory'
 import { CategoryTile } from '../components/CategoryTile'
 import { editMode } from '../store/editmode'
+import CategoryTiles from '../components/CategoryTiles/CategoryTiles.vue'
 
 const categories = ref<CategoryDto[]>([])
 
@@ -28,11 +31,11 @@ async function fetchCategories() {
 
 <style module>
 .root {
-  display: grid;
+  /* display: grid;
   padding: 12px;
   grid-template-columns: repeat(auto-fit, minmax(auto, 300px));
   grid-gap: 24px;
   justify-content: center;
-  text-align: center;
+  text-align: center; */
 }
 </style>

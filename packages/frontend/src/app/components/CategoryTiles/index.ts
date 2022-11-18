@@ -1,5 +1,1 @@
-import { CategoryDto } from '@learning-mono/shared'
-
-export interface CategoryTileProps {
-  categories: CategoryDto[]
-}
+export { default as CategoryTiles } from './CategoryTiles.vue'
