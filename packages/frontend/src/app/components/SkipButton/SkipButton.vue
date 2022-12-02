@@ -1,5 +1,5 @@
 <template>
-  <button :class="$style.button" @click="$emit('click')">
+  <button :class="$style.button">
     SKIP <span> >>> </span>
   </button>
 </template>
