@@ -32,6 +32,7 @@ function handleClick() {
   display: flex;
   height: 100%;
   text-transform: uppercase;
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 .explore_bar {
   writing-mode: vertical-rl;
@@ -53,5 +54,18 @@ function handleClick() {
   background: rgba(37, 188, 80, 1);
   color: #000;
   box-shadow: 0px 1px 3px 1px rgba(0, 255, 0, 0.3);
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>

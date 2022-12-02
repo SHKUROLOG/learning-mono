@@ -2,18 +2,20 @@
   <div ref="cards"
        :class="$style.cards"
        @mousemove="handleMouseMove">
-    <div v-for="category in categories"
-         :key="category.id"
-         ref="card"
-         :style="{ '--mouse-x': `${x}px`, '--mouse-y': `${y}px` }"
-         :class="$style.card"
-         @click="$router.push('category'+`/${category.id}`)">
-      <div :class="$style.card_content">
-        <div v-text="category.title"
-             :class="$style.title"/>
-        <img :class="$style.image" :src="`${getSvgUrl(category.image)}`">
+    <TransitionGroup name="tiles">
+      <div v-for="category in categories"
+           :key="category.id"
+           ref="card"
+           :style="{ '--mouse-x': `${x}px`, '--mouse-y': `${y}px` }"
+           :class="$style.card"
+           @click="$router.push('category'+`/${category.id}`)">
+        <div :class="$style.card_content">
+          <div v-text="category.title"
+               :class="$style.title"/>
+          <img :class="$style.image" :src="`${getSvgUrl(category.image)}`">
+        </div>
       </div>
-    </div>
+    </TransitionGroup>
   </div>
 </template>
 
@@ -142,5 +144,28 @@ function handleMouseMove(e: MouseEvent): void {
   top: 10%;
   width: 100%;
   transition: opacity .5s;
+}
+</style>
+
+<style>
+.tiles-enter-active {
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.tiles-leave-active {
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse;
+}
+
+@keyframes slide-in-left {
+  0% {
+    -webkit-transform: translateX(-1000px);
+            transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>

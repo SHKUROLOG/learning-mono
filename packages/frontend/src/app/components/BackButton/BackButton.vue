@@ -1,8 +1,10 @@
 <template>
-  <button :class="$style.button"
-          @click="$router.go(-2)">
-    <span> &lt; &lt; &lt; </span> GO TO THEMES
-  </button>
+  <Transition name="button" appear>
+    <button :class="$style.button"
+            @click="$router.go(-2)">
+      <span> &lt; &lt; &lt; </span> GO TO THEMES
+    </button>
+  </Transition>
 </template>
 
 <script lang="ts" setup>
@@ -39,5 +41,28 @@
 @keyframes bounceright {
   from { transform: translateX(0); }
   to   { transform: translateX(3px); }
+}
+</style>
+
+<style>
+.button-enter-active {
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.button-leave-active {
+  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) reverse;
+}
+
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+            transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>
