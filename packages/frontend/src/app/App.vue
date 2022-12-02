@@ -22,11 +22,13 @@ userStoreInit()
 
 <style module>
 .content {
+  box-sizing: border-box;
+  padding: 16px;
   overflow: auto;
 }
 
 .header {
-  height: 100px;
+  height: 80px;
   display: grid;
   grid-auto-flow: column;
   grid-template-columns: 1fr max-content;

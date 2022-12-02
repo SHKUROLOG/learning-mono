@@ -58,15 +58,9 @@ async function fetchCategory() {
 <style module>
 .root {
   display: grid;
-  padding: 16px;
   grid-template-columns: max-content 1fr;
-  grid-auto-flow: column;
-  text-align: left;
-  padding: 16px;
-  align-items: start;
   justify-items: start;
   user-select: none;
-  width: 700px;
 }
 
 .root_edit {

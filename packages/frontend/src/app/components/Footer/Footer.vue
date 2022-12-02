@@ -1,7 +1,7 @@
 // eslint-disable-next-line vue/multi-word-component-names
 <template>
   <div :class="$style.root">
-    <div/>
+    <!-- <span :class="$style.label">©syntax-dot 2022</span> -->
     <div :class="$style.social">
       <a href="https://github.com/syntax-dot/learning-mono"
          target="_blank"> <img src="./icons/github.svg"></a>
@@ -9,7 +9,6 @@
       <a href="https://t.me/SYNTAXNAME"
          target="_blank"> <img src="./icons/telegram.svg"></a>
     </div>
-    <div/>
   </div>
 </template>
 
@@ -17,25 +16,15 @@
 
 </script>
 
-<style module>
+<style module lang="scss">
 .root {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  align-items: center;
-  text-align: center;
-  width: 100%;
+  display: flex;
   height: 60px;
-  border-top: 1px solid rgba(37, 188, 80, 0.8);
+  align-items: center;
+  justify-content: center;
 }
 
-.hr {
-  color: #25bc50;
-  size: 1px;
-  margin-bottom: 18px;
-  opacity: 0.8;
-}
-
-.root a {
+.root > a {
   opacity: 0.8;
   margin: 8px;
 }
@@ -44,12 +33,12 @@
   scale: 1.1;
 }
 
-/* .root a:hover {
-  background-color: #25bc50;
-  color: #000;
-} */
+.label {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
 
 .social {
-
+  margin: 0 16px;
 }
 </style>

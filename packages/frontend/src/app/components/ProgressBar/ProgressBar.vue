@@ -46,6 +46,8 @@ watch(percent, (value, oldValue) => {
   display: flex;
   align-items: center;
   padding: 10px;
+  font-family: 'VT323', monospace;
+  font-size: 1.2rem;
 }
 
 .title {

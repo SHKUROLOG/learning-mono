@@ -1,27 +1,25 @@
 <template>
-  <div v-if="themeData"
-       :class="$style.root">
+  <div v-if="themeData">
     <template v-if="!editMode">
-      <div :class="$style.content">
+      <div :class="$style.root">
         <ExploreBar :themeTitle="themeData.title"/>
 
         <div v-if="!editMode && currentQuestion"
              :class="$style.right_content">
           <ProgressBar :ammount="shuffledQuestions.length"
-                       :class="$style.progress_bar"
                        :current="index"
                        :correctItems="correctItems"/>
 
-          <div :class="$style.title">
-            <div>
+          <div :class="$style.question_answers">
+            <div :class="$style.question_title">
               <h1 :key="currentQuestion.id">
                 <BaseText :text="currentQuestion.title"/>
               </h1>
 
-              <hr width="90%"
+              <hr width="100%"
                   color="#25bc50"
                   size="2px"
-                  style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
+                  style="margin: auto; margin-bottom: 8px; opacity: 0.3;">
 
               ({{ index +1 }} OF {{ shuffledQuestions.length }})
             </div>
@@ -136,19 +134,15 @@ watch(
 
 <style module>
 .root {
-
-}
-
-.content {
   display: grid;
   grid-template-columns: max-content 1fr;
   grid-auto-flow: column;
+  box-sizing: border-box;
   text-align: left;
-  padding: 16px;
   align-items: start;
   justify-items: start;
   user-select: none;
-  width: 700px;
+  width: 90%;
 }
 
 .right_content {
@@ -159,7 +153,12 @@ watch(
 }
 
 .explore {
-  height: 320px;
+  max-height: 320px;
+}
+
+.question_title {
+  box-sizing: border-box;
+  margin: 30px 0;
 }
 
 .next {
@@ -168,13 +167,6 @@ watch(
 
 .next:hover {
   opacity: 1;
-}
-
-.progress_bar {
-  margin-left: 36px;
-}
-.title {
-  /* margin: 40px 0 40px 40px; */
 }
 
 .question_edit {

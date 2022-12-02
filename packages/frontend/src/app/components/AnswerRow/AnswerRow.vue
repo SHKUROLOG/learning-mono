@@ -18,11 +18,10 @@ defineProps<AnswerRowProps>()
   user-select: none;
   cursor: pointer;
   padding: 8px;
-  margin-left: 40px;
 }
 
 .root:hover {
-  transform: scale(1.04) translateX(4px);
+  transform: scale(1.05) translateX(4px);
   color: #000;
   background: #25bc50;
 }

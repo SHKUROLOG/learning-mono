@@ -1,9 +1,7 @@
 <template>
-  <div :class="$style.root">
-    <button :class="$style.button">
-      SKIP <span> >>> </span>
-    </button>
-  </div>
+  <button :class="$style.button">
+    SKIP <span> >>> </span>
+  </button>
 </template>
 
 <script lang="ts" setup>
@@ -22,6 +20,7 @@
   padding: 8px;
   cursor: pointer;
   transition: 0.4s ease-in-out;
+  max-width: 140px;
   /* display: flex; */
   /* justify-content: center; */
 
@@ -29,10 +28,6 @@
     color: #000000;
     background-color: #25bc50;
     animation: bounceright;
-  }
-
-  &:hover > span {
-
   }
 }
 

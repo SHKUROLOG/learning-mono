@@ -32,7 +32,6 @@ function handleClick() {
   display: flex;
   height: 100%;
   text-transform: uppercase;
-  transition: all 0.3s ease-in-out;
 }
 .explore_bar {
   writing-mode: vertical-rl;
@@ -47,6 +46,7 @@ function handleClick() {
   border: 1px solid rgba(37, 188, 80, 1);
   border-radius: 2px;
   background: transparent;
+  transition: all 0.3s ease-in-out;
 }
 
 .explore_bar:hover {

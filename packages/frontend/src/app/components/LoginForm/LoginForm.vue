@@ -40,9 +40,6 @@ async function handleLogin(): Promise<void> {
 <style module>
 .root {
   display: grid;
-  padding: 16px;
-  justify-self: end;
-
 }
 
 .input {
