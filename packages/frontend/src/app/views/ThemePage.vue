@@ -5,35 +5,36 @@
       <div :class="$style.content">
         <ExploreBar :themeTitle="themeData.title"/>
 
-        <div v-if="!editMode && currentQuestion">
+        <div v-if="!editMode && currentQuestion"
+             :class="$style.right_content">
           <ProgressBar :ammount="shuffledQuestions.length"
                        :class="$style.progress_bar"
                        :current="index"
                        :correctItems="correctItems"/>
 
           <div :class="$style.title">
-            <h1 :key="currentQuestion.id">
-              <BaseText :text="currentQuestion.title"/>
-            </h1>
+            <div>
+              <h1 :key="currentQuestion.id">
+                <BaseText :text="currentQuestion.title"/>
+              </h1>
 
-            <hr width="90%"
-                color="#25bc50"
-                size="2px"
-                style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
+              <hr width="90%"
+                  color="#25bc50"
+                  size="2px"
+                  style="margin: auto; margin-bottom: 18px; opacity: 0.3;">
 
-            ({{ index +1 }} OF {{ shuffledQuestions.length }})
+              ({{ index +1 }} OF {{ shuffledQuestions.length }})
+            </div>
+
+            <div :key="currentQuestion.id">
+              <AnswerRow v-for="answer in shuffledAnswers"
+                         :key="answer.id"
+                         :answer="answer"
+                         @click="handleAnswerClick(answer)"/>
+            </div>
           </div>
 
-          <div :key="currentQuestion.id">
-            <AnswerRow v-for="answer in shuffledAnswers"
-                       :key="answer.id"
-                       :answer="answer"
-                       @click="handleAnswerClick(answer)"/>
-          </div>
-
-          <BaseButton :buttonSize="ButtonSize.L"
-                      text=">>>"
-                      :class="$style.next"
+          <SkipButton :class="$style.next"
                       @click="moveToNext"/>
         </div>
       </div>
@@ -60,7 +61,6 @@ import { useRouter } from 'vue-router'
 import { api } from '../api'
 import { themeData } from '../store/themeData'
 import { AnswerDto, QuestionDto } from '@learning-mono/shared'
-import { BaseButton, ButtonSize } from '../components/BaseButton'
 import { AnswerRow } from '../components/AnswerRow'
 import { QuestionEditForm } from '../components/QuestionEditForm'
 import { editMode } from '../store/editmode'
@@ -68,6 +68,7 @@ import { ProgressBar } from '../components/ProgressBar'
 import { CreateQuestion } from '../components/CreateQuestion'
 import { BaseText } from '../components/BaseText'
 import { ExploreBar } from '../components/ExploreBar'
+import { SkipButton } from '../components/SkipButton'
 
 interface Props {
   themeId: string
@@ -150,33 +151,30 @@ watch(
   width: 700px;
 }
 
+.right_content {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  height: 100%;
+  margin-left: 40px;
+}
+
 .explore {
   height: 320px;
 }
 
 .next {
-  background: transparent;
-  color: #25bc50;
-  margin-left: 40px;
-  margin-top: 40px;
-  font-size: 18px;
   opacity: 0.4;
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  user-select: none;
 }
 
 .next:hover {
   opacity: 1;
-  background: #25bc50;
-  color: #000;
 }
 
 .progress_bar {
   margin-left: 36px;
 }
 .title {
-  margin: 40px 0 40px 40px;
+  /* margin: 40px 0 40px 40px; */
 }
 
 .question_edit {

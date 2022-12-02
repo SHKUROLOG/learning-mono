@@ -15,9 +15,8 @@ withDefaults(defineProps<BaseButtonProps>(), {
 <style module>
 .btn {
   box-sizing: border-box;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 18px;
-  font-weight: bold;
+  font-family: 'VT323', monospace;
+  font-size: 1.6rem;
   opacity: 0.8;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
@@ -25,22 +24,21 @@ withDefaults(defineProps<BaseButtonProps>(), {
   background-color: transparent;
   border: none;
   color: #25bc50;
-  font-size: 18px;
 }
 
 .btn_s {
   padding: 4px 8px;
-  font-size: 10px;
+  font-size: 1.2rem;
 }
 
 .btn_m {
   padding: 6px 12px;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 .btn_l {
   padding: 8px 16px;
-  font-size: 18px;
+  font-size: 1.6rem;
 }
 
 .btn:hover {

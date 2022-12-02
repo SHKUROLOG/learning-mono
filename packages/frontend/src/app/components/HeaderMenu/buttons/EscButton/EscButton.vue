@@ -1,19 +1,20 @@
 <template>
   <router-link :class="$style.esc" to="/">
-    Esc
+    [Esc]
   </router-link>
 </template>
 
 <style module>
 .esc {
   padding: 8px 16px;
-  font-size: 18px;
+  font-family: 'VT323', monospace;
+  font-size: 1.4rem;
   opacity: 1;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   user-select: none;
   border: 1px solid #25bc50;
-  border-radius: 4px;
+  border-radius: 2px;
 }
 .esc:hover {
   opacity: 1;
