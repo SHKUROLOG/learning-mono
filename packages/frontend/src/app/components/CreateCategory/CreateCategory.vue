@@ -65,8 +65,9 @@ function createForm(): CreateCategoryInput {
   position: relative;
   background: rgba(0, 0, 0, 0.15);
   height: 200px;
-  width: 300px;
+  width: 350px;
   padding: 8px;
+  margin: 0 auto;
 }
 
 .plus {
