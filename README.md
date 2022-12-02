@@ -31,7 +31,7 @@ https://user-images.githubusercontent.com/75541723/201732047-05cdc6b7-c800-4ebf-
  ```
 VITE_SERVER_URL=http://localhost:3030
 BUILDKIT_PROGRESS=plain
-DATABASE_URL=postgres://****:****@****:5432/prod?schema=learning
+DATABASE_URL=postgres://user:password@port:5432/dbname?schema=learning
 CLIENT_URL=http://localhost:3000
  ```
 
