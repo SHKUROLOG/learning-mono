@@ -38,7 +38,7 @@
       </div>
     </template>
 
-    <div v-if="editMode"
+    <div v-show="editMode"
          :class="$style.question_edit">
       <QuestionEditForm v-for="question in shuffledQuestions"
                         :key="question.id"
@@ -136,12 +136,10 @@ watch(
 .root {
   display: grid;
   grid-template-columns: max-content 1fr;
-  grid-auto-flow: column;
   box-sizing: border-box;
-  text-align: left;
-  align-items: start;
   justify-items: start;
   user-select: none;
+  height: 79vh;
   width: 90%;
 }
 

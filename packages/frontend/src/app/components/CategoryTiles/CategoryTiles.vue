@@ -20,16 +20,11 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { CategoryTileProps } from './CategoryTiles.props'
-import { router } from '../../router/index'
 
-const props = defineProps<CategoryTileProps>()
+defineProps<CategoryTileProps>()
 
 function getSvgUrl(name: string): string {
   return new URL(`./icons/${name}.svg`, import.meta.url).pathname
-}
-
-function handleClick() {
-  // router.push()
 }
 
 const x = ref(0)
@@ -74,7 +69,6 @@ function handleMouseMove(e: MouseEvent): void {
   height: 200px;
   position: relative;
   width: 350px;
-  margin-bottom: 32px;
 }
 
 .card:hover .title {
@@ -127,7 +121,6 @@ function handleMouseMove(e: MouseEvent): void {
   flex-direction: column;
   flex-grow: 1;
   inset: 2px;
-  padding: 10px;
   position: absolute;
   z-index: 2;
 }

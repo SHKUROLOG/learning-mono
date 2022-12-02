@@ -4,6 +4,8 @@
     <!-- <hr width="100%" color="#19e57c"> -->
   </div>
 
+  <BackButton/>
+
   <div :class="$style.root">
     <div v-for="(question, index) in questions"
          :key="question.id"
@@ -27,6 +29,7 @@
 import { computed } from 'vue'
 import { themeData } from '../store/themeData'
 import { AnswerDto, QuestionDto } from '@learning-mono/shared'
+import { BackButton } from '../components/BackButton'
 
 const questions = computed(() => themeData.value?.questions ?? [])
 

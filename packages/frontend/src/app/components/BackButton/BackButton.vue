@@ -1,6 +1,7 @@
 <template>
-  <button :class="$style.button" @click="$emit('click')">
-    SKIP <span> >>> </span>
+  <button :class="$style.button"
+          @click="$router.go(-2)">
+    <span> &lt; &lt; &lt; </span> GO TO THEMES
   </button>
 </template>
 
@@ -10,17 +11,21 @@
 
 <style module lang="scss">
 .button {
+  position: absolute;
+  top: 19px;
+  left: 130px;
   font-family: 'VT323', monospace;
+  height: 40px;
   font-size: 1.6rem;
   border: none;
   background-color: transparent;
   border: 1px solid #25bc50;
   border-radius: 2px;
   color: #25bc50;
-  padding: 8px;
+  padding: 0 8px;
   cursor: pointer;
   transition: 0.4s ease-in-out;
-  max-width: 140px;
+
   /* display: flex; */
   /* justify-content: center; */
 

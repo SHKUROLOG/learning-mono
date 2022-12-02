@@ -15,6 +15,8 @@
   user-select: none;
   border: 1px solid #25bc50;
   border-radius: 2px;
+  height: 40px;
+  box-sizing: border-box;
 }
 .esc:hover {
   opacity: 1;

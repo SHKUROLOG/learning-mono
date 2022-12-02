@@ -61,6 +61,7 @@ async function fetchCategory() {
   grid-template-columns: max-content 1fr;
   justify-items: start;
   user-select: none;
+  height: 79vh;
 }
 
 .root_edit {
