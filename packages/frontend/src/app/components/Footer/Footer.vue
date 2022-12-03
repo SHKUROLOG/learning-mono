@@ -1,7 +1,7 @@
 // eslint-disable-next-line vue/multi-word-component-names
 <template>
   <div :class="$style.root">
-    <!-- <span :class="$style.label">©syntax-dot 2022</span> -->
+    <!-- <span :class="$style.label">© 2022 syntax-dot </span> -->
     <div :class="$style.social">
       <a href="https://github.com/syntax-dot/learning-mono"
          target="_blank"> <img src="./icons/github.svg"></a>
