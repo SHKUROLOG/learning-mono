@@ -9,6 +9,7 @@
     </div>
 
     <Footer/>
+    <NotificationView/>
   </div>
 </template>
 
@@ -16,6 +17,7 @@
 import { HeaderMenu } from './components/HeaderMenu'
 import { userStoreInit } from './store/user'
 import { Footer } from './components/Footer'
+import { NotificationView } from './components/NotificationView'
 
 userStoreInit()
 </script>

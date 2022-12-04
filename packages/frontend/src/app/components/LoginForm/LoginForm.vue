@@ -24,6 +24,8 @@ import { reactive } from 'vue'
 import { isUserLoading, user } from '../../store/user'
 import { api } from '../../api'
 import { FormLogin } from '../../api/auth'
+import { notify } from '../../Notification/Notification'
+import { NotificationTypes } from '../../notification/notification'
 
 const formLogin: FormLogin = reactive({
   login: '',
@@ -31,10 +33,29 @@ const formLogin: FormLogin = reactive({
 })
 
 async function handleLogin(): Promise<void> {
-  if (!formLogin.login.trim() && !formLogin.password.trim())
+  if (!formLogin.login.trim() && !formLogin.password.trim()) {
+    notify({
+      message: 'Введите логин/пароль!',
+      type: NotificationTypes.Warning,
+    })
+
     return
+  }
 
   user.value = await api.auth.login(formLogin)
+
+  if (user) {
+    notify({
+      message: `Приветсвую ${user.value?.login} !`,
+      type: NotificationTypes.GreenNotice,
+    })
+  }
+  // else {
+  //   notify({
+  //     message: 'Неправильный логин/пароль!',
+  //     type: NotificationTypes.Warning,
+  //   })
+  // }
 }
 </script>
 
