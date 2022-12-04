@@ -24,8 +24,8 @@ import { reactive } from 'vue'
 import { isUserLoading, user } from '../../store/user'
 import { api } from '../../api'
 import { FormLogin } from '../../api/auth'
-import { notify } from '../../Notification/Notification'
-import { NotificationTypes } from '../../notification/notification'
+import { NotificationTypes } from '../../notification/Notification'
+import { notify } from 'packages/frontend/src/app/notification/notification'
 
 const formLogin: FormLogin = reactive({
   login: '',
