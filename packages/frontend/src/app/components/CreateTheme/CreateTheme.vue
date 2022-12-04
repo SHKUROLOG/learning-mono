@@ -58,7 +58,6 @@ function createForm(): CreateThemeInput {
   text-align: center;
 }
 .create_theme {
-  font-size: 16px;
   font-weight: bold;
   width: 100%;
 }

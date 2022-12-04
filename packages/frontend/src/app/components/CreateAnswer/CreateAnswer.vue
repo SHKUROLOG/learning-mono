@@ -71,7 +71,6 @@ async function createAnswer() {
   width: 100%;
 }
 .create_answer {
-  font-size: 16px;
   font-weight: bold;
   width: 100%;
 }

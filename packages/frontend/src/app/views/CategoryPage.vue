@@ -12,8 +12,8 @@
       </template>
     </div>
 
-    <template v-if="editMode">
-      <div :class="$style.root_edit">
+    <div>
+      <div v-show="editMode" :class="$style.root_edit">
         <CategoryEditForm v-model:category="category"
                           @changed="fetchCategory"/>
 
@@ -25,7 +25,7 @@
         <CreateTheme :categoryId="parseInt(categoryId)"
                      @created="fetchCategory"/>
       </div>
-    </template>
+    </div>
   </div>
 </template>
 

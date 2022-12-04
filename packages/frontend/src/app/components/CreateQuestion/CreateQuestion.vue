@@ -79,7 +79,6 @@ function createForm():CreateQuestionInput {
   display: grid;
   grid-template-rows: 1fr max-content;
   box-sizing: border-box;
-  font-size: 16px;
   font-weight: bold;
   width: 100%;
   height: 100%;
