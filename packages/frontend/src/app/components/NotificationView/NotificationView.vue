@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { notificationSet, NotificationTypes } from '../../notification/Notification'
+import { notificationSet, NotificationTypes } from '../../notification/notification'
 
 </script>
 
