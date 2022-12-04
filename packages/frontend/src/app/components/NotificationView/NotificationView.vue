@@ -46,6 +46,7 @@ import { notificationSet, NotificationTypes } from '../../Notification/Notificat
 .red {
   border-left: 4px solid rgba(255, 0, 0, 0.5);
   background-color: rgba(255, 0, 0, 0.1);
+  color: rgb(255, 0, 0);
 }
 
 @keyframes slide-in-right {
