@@ -4,7 +4,7 @@
          :key="notification.message"
          :class="[$style.notification, {
            [$style.red]: notification.type === NotificationTypes.Warning,
-           [$style.green] : notification.type === NotificationTypes.GreenNotice
+           [$style.green]: notification.type === NotificationTypes.GreenNotice
          }]">
       {{ notification.message }}
     </div>
