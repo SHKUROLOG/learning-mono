@@ -23,8 +23,9 @@
 import { reactive } from 'vue'
 import { isUserLoading, user } from '../../store/user'
 import { api } from '../../api'
+import { FormLogin } from '../../api/auth'
 
-const formLogin = reactive({
+const formLogin: FormLogin = reactive({
   login: '',
   password: '',
 })
