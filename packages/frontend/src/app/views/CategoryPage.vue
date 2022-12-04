@@ -1,30 +1,27 @@
 <template>
   <div v-if="category">
-    <div :class="$style.root">
-      <template v-if="!editMode">
-        <div :class="$style.explore">
-          <ExploreBar :categoryTitle="category.title"/>
-        </div>
+    <div v-show="!editMode" :class="$style.root">
+      <div :class="$style.explore">
+        <ExploreBar :categoryTitle="category.title"/>
+      </div>
 
-        <div :class="$style.content">
-          <CategoryThemes :themes="category.themes"/>
-        </div>
-      </template>
+      <div :class="$style.content">
+        <CategoryThemes :themes="category.themes"/>
+      </div>
     </div>
 
-    <div>
-      <div v-show="editMode" :class="$style.root_edit">
-        <CategoryEditForm v-model:category="category"
-                          @changed="fetchCategory"/>
+    <div v-show="editMode"
+         :class="$style.root_edit">
+      <CategoryEditForm v-model:category="category"
+                        @changed="fetchCategory"/>
 
-        <ThemeEditMode v-for="theme in category?.themes"
-                       :key="theme.id"
-                       :theme="theme"
-                       @changed="fetchCategory"/>
+      <ThemeEditMode v-for="theme in category?.themes"
+                     :key="theme.id"
+                     :theme="theme"
+                     @changed="fetchCategory"/>
 
-        <CreateTheme :categoryId="parseInt(categoryId)"
-                     @created="fetchCategory"/>
-      </div>
+      <CreateTheme :categoryId="parseInt(categoryId)"
+                   @created="fetchCategory"/>
     </div>
   </div>
 </template>

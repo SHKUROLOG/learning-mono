@@ -41,7 +41,7 @@ watch([el, () => props.modelValue], ([el]) => {
   if (!el)
     return
 
-  el.style.height = `${el.scrollHeight ?? 20}px`
+  el.style.height = `${el.scrollHeight}+px`
 })
 </script>
 
