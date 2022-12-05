@@ -4,7 +4,10 @@
 ### Данный сайт позволяет пройти тестирование на знание языков программирования/технологий 
 ### Выбери интересующий тебя раздел, и пройди тестирование на знание
 
-https://user-images.githubusercontent.com/75541723/201732047-05cdc6b7-c800-4ebf-90fb-c7a3e2f61e87.mp4
+![image](https://user-images.githubusercontent.com/75541723/205600762-e1d3fbc8-3ffd-4745-b46f-e26b4c817b92.png)
+
+![image](https://user-images.githubusercontent.com/75541723/205601213-9c42a5ec-25d4-4e97-9a9c-44454061de82.png)
+
 
 ## Проект представляет собой Single Page Application, так же является монорепозиторием, в процессе разработки ипользовал систему сборки Nx + Nrwl
 
