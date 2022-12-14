@@ -58,11 +58,9 @@ a {
   cursor: pointer;
 }
 
-/* @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap'); */
-
 body {
-  /* font-family: 'JetBrains Mono', monospace; */
-  font-family: 'Alumni Sans', sans-serif;
+  font-family: 'JetBrains Mono', monospace;
+  /* font-family: 'Alumni Sans', sans-serif; */
   font-weight: bold;
   color: #25bc50;
   height: 100%;

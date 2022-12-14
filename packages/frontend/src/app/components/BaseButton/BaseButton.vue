@@ -15,7 +15,8 @@ withDefaults(defineProps<BaseButtonProps>(), {
 <style module>
 .btn {
   box-sizing: border-box;
-  font-family: 'DotGothic16', sans-serif;
+  /* font-family: 'DotGothic16', sans-serif; */
+  font-family: 'VT323', monospace;
   font-size: 1.6rem;
   opacity: 0.8;
   transition: all 0.3s ease-in-out;

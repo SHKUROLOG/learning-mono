@@ -7,8 +7,8 @@
 <style module>
 .esc {
   padding: 8px 16px;
-  /* font-family: 'VT323', monospace; */
-  font-family: 'DotGothic16', sans-serif;
+  font-family: 'VT323', monospace;
+  /* font-family: 'DotGothic16', sans-serif; */
   font-size: 1.4rem;
   opacity: 1;
   transition: all 0.3s ease-in-out;
