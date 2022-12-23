@@ -1,9 +1,9 @@
 <template>
-  <div v-if="answer"
-       :class="$style.root">
-    <CustomCheckbox :group="props.answer.questionId.toString()"
-                    :isChecked="answer.isCorrect"
-                    @click="emit('correct:toggle')"/>
+  <div v-if="answer" :class="$style.root">
+    <CustomCheckbox
+      :group="props.answer.questionId.toString()" :is-checked="answer.isCorrect"
+      @click="emit('correct:toggle')"
+    />
     <!-- <section>
       <input type="radio"
              :class="$style.radio"
@@ -12,24 +12,24 @@
              @input="emit('correct:toggle')">
     </section> -->
 
-    <BaseInput v-model="currentForm.title"
-               placeholder="Answer title"/>
+    <BaseInput v-model="currentForm.title" placeholder="Answer title" />
 
-    <BaseSaveRemoveButtons :isSaveShow="!isEqual(currentForm, initialForm)"
-                           @save="saveAnswer"
-                           @remove="removeAnswer(currentForm.id)"/>
+    <BaseSaveRemoveButtons
+      :is-save-show="!isEqual(currentForm, initialForm)" @save="saveAnswer"
+      @remove="removeAnswer(currentForm.id)"
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { BaseInput } from '../BaseInput'
-import { AnswersEditFormEmits, AnswersEditFormProps } from './AnswersEditFormProps'
-import { api } from '../../api'
-import { UpdateAnswerInput } from '@learning-mono/shared'
-import { ref, toRef, watch } from 'vue'
-import { BaseSaveRemoveButtons } from '../BaseSaveRemoveButtons'
+import type { UpdateAnswerInput } from '@learning-mono/shared'
 import { isEqual } from 'lodash'
+import { ref, toRef, watch } from 'vue'
+import { api } from '../../api'
+import { BaseInput } from '../BaseInput'
+import { BaseSaveRemoveButtons } from '../BaseSaveRemoveButtons'
 import { CustomCheckbox } from '../CustomCheckbox'
+import type { AnswersEditFormEmits, AnswersEditFormProps } from './AnswersEditFormProps'
 
 const props = defineProps<AnswersEditFormProps>()
 
@@ -58,10 +58,14 @@ async function removeAnswer(id: number) {
   emit('changed')
 }
 
-watch(toRef(props, 'answer'), () => {
-  initialForm.value = createForm()
-  currentForm.value = createForm()
-}, { deep: true })
+watch(
+  toRef(props, 'answer'),
+  () => {
+    initialForm.value = createForm()
+    currentForm.value = createForm()
+  },
+  { deep: true },
+)
 </script>
 
 <style module>
@@ -104,11 +108,11 @@ watch(toRef(props, 'answer'), () => {
 
 @keyframes outline-checked {
   0% {
-      outline-offset: 0;
+    outline-offset: 0;
   }
 
   100% {
-      outline-offset: -0.2rem;
+    outline-offset: -0.2rem;
   }
 }
 </style>

@@ -5,10 +5,12 @@
 </template>
 
 <script lang="ts" setup>
+import { text } from 'stream/consumers';
+import { defineComponent } from 'vue';
 import { BaseButtonProps, ButtonSize } from './BaseButton.props'
 
 withDefaults(defineProps<BaseButtonProps>(), {
-  buttonSize: 'm' as ButtonSize,
+  buttonSize: ButtonSize.M,
 })
 </script>
 

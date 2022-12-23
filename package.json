@@ -36,6 +36,7 @@
     "vue-router": "^4.0.16"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^0.34.0",
     "@babel/core": "^7.18.5",
     "@babel/plugin-transform-modules-commonjs": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
@@ -63,7 +64,7 @@
     "@vue/eslint-config-typescript": "^11.0.0",
     "class-transformer": "^0.5.1",
     "cypress": "^10.2.0",
-    "eslint": "^8.28.0",
+    "eslint": "^8.30.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
@@ -81,8 +82,8 @@
     "postcss": "^8.4.14",
     "prettier": "^2.6.2",
     "prisma": "^4.1.1",
-    "stylelint": "^14.9.1",
-    "stylelint-config-standard": "^26.0.0",
+    "stylelint": "^14.16.0",
+    "stylelint-config-standard": "^29.0.0",
     "ts-node": "~10.8.0",
     "tsconfig": "^7.0.0",
     "tslib": "^2.4.0",

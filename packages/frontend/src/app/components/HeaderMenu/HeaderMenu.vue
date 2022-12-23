@@ -1,25 +1,25 @@
 <template>
   <div :class="$style.menu">
     <div :class="$style.left">
-      <EscButton :class="$style.esc"/>
+      <EscButton :class="$style.esc" />
     </div>
 
     <div :class="$style.right">
-      <LoginForm v-if="isLoginFormShown && !user "/>
-      <EditMode v-if="user"/>
-      <LogoutButton/>
-      <SignIn/>
+      <LoginForm v-if="isLoginFormShown && !user" />
+      <EditMode v-if="user" />
+      <LogoutButton />
+      <SignIn />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { EscButton, EditMode, SignIn, LogoutButton } from './buttons'
-import { LoginForm } from '../LoginForm'
-import { isLoginFormShown, user } from '../../store/user'
+import { EscButton, EditMode, SignIn, LogoutButton } from "./buttons";
+import { LoginForm } from "../LoginForm";
+import { isLoginFormShown, user } from "../../store/user";
 </script>
 
-<style module>
+<style lang="scss" module>
 .menu {
   display: grid;
   justify-content: stretch;
@@ -31,7 +31,8 @@ import { isLoginFormShown, user } from '../../store/user'
   height: 100%;
 }
 
-.left, .right {
+.left,
+.right {
   display: grid;
   grid-auto-flow: column;
 }
