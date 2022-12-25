@@ -18,6 +18,7 @@ defineProps<AnswerRowProps>()
   cursor: pointer;
   padding: 8px;
   color: #25bc50c0;
+  transition: 0.3s ease-in-out;
 }
 
 .root:hover {
