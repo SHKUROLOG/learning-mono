@@ -5,7 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-import { text } from 'stream/consumers'
 import type { BaseButtonProps, ButtonSize } from './BaseButton.props'
 
 withDefaults(defineProps<BaseButtonProps>(), {
