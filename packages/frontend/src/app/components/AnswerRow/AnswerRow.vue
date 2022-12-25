@@ -1,13 +1,12 @@
 <template>
-  <div v-if="answer"
-       :class="$style.root">
-    <BaseText :text="'> ' + answer.title"/>
+  <div v-if="answer" :class="$style.root">
+    <BaseText :text="`> ${answer.title}`" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { AnswerRowProps } from './AnswerRow.props'
 import { BaseText } from '../BaseText'
+import type { AnswerRowProps } from './AnswerRow.props'
 
 defineProps<AnswerRowProps>()
 </script>
@@ -18,11 +17,12 @@ defineProps<AnswerRowProps>()
   user-select: none;
   cursor: pointer;
   padding: 8px;
+  color: #25bc5088;
 }
 
 .root:hover {
   transform: scale(1.05) translateX(4px);
-  color: #000;
-  background: #25bc50;
+  color: #25bc50;
+  /* background: #25bc50; */
 }
 </style>
