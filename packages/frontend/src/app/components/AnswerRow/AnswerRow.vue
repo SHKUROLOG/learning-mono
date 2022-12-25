@@ -17,7 +17,7 @@ defineProps<AnswerRowProps>()
   user-select: none;
   cursor: pointer;
   padding: 8px;
-  color: #25bc5088;
+  color: #25bc50c0;
 }
 
 .root:hover {
